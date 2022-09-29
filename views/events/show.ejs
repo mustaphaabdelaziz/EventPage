@@ -5,9 +5,9 @@
   <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
     <div class="col-12 col-sm-12 col-lg-6 headline">
       <img
-        src="<%= MyEvent.cover %>"
+        src="<%= MyEvent.picture.url %>"
         class="d-block mx-lg-auto img-fluid shadow-lg"
-        alt=""
+        alt="<%= MyEvent.picture.name %>"
         loading="lazy"
       />
     </div>
@@ -66,6 +66,3 @@
     </div>
   </div>
 </div>
-<script>
-  ScrollReveal().reveal('.headline',{ delay: 200 });
-</script>

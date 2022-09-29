@@ -8,28 +8,7 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary,
   params: {
-    folder: "EventPlus/EventsPictures",
-    allowedFormats: ["jpeg", "png", "jpg", "webp", "svg"],
-  },
-});
-const profilePictures = new CloudinaryStorage({
-  cloudinary,
-  params: {
-    folder: "EventPlus/Profile",
-    allowedFormats: ["jpeg", "png", "jpg", "webp", "svg"],
-  },
-});
-const companyPictures = new CloudinaryStorage({
-  cloudinary,
-  params: {
-    folder: "EventPlus/Profile/Company",
-    allowedFormats: ["jpeg", "png", "jpg", "webp", "svg"],
-  },
-});
-const productPictures = new CloudinaryStorage({
-  cloudinary,
-  params: {
-    folder: "EventPlus/Products",
+    folder: "CardioEvent/EventsPictures",
     allowedFormats: ["jpeg", "png", "jpg", "webp", "svg"],
   },
 });
@@ -37,7 +16,4 @@ const productPictures = new CloudinaryStorage({
 module.exports = {
   cloudinary,
   storage,
-  profilePictures,
-  companyPictures,
-  productPictures,
 };

@@ -13,8 +13,11 @@ const EventSchema = new Schema(
   {
     title: String,
     description: String,
-    pictures: String,
-    cover: String,
+    picture: {
+      url: String,
+      filename: String,
+    },
+
     logo: String,
     location: String,
     period: {
@@ -30,9 +33,9 @@ const EventSchema = new Schema(
 );
 EventSchema.virtual("properties.popUpMarkup").get(function () {
   return `<strong><a class="text-decoration-none" href="/events/${this._id}">${this.title}
-  <img class ="mapPicture thumbnail" src="${this.pictures[0].url}"/></a><strong>`;
+  <img class ="mapPicture thumbnail" src="${this.picture.url}"/></a><strong>`;
 });
-// MediaSchema.virtual("thumbnail").get(function () {
-//   return this.url.replace("/upload", "/upload/w_200");
-// });
+EventSchema.virtual("thumbnail").get(function () {
+  return this.picture.url.replace("/upload", "/upload/w_200");
+});
 module.exports = mongoose.model("Event", EventSchema);

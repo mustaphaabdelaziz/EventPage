@@ -1,146 +1,131 @@
 <% layout('layouts/boilerplate')%>
-<div class="container">
-  <h1 class="my-3 text-green">Clinique des Oasis</h1>
-  <div class="row">
-    <div class="col-lg-4 col-sm-12 col-md-6 col-12 my-3 text-center">
-      <div id="eventCards" class="card">
-        <div class="card-image event-card-wrapper">
-          <div class="overlay"></div>
-          <img
-            height="250px"
-            src="/assets/oasis-cardio.jpg"
-            class="card-img-top"
-          />
+<section class="">
+  <div class="mt-3 py-2">
+    <!-- <div class="h1 text-center text-dark" id="pageHeaderTitle">
+      Clinique Des Oasis
+    </div> -->
+    <% for (let event of events){%>
+    <article class="postcard light blue headline">
+      <a class="postcard__img_link" href="events/<%= event._id %>">
+        <img class="postcard__img" src="<%= event.picture.url %>" alt="<%= event.picture.name %>" />
+      </a>
+      <div class="postcard__text t-dark">
+        <h1 class="postcard__title blue">
+          <a href="events/<%= event._id %>"><%= event.title %></a>
+        </h1>
+        <div class="postcard__subtitle small">
+          <time datetime="2020-05-25 12:00:00">
+            <i class="fas fa-calendar-alt mr-2"></i><%=
+            moment(event.period.start).format("l") %>
+          </time>
         </div>
-        <div class="card-body">
-          <h6 class="card-title align-self-center">
-            <a href="/events/12345" class="text-cyan text-decoration-none">
-              Cardiologie Congénitale
-            </a>
-          </h6>
-          <p class="card-text">
-            Notre wilaya sera un pôle de cardiologie congénitale en matière de
-            diagnostic et de prise en charge des enfants atteints de
-            cardiopathies...
-          </p>
-
-          <div class="mb-2 text-primary text-center">
-            <span>
-              <i class="bi bi-calendar-event-fill"></i>
-              <span>13/10/2022</span>
-            </span>
-          </div>
-          <div class="my-3">
-            <a
-              href="/user/656565656/profile"
-              class="link-dark text-decoration-none d-flex align-items-center justify-content-center mb-3"
-            >
-              <img class="avatar me-1" src="/assets/profile.jpeg" alt="user" />
-              <span>Mohamed Reghis</span>
-            </a>
-          </div>
-
-          <a
-            href="/events/filter?category=dsfdsfsdf"
-            class="badge rounded-pill text-decoration-none align-self-center tag-cyan"
-          >
-            Medical
-          </a>
-        </div>
+        <div class="postcard__bar"></div>
+        <div class="postcard__preview-txt"><%= event.description %></div>
+        <ul class="postcard__tagbox">
+          <li class="tag__item"><i class="fas fa-tag mr-2"></i><%= t('program') %></li>
+          <li class="tag__item"><i class="fas fa-clock mr-2"></i><%= t('speakers') %></li>
+        </ul>
       </div>
-    </div>
-    <div class="col-lg-4 col-sm-12 col-md-6 col-12 my-3 text-center">
-      <div id="eventCards" class="card">
-        <div class="card-image event-card-wrapper">
-          <div class="overlay"></div>
-          <img
-            height="250px"
-            src="/assets/Child-cardio.jpg"
-            class="card-img-top"
-          />
+    </article>
+    <% } %>
+    <article class="postcard light red headline">
+      <a class="postcard__img_link" href="#">
+        <img
+          class="postcard__img"
+          src="https://picsum.photos/501/500"
+          alt="Image Title"
+        />
+      </a>
+      <div class="postcard__text t-dark">
+        <h1 class="postcard__title red"><a href="#">Podcast Title</a></h1>
+        <div class="postcard__subtitle small">
+          <time datetime="2020-05-25 12:00:00">
+            <i class="fas fa-calendar-alt mr-2"></i>Mon, May 25th 2020
+          </time>
         </div>
-        <div class="card-body">
-          <h6 class="card-title align-self-center">
-            <a href="/events/545454" class="text-red text-decoration-none">
-              Cardio Event
-            </a>
-          </h6>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-
-          <div class="mb-2 text-primary text-center">
-            <span>
-              <i class="bi bi-calendar-event-fill"></i>
-              <span>14/10/2022</span>
-            </span>
-          </div>
-
-          <div class="my-3">
-            <a
-              href="/user/656565656/profile"
-              class="link-dark text-decoration-none d-flex align-items-center justify-content-center mb-3"
-            >
-              <img class="avatar me-1" src="/assets/profile.jpeg" alt="user" />
-              <span>Harrouzi Hocine</span>
-            </a>
-          </div>
-
-          <a
-            href="/events/filter?category=dsfdsfsdf"
-            class="badge rounded-pill text-decoration-none align-self-center tag-red"
-          >
-            Medical
-          </a>
+        <div class="postcard__bar"></div>
+        <div class="postcard__preview-txt">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
+          fugiat asperiores inventore beatae accusamus odit minima enim, commodi
+          quia, doloribus eius! Ducimus nemo accusantium maiores velit corrupti
+          tempora reiciendis molestiae repellat vero. Eveniet ipsam adipisci
+          illo iusto quibusdam, sunt neque nulla unde ipsum dolores nobis enim
+          quidem excepturi, illum quos!
         </div>
+        <ul class="postcard__tagbox">
+          <li class="tag__item"><i class="fas fa-tag mr-2"></i>Podcast</li>
+          <li class="tag__item"><i class="fas fa-clock mr-2"></i>55 mins.</li>
+          <li class="tag__item play red">
+            <a href="#"><i class="fas fa-play mr-2"></i>Play Episode</a>
+          </li>
+        </ul>
       </div>
-    </div>
-    <div class="col-lg-4 col-sm-12 col-md-6 col-12 my-3 text-center">
-      <div id="eventCards" class="card">
-        <div class="card-image event-card-wrapper">
-          <div class="overlay"></div>
-          <img height="250px" src="/assets/cardio4.jpg" class="card-img-top" />
+    </article>
+    <article class="postcard light green headline">
+      <a class="postcard__img_link" href="#">
+        <img
+          class="postcard__img"
+          src="https://picsum.photos/500/501"
+          alt="Image Title"
+        />
+      </a>
+      <div class="postcard__text t-dark ">
+        <h1 class="postcard__title green"><a href="#">Podcast Title</a></h1>
+        <div class="postcard__subtitle small">
+          <time datetime="2020-05-25 12:00:00">
+            <i class="fas fa-calendar-alt mr-2"></i>Mon, May 25th 2020
+          </time>
         </div>
-        <div class="card-body">
-          <h6 class="card-title align-self-center">
-            <a href="/events/545454" class="text-purple text-decoration-none">
-              Cardio Event
-            </a>
-          </h6>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-
-          <div class="mb-2 text-primary text-center">
-            <span>
-              <i class="bi bi-calendar-event-fill"></i>
-              <span>15/10/2022</span>
-            </span>
-          </div>
-
-          <div class="my-3">
-            <a
-              href="/user/656565656/profile"
-              class="link-dark text-decoration-none d-flex align-items-center justify-content-center mb-3"
-            >
-              <img class="avatar me-1" src="/assets/profile.jpeg" alt="user" />
-              <span>Fakher Yacine</span>
-            </a>
-          </div>
-
-          <a
-            href="/events/filter?category=dsfdsfsdf"
-            class="badge rounded-pill text-decoration-none align-self-center tag-purple"
-          >
-            Medical
-          </a>
+        <div class="postcard__bar"></div>
+        <div class="postcard__preview-txt">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
+          fugiat asperiores inventore beatae accusamus odit minima enim, commodi
+          quia, doloribus eius! Ducimus nemo accusantium maiores velit corrupti
+          tempora reiciendis molestiae repellat vero. Eveniet ipsam adipisci
+          illo iusto quibusdam, sunt neque nulla unde ipsum dolores nobis enim
+          quidem excepturi, illum quos!
         </div>
+        <ul class="postcard__tagbox">
+          <li class="tag__item"><i class="fas fa-tag mr-2"></i>Podcast</li>
+          <li class="tag__item"><i class="fas fa-clock mr-2"></i>55 mins.</li>
+          <li class="tag__item play green">
+            <a href="#"><i class="fas fa-play mr-2"></i>Play Episode</a>
+          </li>
+        </ul>
       </div>
-    </div>
+    </article>
+    <article class="postcard light yellow headline">
+      <a class="postcard__img_link" href="#">
+        <img
+          class="postcard__img"
+          src="https://picsum.photos/501/501"
+          alt="Image Title"
+        />
+      </a>
+      <div class="postcard__text t-dark">
+        <h1 class="postcard__title yellow"><a href="#">Podcast Title</a></h1>
+        <div class="postcard__subtitle small">
+          <time datetime="2020-05-25 12:00:00">
+            <i class="fas fa-calendar-alt mr-2"></i>Mon, May 25th 2020
+          </time>
+        </div>
+        <div class="postcard__bar"></div>
+        <div class="postcard__preview-txt">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
+          fugiat asperiores inventore beatae accusamus odit minima enim, commodi
+          quia, doloribus eius! Ducimus nemo accusantium maiores velit corrupti
+          tempora reiciendis molestiae repellat vero. Eveniet ipsam adipisci
+          illo iusto quibusdam, sunt neque nulla unde ipsum dolores nobis enim
+          quidem excepturi, illum quos!
+        </div>
+        <ul class="postcard__tagbox">
+          <li class="tag__item"><i class="fas fa-tag mr-2"></i>Podcast</li>
+          <li class="tag__item"><i class="fas fa-clock mr-2"></i>55 mins.</li>
+          <li class="tag__item play yellow">
+            <a href="#"><i class="fas fa-play mr-2"></i>Play Episode</a>
+          </li>
+        </ul>
+      </div>
+    </article>
   </div>
-</div>
-<div id="cluster-map" class="mt-5"></div>
-
-<script src="/js/clusterMap.js"></script>
+</section>
