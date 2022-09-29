@@ -1,0 +1,86 @@
+{
+    "title": "Les journées de dépistage et d'exploration des cardiopathies congénitales chez l'enfants",
+    "description": "Les journées de dépistage et d'exploration des cardiopathies congénitales chez l'enfants",
+    "pictures": "https://scontent.fogx1-1.fna.fbcdn.net/v/t39.30808-6/306631483_504172745049840_3871459454981531360_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=NW59S59Xx5YAX8mjxMR&_nc_ht=scontent.fogx1-1.fna&oh=00_AT9s8pq4g1U8qHFV4Pvm2mzozhlp85hkCEvzxM5ga22oSg&oe=6336791B",
+    "cover": "https://scontent.fogx1-1.fna.fbcdn.net/v/t39.30808-6/306631483_504172745049840_3871459454981531360_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=NW59S59Xx5YAX8mjxMR&_nc_ht=scontent.fogx1-1.fna&oh=00_AT9s8pq4g1U8qHFV4Pvm2mzozhlp85hkCEvzxM5ga22oSg&oe=6336791B",
+    "logo": "https://scontent.fogx1-1.fna.fbcdn.net/v/t39.30808-6/306631483_504172745049840_3871459454981531360_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=NW59S59Xx5YAX8mjxMR&_nc_ht=scontent.fogx1-1.fna&oh=00_AT9s8pq4g1U8qHFV4Pvm2mzozhlp85hkCEvzxM5ga22oSg&oe=6336791B",
+    "location": "La Clinique des Oasis",
+    "period": {
+        "start": "13/10/2022",
+        "end": "15/10/2022"
+    },
+    "author": "Clinique des Oasis",
+    "participants": [],
+    "program": [
+        {
+            "day": "day1",
+            "_id": {
+                "$oid": "61d73ffc919f8a45b9fd4a40"
+            },
+            "topics": []
+        },
+        {
+            "day": "day2",
+            "_id": {
+                "$oid": "61d73ffc919f8a45b9fd4a41"
+            },
+            "topics": []
+        },
+        {
+            "day": "day3",
+            "_id": {
+                "$oid": "61d73ffc919f8a45b9fd4a42"
+            },
+            "topics": []
+        },
+        {
+            "day": "day4",
+            "_id": {
+                "$oid": "61d73ffc919f8a45b9fd4a43"
+            },
+            "topics": []
+        },
+        {
+            "day": "day5",
+            "_id": {
+                "$oid": "61d73ffc919f8a45b9fd4a44"
+            },
+            "topics": []
+        },
+        {
+            "day": "day6",
+            "_id": {
+                "$oid": "61d73ffc919f8a45b9fd4a45"
+            },
+            "topics": []
+        }
+    ],
+    "discussions": [
+        {
+            "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+            "pictures": [
+                {
+                    "url": "https://res.cloudinary.com/mustaphaaziz/image/upload/v1641496570/EventPlus/EventsPictures/wtv2rcwezyyjrhmovzdd.jpg",
+                    "filename": "EventPlus/EventsPictures/wtv2rcwezyyjrhmovzdd",
+                    "_id": {
+                        "$oid": "61d73ffc919f8a45b9fd4a3c"
+                    }
+                }
+            ],
+            "_id": {
+                "$oid": "61d73ffc919f8a45b9fd4a3e"
+            },
+           
+            "createdAt": {
+                "$date": {
+                    "$numberLong": "1641496572345"
+                }
+            },
+            "updatedAt": {
+                "$date": {
+                    "$numberLong": "1641496572346"
+                }
+            }
+        }
+    ]
+}

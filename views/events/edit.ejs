@@ -1,0 +1,134 @@
+<button
+  id="item2"
+  type="button"
+  class="btn btn-outline-warning bg-gradient px-2 py-1"
+  data-bs-toggle="modal"
+  data-bs-target="#editEvent"
+>
+  <i class="bi bi-pencil-fill"></i>
+</button>
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="editEvent"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel"><%=t("event") %></h5>
+
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <div class="modal-body">
+        <form
+          action="/events/<%= MyEvent._id%>?_method=PUT"
+          method="POST"
+          class="needs-validation"
+          novalidate
+        >
+          <div class="form-floating mb-3 col-md-12">
+            <input
+              class="form-control"
+              id="title"
+              type="text"
+              name="event[title]"
+              placeholder="<%= t('title') %>"
+              value="<%=MyEvent.title%>"
+              required
+              style="text-transform: capitalize"
+            />
+            <label for="title" class="form-label fw-bold fs-6"
+              ><%= t('title') %>
+            </label>
+            <div class="valid-feedback">looks good</div>
+          </div>
+          <div class="form-floating col-md-12 mb-3">
+            <input
+              class="form-select"
+              id="wilaya"
+              name="event[location]"
+              list="cities"
+              placeholder="Wilaya"
+              value="<%= MyEvent.location %>"
+            />
+            <datalist id="cities">
+              <option class="option" value="">Ville</option>
+              <% for (city of states) { %>
+              <option class="option" value="<%= city.name %>">
+                <%= city.id + " - " + city.name %>
+              </option>
+              <%} %>
+            </datalist>
+            <label for="wilaya" class="form-label">Wilaya</label>
+            <div class="valid-feedback">BIEN</div>
+          </div>
+
+          <div class="form-floating mb-3 col-md-12">
+            <input
+              type="text"
+              class="form-control"
+              id="cover"
+              name="event[cover]"
+              value="<%=MyEvent.cover %>"
+            />
+            <label for="cover" class="form-labelfs-6"
+              ><%= t('event') %> <%= t('cover') %>
+            </label>
+            <div class="valid-feedback">looks good</div>
+          </div>
+
+          <div class="mb-3 col-md-12">
+            <label for="Description" class="form-label fw-bold fs-6"
+              ><%= t('description') %>
+            </label>
+            <textarea
+              class="form-control"
+              type="text"
+              name="event[description]"
+              rows="8"
+              placeholder="description"
+              required
+            >
+  <%=MyEvent.description%></textarea
+            >
+            <div class="valid-feedback">looks good</div>
+          </div>
+
+          <div class="modal-footer mt-3">
+            <button
+              type="button"
+              class="btn btn-outline-danger bg-gradient"
+              data-bs-dismiss="modal"
+            >
+              Annuler
+            </button>
+            <button
+              type="submit"
+              id="patient-register"
+              class="btn btn-outline-warning bg-gradient"
+            >
+              Modifier
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $("#newPatient").on("shown.bs.modal", function () {
+    $(this).find("[autofocus]").focus();
+  });
+</script>

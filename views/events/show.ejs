@@ -1,0 +1,71 @@
+<% layout('layouts/boilerplate')%>
+
+<div class="col-xxl-8 px-3 py-5">
+  
+  <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+    <div class="col-12 col-sm-12 col-lg-6 headline">
+      <img
+        src="<%= MyEvent.cover %>"
+        class="d-block mx-lg-auto img-fluid shadow-lg"
+        alt=""
+        loading="lazy"
+      />
+    </div>
+    <div class="col-lg-6 headline">
+      <h2 class="display-5 fw-bold lh-1 mb-3"><%= MyEvent.title %></h2>
+      <p class="lead"><%= MyEvent.description %></p>
+      <span class="text-muted mb-4">
+        <%=MyEvent.location  %> <i class="bi bi-geo-alt"></i>
+      </span>
+      <div class="d-md-flex justify-content-md-start mb-2 mt-2">
+        <% if(!currentUser) {%>
+        <a href="/participants/register" class="btn btn-outline-success bg-gradient px-4">
+          <%= t('register') %>
+        </a>
+        <% }%>
+      </div>
+      
+        <%- include("./edit")%>
+        <%- include("./delete")%>
+
+   
+    </div>
+  </div>
+  <div class="row headline">
+    <div class="col-12 col-sm-12 col-lg-12">
+      <div class="col-12 col-sm-12 col-lg-12">
+        <!-- <div class="card-body"> -->
+          <h1 class="card-title title-timeline"><%= t('program') %></h1>
+          <%- include("./addProgram")%> <% for(program of MyEvent.program){ %>
+          <h2 class="title-timeline mt-5 headline">
+            <%=`${program.day}: ${moment(program.date).format('dddd, MMMM Do,YYYY')}`%>
+          </h2>
+          <div id="content">
+            <% if(program.timeline.length>0){ %> 
+            <ul class="timeline shadow-lg">
+              <% for(timeline of program.timeline) {%>
+              <li
+                class="event headline"
+                data-date="<%=timeline.time.start%> - <%=timeline.time.end%>"
+              >
+                <h3 class="title-timeline">
+                  <%=timeline.title %>
+                </h3>
+                <p>
+                  Get here on time, it's first come first serve. Be late, get
+                  turned away.
+                </p>
+              </li>
+              <% } %>
+            </ul>
+            <% } %> 
+          </div>
+          <% } %>
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  ScrollReveal().reveal('.headline',{ delay: 200 });
+</script>
