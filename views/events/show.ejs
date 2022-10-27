@@ -19,15 +19,15 @@
       </span>
       <div class="d-md-flex justify-content-md-start mb-2 mt-2">
         <% if(!currentUser) {%>
-        <a href="/participants/register" class="btn btn-outline-success bg-gradient px-4">
+        <a href="/participants/<%=MyEvent.id%>/register" class="btn btn-outline-success bg-gradient px-4">
           <%= t('register') %>
         </a>
         <% }%>
       </div>
-      
+      <% if(currentUser) {%>
         <%- include("./edit")%>
         <%- include("./delete")%>
-
+        <% } %> 
    
     </div>
   </div>
@@ -36,7 +36,10 @@
       <div class="col-12 col-sm-12 col-lg-12">
         <!-- <div class="card-body"> -->
           <h1 class="card-title title-timeline"><%= t('program') %></h1>
-          <%- include("./addProgram")%> <% for(program of MyEvent.program){ %>
+          <% if(currentUser) {%>
+          <%- include("./addProgram")%> 
+          <% } %> 
+          <% for(program of MyEvent.program){ %>
           <h2 class="title-timeline mt-5 headline">
             <%=`${program.day}: ${moment(program.date).format('dddd, MMMM Do,YYYY')}`%>
           </h2>

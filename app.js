@@ -100,7 +100,8 @@ app.use("/about", (req, res) => {
 // });
 // ===== User Routes ====
 app.use("/events/:id/program", programRoutes);
-app.use("/participants", participantRoutes);
+app.use("/participants/:eventid", participantRoutes);
+// app.use("/events/:id/participants", participant);
 app.use("/user", userRoutes);
 app.use("/events", eventRoutes);
 

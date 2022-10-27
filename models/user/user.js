@@ -8,7 +8,6 @@ const opts = {
 //  This strategy integrates Mongoose with the passport-local strategy.
 const passportLocalMongoose = require("passport-local-mongoose");
 const Schema = mongoose.Schema;
-
 const UserSchema = new Schema(
   {
     username: {

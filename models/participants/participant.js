@@ -21,7 +21,12 @@ const ParticipantSchema = new Schema(
     gender: String,
     job: String,
     city: String,
-    role: String,
+    participantEvents: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Event",
+      },
+    ],
   },
   opts
 );

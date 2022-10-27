@@ -11,6 +11,7 @@ const {
   createEvent,
   updateEvent,
   deleteEvent,
+  participantsList,
 } = require("../../controllers/events/events");
 // const { isLoggedIn } = require("../../middleware/middleware");
 router
@@ -21,6 +22,7 @@ router.route("/new").get(catchAsync(renderEventForm));
 router
   .route("/:id")
   .get(catchAsync(showEvent))
-  .put(upload.single("picture"),catchAsync(updateEvent))
+  .put(upload.single("picture"), catchAsync(updateEvent))
   .delete(catchAsync(deleteEvent));
+router.route("/:id/participants").get(catchAsync(participantsList));
 module.exports = router;

@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const ProgramSchema = require("./program");
 const DiscussionSchema = require("./discussion");
+const { widthOfString } = require("pdfkit");
 const opts = { toJSON: { virtuals: true } };
 const UserObject = {
   _id: Schema.Types.ObjectId,
@@ -27,7 +28,15 @@ const EventSchema = new Schema(
     author: String,
     speakers: [UserObject],
     program: [ProgramSchema],
-    discussions: [],
+    participants: [
+      {
+        role: String,
+        participant: {
+          type: Schema.Types.ObjectId,
+          ref: "Participant",
+        },
+      },
+    ],
   },
   opts
 );

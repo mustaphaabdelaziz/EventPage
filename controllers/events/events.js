@@ -17,7 +17,7 @@ module.exports.index = async (req, res) => {
 module.exports.showEvent = async (req, res) => {
   const eventId = req.params.id;
   let MyEvent;
-  MyEvent = await Event.findById(eventId).populate([]);
+  MyEvent = await Event.findById(eventId);
 
   if (!MyEvent) {
     req.flash("error", "Cannot find that event !!!");
@@ -98,4 +98,14 @@ module.exports.deleteEvent = async (req, res) => {
   await Event.findByIdAndDelete(id);
   req.flash("success", "Successfully deleted event");
   res.redirect("/events");
+};
+module.exports.participantsList = async (req, res) => {
+  const { id } = req.params;
+  const event = await Event.findById(id).populate({
+    path: "participants.participant",
+  });
+  const algeria = await Country.find({});
+  const states = algeria[0].states;
+  res.render("events/participants/index",{event,states})
+  // res.send(event);
 };
