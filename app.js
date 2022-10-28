@@ -73,7 +73,25 @@ app.use(flash());
 app.use(compression());
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use("user", new LocalStrategy(User.authenticate()));
+passport.use(
+  "user",
+  new LocalStrategy((username, password, done) => {
+    User.findOne({ username: username.toLowerCase() }, function (err, user) {
+      if (err) {
+        return done(err);
+      }
+      if (!user) {
+        return done(null, false);
+      } else {
+        if (user.approved) {
+          return done(null, user);
+        } else {
+          return done(null, false, "Your account is not approved yet");
+        }
+      }
+    });
+  })
+);
 
 // serialization refers to how to store user's
 // authentication user data will be stored in the session

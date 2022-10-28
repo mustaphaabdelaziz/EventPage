@@ -17,6 +17,15 @@ const UserSchema = new Schema(
       lowercase: true,
       trim: true,
     },
+    privileges: [
+      {
+        type: String,
+      },
+    ],
+    approved: {
+      type: Boolean,
+      default: false,
+    },
   },
   opts
 );
@@ -25,5 +34,10 @@ const UserSchema = new Schema(
 UserSchema.plugin(passportLocalMongoose, {
   usernameField: "username",
   passwordField: "password",
+});
+UserSchema.virtual("name").get(function () {
+  return (
+    this.username.charAt(0).toUpperCase() + this.username.slice(1).toLowerCase()
+  );
 });
 module.exports = mongoose.model("User", UserSchema);
