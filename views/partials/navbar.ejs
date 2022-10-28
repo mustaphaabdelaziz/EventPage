@@ -1,0 +1,63 @@
+<nav
+  class="navbar navbar-expand-lg sticky-top navbar-light bg-antiqueSteel shadow-sm"
+>
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold" href="/">
+      <img
+        id="assest"
+        src="/assets/logo.png"
+        alt=""
+        width="80"
+        height="60"
+        class="d-inline-block align-text-center"
+      />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      id="navbarSupportedbutton"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <% if (!currentUser){%>
+        <li class="nav-item">
+          <a class="nav-link" href="/events"><%= t('events') %></a>
+        </li>
+        <% }else{ %>
+        <li class="dropdown nav-item" id="navbarNavDarkDropdown">
+          <a
+            class="nav-link dropdown-toggle bg-antiqueSteel"
+            href="#"
+            id="navbarDarkDropdownMenuLink"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <%= t('events') %>
+          </a>
+          <div class="dropdown-content bg-antiqueSteel">
+            <a class="dropdown-item text-dark" href="/events">
+              <%= t('events') %>
+            </a>
+            <a class="dropdown-item text-dark" href="/events/new">
+              <%= t('add')%> <%= t('event') %>
+            </a>
+          </div>
+        </li>
+        <% } %>
+        <li class="nav-item">
+          <a class="nav-link" href="/about"><%= t('about') %></a>
+        </li>
+        <li class="dropdown nav-item"><%-include("./langDropdown") %></li>
+        <li class="dropdown nav-item"><%-include("./userDropdown") %></li>
+      </ul>
+    </div>
+  </div>
+</nav>

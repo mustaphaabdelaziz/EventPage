@@ -1,0 +1,173 @@
+<button
+  id="item2"
+  type="button"
+  class="btn btn-outline-warning bg-gradient px-2 py-1"
+  data-bs-toggle="modal"
+  data-bs-target="#editEvent"
+>
+  <i class="bi bi-pencil-fill"></i>
+</button>
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="editEvent"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel"><%=t("event") %></h5>
+
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <div class="modal-body">
+        <form
+          action="/events/<%= MyEvent._id%>?_method=PUT"
+          method="POST"
+          class="row needs-validation"
+          novalidate
+          enctype="multipart/form-data"
+        >
+          <div class="form-floating mb-3 col-md-6">
+            <input
+              class="form-control"
+              id="title"
+              type="text"
+              name="event[title]"
+              placeholder="<%= t('title') %>"
+              value="<%=MyEvent.title%>"
+              required
+              style="text-transform: capitalize"
+            />
+            <label for="title" class="form-label fw-bold fs-6"
+              ><%= t('title') %>
+            </label>
+            <div class="valid-feedback">looks good</div>
+          </div>
+          <div class="form-floating col-md-6 mb-3">
+            <input
+              class="form-select"
+              id="wilaya"
+              name="event[location]"
+              list="cities"
+              placeholder="Wilaya"
+              value="<%= MyEvent.location %>"
+            />
+            <datalist id="cities">
+              <option class="option" value="">Ville</option>
+              <% for (city of states) { %>
+              <option class="option" value="<%= city.name %>">
+                <%= city.id + " - " + city.name %>
+              </option>
+              <%} %>
+            </datalist>
+            <label for="wilaya" class="form-label">Wilaya</label>
+            <div class="valid-feedback">BIEN</div>
+          </div>
+
+          <div class="form-floating col-md-6 mb-3">
+            <input
+              class="form-control"
+              type="date"
+              id="start"
+              name="period[start]"
+              placeholder="<%= t('date') %>"
+              required
+              min="<%= moment().format('YYYY-MM-DD')%>"
+              value="<%=moment(MyEvent.period.start).format('YYYY-MM-DD')%>"
+            />
+            <label for="start" class="form-label fs-6"><%= t('begin') %></label>
+            <div class="valid-feedback">looks good</div>
+          </div>
+          <div class="form-floating col-md-6 mb-3">
+            <input
+              class="form-control"
+              type="date"
+              id="end"
+              name="period[end]"
+              required
+              min="<%= moment().format('YYYY-MM-DD')%>"
+              value="<%=moment(MyEvent.period.end).format('YYYY-MM-DD')%>"
+            />
+            <label for="end" class="form-label fs-6"><%= t('finish') %></label>
+            <div class="valid-feedback">looks good</div>
+          </div>
+
+          <div class="input-group mb-3 col-md-12">
+            <input
+              type="file"
+              class="form-control"
+              id="picture"
+              name="picture"
+            />
+            <label class="input-group-text" for="picture"
+              ><%= t('cover') %> <%= t('picture') %></label
+            >
+          </div>
+
+          <div class="mb-3 col-md-12">
+            <label for="Description" class="form-label fw-bold fs-6"
+              ><%= t('description') %>
+            </label>
+            <textarea
+              class="form-control"
+              type="text"
+              name="event[description]"
+              rows="8"
+              placeholder="description"
+              required
+            >
+  <%=MyEvent.description%></textarea
+            >
+            <div class="valid-feedback">looks good</div>
+          </div>
+          <div class="mb-3">
+            <img src="<%=MyEvent.thumbnail %>" class="img-thumbnail" alt="" />
+            <div class="form-check-inline">
+              <input
+                type="checkbox"
+                id="picture"
+                name="deleteImage"
+                value="<%=MyEvent.picture.filename%>"
+              />
+            </div>
+            <label for="picture"><i class="bi bi-trash-fill"></i></label>
+          </div>
+
+          <div class="modal-footer mt-3">
+            <button
+              type="button"
+              class="btn btn-outline-danger bg-gradient"
+              data-bs-dismiss="modal"
+            >
+              Annuler
+            </button>
+            <button
+              type="submit"
+              id="patient-register"
+              class="btn btn-outline-warning bg-gradient"
+            >
+              Modifier
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $("#newPatient").on("shown.bs.modal", function () {
+    $(this).find("[autofocus]").focus();
+  });
+</script>

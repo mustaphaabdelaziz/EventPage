@@ -1,0 +1,102 @@
+$lightCoral: #e2564c;
+$mediumTurquoise: #0fa2b6;
+$greenSea: #5da49c;
+$crystalBlue: #afd9ea;
+$pistachio: #DCF4E4 ;
+$antiqueSteel : #E8E9E9 ;
+.bg-pistachio {
+  background-color: $pistachio;
+}
+.bg-greenSea {
+  background-color: $greenSea;
+}
+.bg-crystalBlue {
+  background-color: $crystalBlue;
+}
+.bg-lightCoral {
+  background-color: $lightCoral;
+}
+.bg-mediumTurquoise {
+  background-color: $mediumTurquoise;
+}
+.bg-antiqueSteel {
+  background-color: $antiqueSteel;
+}
+.text-antiqueSteel {
+  color: $antiqueSteel;
+}
+.text-pistachio {
+  color: $pistachio;
+}
+.text-crystalBlue {
+  color: $crystalBlue;
+}
+.text-greenSea {
+  color: $greenSea;
+}
+.text-lightCoral {
+  color: $lightCoral;
+}
+.text-mediumTurquoise {
+  color: $mediumTurquoise;
+}
+.btn-greenSea {
+  color: #fff;
+  background-color: $greenSea;
+  border-color: $greenSea;
+}
+.btn-greenSea:hover {
+  color: #fff;
+  background-color: $greenSea;
+  opacity: 0.8;
+}
+.btn-crystalBlue {
+  color: #fff;
+  background-color: $crystalBlue;
+  border-color: $crystalBlue;
+}
+.btn-crystalBlue:hover {
+  color: #fff;
+  background-color: $crystalBlue;
+  opacity: 0.8;
+}
+.btn-mediumTurquoise {
+  color: #fff;
+  background-color: $mediumTurquoise;
+  border-color: $mediumTurquoise;
+}
+.btn-mediumTurquoise:hover {
+  color: #fff;
+  background-color: $mediumTurquoise;
+  opacity: 0.8;
+}
+.btn-lightCoral {
+  color: #fff;
+  background-color: $lightCoral;
+  border-color: $lightCoral;
+}
+.btn-lightCoral:hover {
+  color: #fff;
+  background-color: $lightCoral;
+  opacity: 0.8;
+}
+.btn-pistachio {
+  color: #fff;
+  background-color: $pistachio;
+  border-color: $pistachio;
+}
+.btn-pistachio:hover {
+  color: #fff;
+  background-color: $pistachio;
+  opacity: 0.8;
+}
+.btn-antiqueSteel {
+  color: #fff;
+  background-color: $antiqueSteel;
+  border-color: $antiqueSteel;
+}
+.btn-antiqueSteel:hover {
+  color: #fff;
+  background-color: $antiqueSteel;
+  opacity: 0.8;
+}

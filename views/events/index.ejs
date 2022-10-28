@@ -1,0 +1,39 @@
+<% layout('layouts/boilerplate')%>
+<section class="">
+  <div class="mt-3 py-2">
+    <!-- <div class="h1 text-center text-dark" id="pageHeaderTitle">
+      Clinique Des Oasis
+    </div> -->
+    <% for (let event of events){%>
+    <article class="postcard light blue headline">
+      <a class="postcard__img_link" href="events/<%= event._id %>">
+        <img class="postcard__img" src="<%= event.picture.url %>" alt="<%= event.picture.name %>" />
+      </a>
+      <div class="postcard__text t-dark">
+        <h1 class="postcard__title blue">
+          <a href="events/<%= event._id %>"><%= event.title %></a>
+        </h1>
+        <div class="postcard__subtitle small">
+          <time datetime="2020-05-25 12:00:00">
+            <i class="fas fa-calendar-alt mr-2"></i><%=
+            moment(event.period.start).format("l") %>
+          </time>
+        </div>
+        <div class="postcard__bar"></div>
+        <div class="postcard__preview-txt"><%= event.description %></div>
+        <ul class="postcard__tagbox">
+          <% if(currentUser) {%>
+          <li class="tag__item">
+            <a href="events/<%= event.id %>/participants"><i class="bi bi-people"></i>participants</a>
+          </li>
+          <% } %>
+          <li class="tag__item">
+            <i class="fas fa-clock mr-2"></i><%= t('speakers') %>
+          </li>
+        </ul>
+      </div>
+    </article>
+    <% } %>
+
+  </div>
+</section>

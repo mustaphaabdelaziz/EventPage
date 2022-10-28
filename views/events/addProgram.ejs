@@ -1,0 +1,109 @@
+<button
+  id="item2"
+  type="button"
+  class="btn btn-outline-success bg-gradient ms-2"
+  data-bs-toggle="modal"
+  data-bs-target="#newPatient"
+>
+  Ajouter Programme <i class="bi bi-person-plus-fill me-2"></i>
+</button>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="newPatient"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Ajouter Programme</h5>
+
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <div class="modal-body">
+        <form
+          class="row g-2 m-2 needs-validation"
+          action="/events/<%= MyEvent._id %>/program"
+          id="personal"
+          method="POST"
+          autocomplete="on"
+          novalidate
+        >
+          <div class="form-floating col-md-6">
+            <select id="day" name="program[day]" class="form-select" required>
+              <option selected disabled>Days</option>
+              <% for(program of MyEvent.program){ %>
+              <option class="option" value="<%= program.day %>">
+                <%= program.day %>
+              </option>
+              <% } %>
+            </select>
+          </div>
+          <div class="form-floating col-md-6">
+            <input
+              id="title"
+              name="program[title]"
+              type="text"
+              class="form-control"
+              style="text-transform: capitalize"
+              required
+              autofocus
+              autocomplete="on"
+            />
+            <label for="title" class="form-label">Title</label>
+            <div class="valid-feedback">BIEN</div>
+          </div>
+
+          <div class="form-floating col-md-6">
+            <input
+              id="start"
+              name="program[start]"
+              type="time"
+              class="form-control"
+            />
+            <label for="start" class="form-label">Time Start</label>
+            <div class="valid-feedback">BIEN</div>
+          </div>
+          <div class="form-floating col-md-6">
+            <input
+              id="end"
+              name="program[end]"
+              type="time"
+              class="form-control"
+            />
+            <label for="end" class="form-label">Time End</label>
+            <div class="valid-feedback">BIEN</div>
+          </div>
+
+          <div class="modal-footer mt-4">
+            <button
+              type="button"
+              class="btn btn-outline-danger bg-gradient"
+              data-bs-dismiss="modal"
+            >
+              Annuler
+            </button>
+            <button class="btn btn-outline-success bg-gradient">Ajouter</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $("#newPatient").on("shown.bs.modal", function () {
+    $(this).find("[autofocus]").focus();
+  });
+</script>

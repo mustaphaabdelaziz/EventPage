@@ -1,0 +1,119 @@
+<button type="button" class="me-3 btn btn-outline-warning bg-gradient px-2 py-1" data-bs-toggle="modal"
+  data-bs-target="#edit-<%= p.participant.id %>">
+  <i class="bi bi-pencil-fill"></i>
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="edit-<%= p.participant.id %>" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Modifier Personnel</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" required></button>
+      </div>
+
+      <div class="modal-body">
+        <form class="row g-3 needs-validation"
+          action="/participants/<%= event.id %>/<%= p.participant.id %>/?_method=PUT" id="personal" method="POST"
+          novalidate>
+          <div class="form-floating">
+            <input id="staffLastName" name="participant[lastname]" type="text" class="form-control"
+              style="text-transform: capitalize" value="<%= p.participant.lastname %>" required autofocus />
+            <label for="staffLastName" class="form-label">Nom</label>
+            <div class="valid-feedback">BIEN</div>
+          </div>
+          <div class="form-floating">
+            <input id="firstname" name="participant[firstname]" type="text" class="form-control"
+              style="text-transform: capitalize" value="<%= p.participant.firstname %>" />
+            <label for="firstname" class="form-label">Prénom</label>
+            <div class="valid-feedback">BIEN</div>
+          </div>
+
+          <div class="form-floating">
+            <select id="role" name="participant[role]" class="form-select" value="<%= p.role %>" required>
+              <option selected disabled value="">Role</option>
+              <% if (p.role === 'Organizer'){%>
+              <option class="option" value="organizer" selected>Organizer</option>
+              <option class="option" value="participant">
+                Participant
+              </option>
+              <option class="option" value="invité">
+                Invité
+              </option>
+              <% }else if(p.role === 'participant'){ %>
+              <option class="option" value="organizer">Organizer</option>
+              <option class="option" value="participant" selected>
+                Participant
+              </option>
+              <option class="option" value="invité">
+                Invité
+              </option>
+              <% }else { %>
+              <option class="option" value="organizer">Organizer</option>
+              <option class="option" value="participant" selected>
+                Participant
+              </option>
+              <option class="option" value="invité" selected>
+                Invité
+              </option>
+              <% } %>
+            </select>
+            <label for="role" class="form-label">Role</label>
+            <div class="valid-feedback">BIEN</div>
+          </div>
+
+
+          
+          <div class="form-floating">
+            <input
+              class="form-select"
+              id="wilaya"
+              name="participant[city]"
+              list="cities"
+              placeholder="Wilaya"
+              
+              value="<%= p.participant.city %>"
+            />
+            <datalist id="cities">
+              <option class="option" value="">Ville</option>
+              <% for (city of states) { %>
+              <option class="option" value="<%= city.name %>">
+                <%= city.id + " - " + city.name %>
+              </option>
+              <%} %>
+            </datalist>
+            <label for="wilaya" class="form-label">Wilaya</label>
+            <div class="valid-feedback">BIEN</div>
+          </div>
+
+          <div class="form-floating">
+            <input type="text" class="form-control" style="text-transform: lowercase" id="stafemail"
+              name="participant[email]" value="<%=  p.participant.email %>" />
+            <label for="staffemail" class="form-label">Email</label>
+            <div class="valid-feedback">BIEN</div>
+          </div>
+          <div class="form-floating">
+            <input type="text" class="form-control" id="staffPhone" name="participant[phone]"
+              value="<%=  p.participant.phone %>" maxlength="10" />
+            <label for="staffPhone" class="form-label">Téléphone</label>
+            <div class="valid-feedback">BIEN</div>
+          </div>
+          <div class="modal-footer mt-3">
+            <button type="button" class="btn btn-outline-danger bg-gradient" data-bs-dismiss="modal">
+              Annuler
+            </button>
+            <button type="submit" id="staff-edit" class="btn btn-outline-warning bg-gradient">
+              Modifier
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $("#edit-<%= p.participant.id %>").on("shown.bs.modal", function () {
+    $(this).find("[autofocus]").focus();
+  });
+</script>

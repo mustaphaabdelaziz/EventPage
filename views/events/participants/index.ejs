@@ -1,0 +1,62 @@
+<% layout('layouts/boilerplate')%>
+
+<div class="container-fluid mt-4">
+  <div class="col m-auto">
+    <h3 class="mb-4 text-center text-success">Liste des Participants</h3>
+    <!-- <div class="mb-3">
+      
+    </div> -->
+
+    <form class="d-flex">
+      <input
+        id="search"
+        class="form-control mb-2"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+      />
+    </form>
+    <div class="table-responsive">
+      <table
+        class="table table-striped table-hover table-borderless text-center sortable"
+      >
+        <thead class="table-success">
+          <tr>
+            <th scope="col">N°</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Prénom</th>
+            <th scope="col">Date de Naissance</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Job</th>
+            <th scope="col">City</th>
+            <th scope="col">Role</th>
+            <th id="item1" scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody id="tablebody">
+          <% var i=1 %> 
+          <% for (p of event.participants){%>
+          <tr>
+            <th scope="row"><%= i%><% i=i+1; %></th>
+            <td><%= p.participant.firstname %></td>
+            <td><%= p.participant.lastname %></td>
+            <td><%= p.participant.birthday %></td>
+            <td><%=p.participant.email %></td>
+            <td><%=p.participant.phone %></td>
+            <td><%=p.participant.job %></td>
+            <td><%=p.participant.city %></td>
+            <td><%=p.role %></td>
+            <th>
+              <div class="d-flex justify-content-center align-items-center">
+                <%- include("./edit")%> 
+                <%- include("./delete")%>
+              </div>
+            </th>
+          </tr>
+          <% }%>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
