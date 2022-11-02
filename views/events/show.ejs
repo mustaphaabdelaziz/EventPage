@@ -3,7 +3,7 @@
 <div class="col-xxl-8 px-3 py-5">
   
   <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-    <div class="col-12 col-sm-12 col-lg-6 headline">
+    <div class="col--6 headline">
       <img
         src="<%= MyEvent.picture.url %>"
         class="d-block mx-lg-auto img-fluid shadow-lg"
@@ -11,8 +11,8 @@
         loading="lazy"
       />
     </div>
-    <div class="col-lg-6 headline">
-      <h2 class="display-5 fw-bold lh-1 mb-3"><%= MyEvent.title %></h2>
+    <div class="col-lg-6 col-6 col-xl-6 headline">
+      <h2 class="display-5 fw-bold mb-3"><%= MyEvent.title %></h2>
       <p class="lead"><%= MyEvent.description %></p>
       <span class="text-muted mb-4">
         <%=MyEvent.location  %> <i class="bi bi-geo-alt"></i>

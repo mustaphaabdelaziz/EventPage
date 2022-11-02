@@ -16,9 +16,10 @@ module.exports.register = async (req, res) => {
 
     const user = new User({
       username: username.toLowerCase(),
+      privileges: ["user"],
     });
     const registeredUser = await User.register(user, password);
-    req.flash("success", "User créé avec success");
+    req.flash("success", "Contact the admin to ativate your account");
     res.redirect("/user/login");
   } catch (e) {
     req.flash("error", e.message);

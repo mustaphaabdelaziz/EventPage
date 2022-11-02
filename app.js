@@ -42,6 +42,7 @@ const ExpressError = require("./utils/ExpressError");
 const participantRoutes = require("./routes/participants/participants");
 const userRoutes = require("./routes/users/user");
 const eventRoutes = require("./routes/events/event");
+const videosRoutes = require("./routes/videos/video");
 const programRoutes = require("./routes/events/program");
 const DBConnection = require("./database/connection");
 const { errorPage } = require("./middleware/middleware");
@@ -73,7 +74,25 @@ app.use(flash());
 app.use(compression());
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use("user", new LocalStrategy(User.authenticate()));
+passport.use(
+  "user",
+  new LocalStrategy((username, password, done) => {
+    User.findOne({ username: username.toLowerCase() }, function (err, user) {
+      if (err) {
+        return done(err);
+      }
+      if (!user) {
+        return done(null, false);
+      } else {
+        if (user.approved) {
+          return done(null, user);
+        } else {
+          return done(null, false, "Your account is not approved yet");
+        }
+      }
+    });
+  })
+);
 
 // serialization refers to how to store user's
 // authentication user data will be stored in the session
@@ -104,6 +123,8 @@ app.use("/participants/:eventid", participantRoutes);
 // app.use("/events/:id/participants", participant);
 app.use("/user", userRoutes);
 app.use("/events", eventRoutes);
+app.use("/videos", videosRoutes);
+app.use("/videos/:idvideo", videosRoutes);
 
 // ==== set language ===
 app.get("/:lang", (req, res) => {
