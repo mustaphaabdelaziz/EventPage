@@ -43,6 +43,7 @@ const participantRoutes = require("./routes/participants/participants");
 const userRoutes = require("./routes/users/user");
 const eventRoutes = require("./routes/events/event");
 const videosRoutes = require("./routes/videos/video");
+const articlesRoutes = require("./routes/articles/article");
 const programRoutes = require("./routes/events/program");
 const DBConnection = require("./database/connection");
 const { errorPage } = require("./middleware/middleware");
@@ -124,6 +125,8 @@ app.use("/participants/:eventid", participantRoutes);
 app.use("/user", userRoutes);
 app.use("/events", eventRoutes);
 app.use("/videos", videosRoutes);
+app.use("/articles", articlesRoutes);
+app.use("/articles/:idarticle", articlesRoutes);
 app.use("/videos/:idvideo", videosRoutes);
 
 // ==== set language ===

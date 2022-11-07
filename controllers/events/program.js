@@ -12,8 +12,7 @@ module.exports.topicForm = async (req, res) => {
 module.exports.createTopic = async (req, res) => {
   const eventId = req.params.id;
   const { title, day, start, end } = req.body.program;
-  console.log(eventId, day, title, start, end);
-  console.log(typeof start);
+ 
   const time = {
     start,
     end,
