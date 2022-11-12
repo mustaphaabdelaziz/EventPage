@@ -12,8 +12,16 @@ const storage = new CloudinaryStorage({
     allowedFormats: ["jpeg", "png", "jpg", "webp", "svg"],
   },
 });
+const ArticleStorage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: "CardioEvent/ArticlePictures",
+    allowedFormats: ["jpeg", "png", "jpg", "webp", "svg"],
+  },
+});
 
 module.exports = {
   cloudinary,
   storage,
+  ArticleStorage,
 };

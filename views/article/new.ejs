@@ -1,0 +1,118 @@
+<button
+  id="item2"
+  type="button"
+  class="btn btn-outline-success"
+  data-bs-toggle="modal"
+  data-bs-target="#newarticle"
+>
+  <i class="bi bi-person-plus-fill me-2"></i>Nouveau article
+</button>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="newarticle"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Ajouter Article</h5>
+
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <div class="modal-body">
+        <form
+          class="row g-3 needs-validation"
+          action="/articles"
+          id="article"
+          method="POST"
+          autocomplete="on"
+          novalidate
+          enctype="multipart/form-data"
+        >
+          <div class="form-floating col-md-12">
+            <input class="form-control" type="date" id="date"
+            name="article[date]" placeholder="<%= t('date') %>" required
+            value="<%= moment().format("YYYY-MM-DD") %>" />
+            <label for="date" class="form-label fs-6"> <%= t('date') %> </label>
+            <div class="valid-feedback">looks good</div>
+          </div>
+          <div class="form-floating">
+            <input
+              id="idtitle"
+              name="article[title]"
+              type="text"
+              class="form-control"
+              style="text-transform: capitalize"
+              autofocus
+              required
+            />
+            <label for="idtitle" class="form-label">Titre</label>
+            <div class="valid-feedback">BIEN</div>
+          </div>
+
+          <div class="">
+            <textarea
+              class="form-control"
+              name="article[resume]"
+              id="resume"
+              rows="9"
+              placeholder="Résumé de l'article"
+            ></textarea>
+          </div>
+
+          <div class="">
+            <textarea
+              class="form-control"
+              name="article[body]"
+              id="idbody"
+              rows="9"
+              placeholder="Rédigez votre article ici"
+              style="text-transform: capitalize"
+            ></textarea>
+          </div>
+          <div class="col-12 input-group mb-3">
+            <input
+              type="file"
+              class="form-control"
+              id="picture"
+              name="picture"
+              required
+            />
+            <label class="input-group-text" for="picture"
+              ><%= t('cover') %> <%= t('picture') %></label
+            >
+          </div>
+
+          <div class="modal-footer mt-4">
+            <button
+              type="button"
+              class="btn btn-outline-danger bg-gradient"
+              data-bs-dismiss="modal"
+            >
+              Annuler
+            </button>
+            <button class="btn btn-outline-success">Ajouter</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $("#newaarticle").on("shown.bs.modal", function () {
+    $(this).find("[autofocus]").focus();
+  });
+</script>

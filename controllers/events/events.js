@@ -34,7 +34,7 @@ module.exports.renderEventForm = async (req, res) => {
   res.render("events/new", { moment, states });
 };
 // ===============================================================================
-module.exports.createEvent = async (req, res, next) => {
+module.exports.createEvent = async (req, res) => {
   // the forwardGeocode function turns a single location name
   // and returns its geographic coordinates.
   const { event, period } = req.body;
@@ -106,6 +106,6 @@ module.exports.participantsList = async (req, res) => {
   });
   const algeria = await Country.find({});
   const states = algeria[0].states;
-  res.render("events/participants/index",{event,states})
+  res.render("events/participants/index", { event, states });
   // res.send(event);
 };

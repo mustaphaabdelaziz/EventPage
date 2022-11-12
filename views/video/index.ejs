@@ -1,0 +1,52 @@
+<% layout('layouts/boilerplate')%>
+
+<div class="container-fluid mt-4">
+  <div class="col m-auto bg-light rounded-5 p-2">
+    <h3 class="text-center text-success">Liste des Vidéos</h3>
+    <div class="d-flex mb-2">
+      <%- include("./new")%>
+     
+    
+    </div>
+  </div>
+  <form class="d-flex mt-2">
+    <input
+      id="search"
+      class="form-control mb-2"
+      type="search"
+      placeholder="Search"
+      aria-label="Search"
+    />
+  </form>
+  <div class="table-responsive shadow-sm">
+    <table
+      class="table table-striped table-hover table-borderless text-center sortable"
+      width="100"
+      id="patientTable"
+    >
+      <thead class="table-success">
+        <tr>
+          <th scope="col">N°</th>
+          <th scope="col">Titre</th>
+          <th scope="col">Déscription</th>
+          <th scope="col">Action</th>
+                   
+        </tr>
+      </thead>
+      <tbody id="tablebody">
+        <% var i=1 %> <% for (video of videos){%>
+        <tr>
+          <th scope="row"><%= i%> <% i=i+1; %></th>
+          <td style="overflow-wrap: break-word"><%= video.title %></td>
+          <td><%=video.description %></td>
+          <td><%- include("./preview")%>
+            <%- include("./delete")%>
+        </td>
+                  
+        </tr>
+        <% }%>
+      </tbody>
+    </table>
+  </div>
+</div>
+<style></style>

@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const ProgramSchema = require("./program");
 const DiscussionSchema = require("./discussion");
-const { widthOfString } = require("pdfkit");
 const opts = { toJSON: { virtuals: true } };
 const UserObject = {
   _id: Schema.Types.ObjectId,

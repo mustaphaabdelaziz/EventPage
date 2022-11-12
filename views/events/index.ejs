@@ -7,7 +7,11 @@
     <% for (let event of events){%>
     <article class="postcard light blue headline">
       <a class="postcard__img_link" href="events/<%= event._id %>">
-        <img class="postcard__img" src="<%= event.picture.url %>" alt="<%= event.picture.name %>" />
+        <img
+          class="postcard__img"
+          src="<%= event.picture.url %>"
+          alt="<%= event.picture.name %>"
+        />
       </a>
       <div class="postcard__text t-dark">
         <h1 class="postcard__title blue">
@@ -24,7 +28,9 @@
         <ul class="postcard__tagbox">
           <% if(currentUser) {%>
           <li class="tag__item">
-            <a href="events/<%= event.id %>/participants"><i class="bi bi-people"></i>participants</a>
+            <a href="events/<%= event.id %>/participants"
+              ><i class="bi bi-people"></i>participants</a
+            >
           </li>
           <% } %>
           <li class="tag__item">
@@ -34,6 +40,5 @@
       </div>
     </article>
     <% } %>
-
   </div>
 </section>

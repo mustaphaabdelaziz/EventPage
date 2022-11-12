@@ -42,7 +42,10 @@ const ExpressError = require("./utils/ExpressError");
 const participantRoutes = require("./routes/participants/participants");
 const userRoutes = require("./routes/users/user");
 const eventRoutes = require("./routes/events/event");
+const videosRoutes = require("./routes/videos/video");
+const articlesRoutes = require("./routes/articles/article");
 const programRoutes = require("./routes/events/program");
+const Article = require("./models/articles/article");
 const DBConnection = require("./database/connection");
 const { errorPage } = require("./middleware/middleware");
 const { sessionConfig } = require("./config/sessionConfig");
@@ -50,6 +53,7 @@ const { sessionConfig } = require("./config/sessionConfig");
 const i18next = require("./config/i18next");
 // the local file contain all the local variable
 const { locals } = require("./config/local");
+
 const app = express();
 app.set("trust proxy", true);
 // ====================================================
@@ -122,6 +126,10 @@ app.use("/participants/:eventid", participantRoutes);
 // app.use("/events/:id/participants", participant);
 app.use("/user", userRoutes);
 app.use("/events", eventRoutes);
+app.use("/videos", videosRoutes);
+app.use("/articles", articlesRoutes);
+app.use("/articles/:idarticle", articlesRoutes);
+app.use("/videos/:idvideo", videosRoutes);
 
 // ==== set language ===
 app.get("/:lang", (req, res) => {
@@ -138,8 +146,9 @@ app.get("/:lang", (req, res) => {
 // === Home Page ===
 
 app.get("/", async (req, res) => {
-  //  res.send(req.ip)
-  res.render("home/home");
+  const articles = await Article.find({}).sort({ date: -1 }).limit(2);
+  //  res.send(articles)
+  res.render("home/home", { articles, moment });
 });
 // ========== if none of the routes match then it's error ==========
 app.all("*", (req, res, next) => {
