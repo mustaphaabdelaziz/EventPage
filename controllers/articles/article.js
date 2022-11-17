@@ -1,8 +1,5 @@
 const Article = require("../../models/articles/article");
 const moment = require("moment");
-const multer = require("multer");
-const { storage } = require("../../cloudinary/index");
-const upload = multer({ storage });
 
 module.exports.showArticles = async (req, res) => {
   const articles = await Article.find({}).sort({ date: -1 });

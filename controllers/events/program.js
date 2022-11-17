@@ -12,7 +12,7 @@ module.exports.topicForm = async (req, res) => {
 module.exports.createTopic = async (req, res) => {
   const eventId = req.params.id;
   const { title, day, start, end } = req.body.program;
- 
+  console.log(day);
   const time = {
     start,
     end,
@@ -29,9 +29,9 @@ module.exports.createTopic = async (req, res) => {
         },
       },
     },
-    {}
+    { new: true }
   );
-  console.log(event);
+  // console.log(event);
   // res.send(event);
   res.redirect(`/events/${eventId}`);
 };

@@ -2,12 +2,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const ProgramSchema = require("./program");
 const DiscussionSchema = require("./discussion");
+const underscore = require("underscore");
 const opts = { toJSON: { virtuals: true } };
 const UserObject = {
-  _id: Schema.Types.ObjectId,
-  firstname: String,
-  lastname: String,
-  pictures: String,
+  type: Schema.Types.ObjectId,
+  ref: "Participant",
 };
 const EventSchema = new Schema(
   {
@@ -24,7 +23,8 @@ const EventSchema = new Schema(
       start: Date,
       end: Date,
     },
-    author: String,
+    type:String,
+    author: [UserObject],
     speakers: [UserObject],
     program: [ProgramSchema],
     participants: [
@@ -45,5 +45,8 @@ EventSchema.virtual("properties.popUpMarkup").get(function () {
 });
 EventSchema.virtual("thumbnail").get(function () {
   return this.picture.url.replace("/upload", "/upload/w_200");
+});
+EventSchema.virtual("sortedProgram").get(function () {
+  return underscore.sortBy(this.program.timeline, "time");
 });
 module.exports = mongoose.model("Event", EventSchema);

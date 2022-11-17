@@ -1,5 +1,21 @@
+.bg-temptress {
+  background-color: #3a2625;
+}
+
+.bg-unmetal {
+  background-color: #25393a;
+}
+
+.bg-chineseWhite {
+  background-color: #dbe3e3;
+}
+
+.bg-hookersGreen {
+  background-color: #497174;
+}
+
 .bg-pistachio {
-  background-color: #DCF4E4;
+  background-color: #dcf4e4;
 }
 
 .bg-greenSea {
@@ -19,15 +35,31 @@
 }
 
 .bg-antiqueSteel {
-  background-color: #E8E9E9;
+  background-color: #eff5f5;
+}
+
+.text-temptress {
+  color: #3a2625;
+}
+
+.text-chineseWhite {
+  color: #dbe3e3;
+}
+
+.text-gunmetal {
+  color: #25393a;
+}
+
+.text-hookersGreen {
+  color: #497174;
 }
 
 .text-antiqueSteel {
-  color: #E8E9E9;
+  color: #eff5f5;
 }
 
 .text-pistachio {
-  color: #DCF4E4;
+  color: #dcf4e4;
 }
 
 .text-crystalBlue {
@@ -96,24 +128,24 @@
 
 .btn-pistachio {
   color: #fff;
-  background-color: #DCF4E4;
-  border-color: #DCF4E4;
+  background-color: #dcf4e4;
+  border-color: #dcf4e4;
 }
 
 .btn-pistachio:hover {
   color: #fff;
-  background-color: #DCF4E4;
+  background-color: #dcf4e4;
   opacity: 0.8;
 }
 
 .btn-antiqueSteel {
   color: #fff;
-  background-color: #E8E9E9;
-  border-color: #E8E9E9;
+  background-color: #eff5f5;
+  border-color: #eff5f5;
 }
 
 .btn-antiqueSteel:hover {
   color: #fff;
-  background-color: #E8E9E9;
+  background-color: #eff5f5;
   opacity: 0.8;
 }/*# sourceMappingURL=color.css.map */

@@ -46,6 +46,7 @@ const videosRoutes = require("./routes/videos/video");
 const articlesRoutes = require("./routes/articles/article");
 const programRoutes = require("./routes/events/program");
 const Article = require("./models/articles/article");
+const Event = require("./models/event");
 const DBConnection = require("./database/connection");
 const { errorPage } = require("./middleware/middleware");
 const { sessionConfig } = require("./config/sessionConfig");
@@ -147,8 +148,17 @@ app.get("/:lang", (req, res) => {
 
 app.get("/", async (req, res) => {
   const articles = await Article.find({}).sort({ date: -1 }).limit(2);
+  const latestEvents = await Event.find({})
+    .sort({ "period.start": -1 })
+    .limit(2);
+  const upcomingEvents = await Event.find({
+    "period.start": { $gt: moment().format("l") },
+  })
+    .sort({ "period.start": 1 })
+    .limit(2);
+
   //  res.send(articles)
-  res.render("home/home", { articles, moment });
+  res.render("home/home", { articles, latestEvents, upcomingEvents, moment });
 });
 // ========== if none of the routes match then it's error ==========
 app.all("*", (req, res, next) => {

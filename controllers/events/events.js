@@ -2,6 +2,7 @@ const Event = require("../../models/event");
 const moment = require("moment");
 const Country = require("../../models/country");
 const { cloudinary } = require("../../cloudinary");
+const { resolve } = require("path");
 // ===============================================================================
 module.exports.index = async (req, res) => {
   const events = await Event.find({}).sort({
@@ -39,8 +40,8 @@ module.exports.createEvent = async (req, res) => {
   // and returns its geographic coordinates.
   const { event, period } = req.body;
 
-  let start = moment(period.start).format("MMM/DD/YYYY");
-  let end = moment(period.end).format("MMM/DD/YYYY");
+  let start = moment(period.start).format("MM/DD/YYYY");
+  let end = moment(period.end).format("MM/DD/YYYY");
 
   const p = {
     start,
@@ -64,7 +65,7 @@ module.exports.createEvent = async (req, res) => {
   for (i = 1; i <= nbrOfDays + 1; i++)
     createdEvent.program.push({
       day: "day " + i,
-      date: moment(moment(period.start).add(i, "days")),
+      date: moment(moment(period.start).add(i - 1, "days")),
     });
 
   await createdEvent.save();
@@ -75,22 +76,55 @@ module.exports.createEvent = async (req, res) => {
 module.exports.updateEvent = async (req, res) => {
   const { id } = req.params;
   const { deleteImage } = req.body;
-
-  let event = await Event.findByIdAndUpdate(id, {
-    ...req.body.event,
-  });
+  const { event, period } = req.body;
+  let start = moment(period.start).format("MM/DD/YYYY");
+  let end = moment(period.end).format("MM/DD/YYYY");
+  console.log(start, end);
+  const p = {
+    start,
+    end,
+  };
+  const createdEvent = {
+    ...event,
+  };
+  createdEvent.period = { ...p };
+  console.log(createdEvent.period);
   if (req.file) {
-    event.picture = {
+    createdEvent.picture = {
       url: req.file.path,
       filename: req.file.filename,
     };
-    await event.save();
   }
+  const nbrOfDays = Math.abs(
+    moment(period.end).diff(moment(period.start), "days")
+  );
+  createdEvent.program = [
+    {
+      day: "day 1",
+      date: moment(period.start),
+    },
+  ];
+  for (i = 2; i <= nbrOfDays + 1; i++)
+    createdEvent.program.push({
+      day: "day " + i,
+      date: moment(moment(period.start).add((i-1), "days")),
+    });
+  console.log("nbrOfDays :", nbrOfDays);
+  console.log(createdEvent.program);
+  // res.send(createdEvent);
   if (deleteImage) {
     await cloudinary.uploader.destroy(deleteImage);
   }
+  let MyEvent = await Event.findByIdAndUpdate(
+    id,
+    {
+      ...createdEvent,
+    },
+    { new: true }
+  );
+
   req.flash("success", "Successfully updated event!");
-  res.redirect(`/events/${event._id}`);
+  res.redirect(`/events/${MyEvent._id}`);
 };
 // ===============================================================================
 module.exports.deleteEvent = async (req, res) => {

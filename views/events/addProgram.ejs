@@ -43,9 +43,9 @@
         >
           <div class="form-floating col-md-6">
             <select id="day" name="program[day]" class="form-select" required>
-              <option selected disabled>Days</option>
+              <option selected disabled value="">Days</option>
               <% for(program of MyEvent.program){ %>
-              <option class="option" value="<%= program.day %>">
+              <option class="option" value="<%= program.day%>">
                 <%= program.day %>
               </option>
               <% } %>

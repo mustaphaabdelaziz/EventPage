@@ -49,22 +49,55 @@
             <a class="dropdown-item text-dark" href="/events">
               <%= t('events') %>
             </a>
-           
           </div>
         </li>
         <% } %>
+       
         <li class="nav-item">
-          <a class="nav-link" href="/about"><%= t('about') %></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/videos">Vidéos</a>
+          <a class="nav-link" href="/videos"><%= t('videos') %></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/articles">Articles</a>
         </li>
-        
+        <li class="nav-item">
+          <a class="nav-link" href="/about"><%= t('about') %></a>
+        </li>
+      </ul>
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <div class="d-flex flex-md-row ">
+          <li class="dropdown nav-item"><%-include("./userDropdown") %></li>
         <li class="dropdown nav-item"><%-include("./langDropdown") %></li>
-        <li class="dropdown nav-item"><%-include("./userDropdown") %></li>
+        <li class="nav-item me-3">
+          <a href="" target="_blank"
+            ><i class="portfolio fas fa-briefcase fs-5"></i
+          ></a>
+        </li>
+        <li class="nav-item me-3">
+          <a href="" target="_blank"
+            ><i class="linkedin bi bi-linkedin fs-5"></i
+          ></a>
+        </li>
+        <li class="nav-item me-3">
+          <a href="" target="_blank"
+            ><i class="twitter bi bi-twitter fs-5"></i
+          ></a>
+        </li>
+        <li class="nav-item me-3">
+          <a href="" target="_blank"
+            ><i class="facebook bi bi-facebook fs-5"></i
+          ></a>
+        </li>
+        <li class="nav-item me-3">
+          <a href="" target="_blank"
+            ><i class="instagram bi bi-instagram fs-5"></i
+          ></a>
+        </li>
+        <li class="nav-item me-3">
+          <a href="" target="_blank"
+            ><i class="youtube fab fa-youtube fs-5"></i
+          ></a>
+        </li>
+        </div>
       </ul>
     </div>
   </div>

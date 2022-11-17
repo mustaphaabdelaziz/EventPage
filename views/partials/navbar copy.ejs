@@ -1,6 +1,7 @@
 <nav
   class="navbar navbar-expand-lg sticky-top navbar-light bg-antiqueSteel shadow-sm"
 >
+
   <div class="container-fluid">
     <a class="navbar-brand fw-bold" href="/">
       <img
@@ -124,8 +125,8 @@
             </li>
           </ul>
         </li>
-        <% if(currentUser){ %> <% if(currentUser.privileges.includes('admin')) {
-        %>
+        <% if(currentUser){ %> 
+        <% if(currentUser.privileges.includes('admin')) {%>
         <li class="nav-item">
           <a class="nav-link" href="/user"
             >Utilisateurs
@@ -135,6 +136,7 @@
         <% }} %>
         <li class="dropdown nav-item"><%-include("./userDropdown") %></li>
       </ul>
+      
     </div>
   </div>
 </nav>

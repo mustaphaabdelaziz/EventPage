@@ -17,18 +17,16 @@
       <span class="text-muted mb-4">
         <%=MyEvent.location  %> <i class="bi bi-geo-alt"></i>
       </span>
+      <% if(!currentUser) {%>
       <div class="d-md-flex justify-content-md-start mb-2 mt-2">
-        <% if(!currentUser) {%>
         <a href="/participants/<%=MyEvent.id%>/register" class="btn btn-outline-success bg-gradient px-4">
           <%= t('register') %>
         </a>
-        <% }%>
       </div>
-      <% if(currentUser) {%>
+      <% }else{%>
         <%- include("./edit")%>
         <%- include("./delete")%>
-        <% } %> 
-   
+      <% } %> 
     </div>
   </div>
   <div class="row headline">

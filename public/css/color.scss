@@ -2,8 +2,24 @@ $lightCoral: #e2564c;
 $mediumTurquoise: #0fa2b6;
 $greenSea: #5da49c;
 $crystalBlue: #afd9ea;
-$pistachio: #DCF4E4 ;
-$antiqueSteel : #E8E9E9 ;
+$pistachio: #dcf4e4;
+$antiqueSteel: #eff5f5;
+$hookersGreen: #497174;
+$chineseWhite: #dbe3e3;
+$gunmetal: #25393a;
+$temptress: #3a2625;
+.bg-temptress {
+  background-color: $temptress;
+}
+.bg-unmetal {
+  background-color: $gunmetal;
+}
+.bg-chineseWhite {
+  background-color: $chineseWhite;
+}
+.bg-hookersGreen {
+  background-color: $hookersGreen;
+}
 .bg-pistachio {
   background-color: $pistachio;
 }
@@ -21,6 +37,18 @@ $antiqueSteel : #E8E9E9 ;
 }
 .bg-antiqueSteel {
   background-color: $antiqueSteel;
+}
+.text-temptress {
+  color: $temptress;
+}
+.text-chineseWhite {
+  color: $chineseWhite;
+}
+.text-gunmetal {
+  color: $gunmetal;
+}
+.text-hookersGreen {
+  color: $hookersGreen;
 }
 .text-antiqueSteel {
   color: $antiqueSteel;
