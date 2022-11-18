@@ -3,6 +3,7 @@ const moment = require("moment");
 const Country = require("../../models/country");
 const { cloudinary } = require("../../cloudinary");
 const { resolve } = require("path");
+const User = require("../../models/user/user");
 // ===============================================================================
 module.exports.index = async (req, res) => {
   const events = await Event.find({}).sort({
@@ -22,10 +23,11 @@ module.exports.showEvent = async (req, res) => {
 
   if (!MyEvent) {
     req.flash("error", "Cannot find that event !!!");
-    return res.redirect("/events");
+    res.redirect("/events");
   }
   const algeria = await Country.find({});
   const states = algeria[0].states;
+  // res.send(MyEvent)
   res.render("events/show", { MyEvent, moment, states });
 };
 // ===============================================================================
@@ -59,6 +61,13 @@ module.exports.createEvent = async (req, res) => {
     url: req.file.path,
     filename: req.file.filename,
   };
+  createdEvent.author = {
+    _id: req.user._id,
+  };
+  createdEvent.participants.push({
+    role: "Organiser",
+    _id: req.user._id,
+  });
   const nbrOfDays = Math.abs(
     moment(period.end).diff(moment(period.start), "days")
   );
@@ -69,59 +78,55 @@ module.exports.createEvent = async (req, res) => {
     });
 
   await createdEvent.save();
+  User.findByIdAndUpdate(
+    req.user._id,
+    { $addToSet: { attendedEvents: { _id: id } } },
+    { new: true }
+  );
   req.flash("success", "Successfully made a new events !!!");
   res.redirect(`/events/${createdEvent._id}`);
 };
 // ===============================================================================
 module.exports.updateEvent = async (req, res) => {
   const { id } = req.params;
-  const { deleteImage } = req.body;
-  const { event, period } = req.body;
+  const { deleteImage, period } = req.body;
+  const { title, description, location } = req.body.event;
   let start = moment(period.start).format("MM/DD/YYYY");
   let end = moment(period.end).format("MM/DD/YYYY");
-  console.log(start, end);
   const p = {
     start,
     end,
   };
-  const createdEvent = {
-    ...event,
-  };
-  createdEvent.period = { ...p };
-  console.log(createdEvent.period);
+  let MyEvent;
+
+  let picture = {};
+  let hasChanged = false;
   if (req.file) {
-    createdEvent.picture = {
+    hasChanged = true;
+    picture = {
       url: req.file.path,
       filename: req.file.filename,
     };
   }
-  const nbrOfDays = Math.abs(
-    moment(period.end).diff(moment(period.start), "days")
-  );
-  createdEvent.program = [
-    {
-      day: "day 1",
-      date: moment(period.start),
-    },
-  ];
-  for (i = 2; i <= nbrOfDays + 1; i++)
-    createdEvent.program.push({
-      day: "day " + i,
-      date: moment(moment(period.start).add((i-1), "days")),
-    });
-  console.log("nbrOfDays :", nbrOfDays);
-  console.log(createdEvent.program);
-  // res.send(createdEvent);
   if (deleteImage) {
     await cloudinary.uploader.destroy(deleteImage);
   }
-  let MyEvent = await Event.findByIdAndUpdate(
-    id,
-    {
-      ...createdEvent,
-    },
-    { new: true }
-  );
+  if (hasChanged) {
+    MyEvent = await Event.findByIdAndUpdate(id, {
+      title,
+      description,
+      location,
+      period: p,
+      picture,
+    });
+  } else {
+    MyEvent = await Event.findByIdAndUpdate(id, {
+      title,
+      description,
+      location,
+      period: p,
+    });
+  }
 
   req.flash("success", "Successfully updated event!");
   res.redirect(`/events/${MyEvent._id}`);

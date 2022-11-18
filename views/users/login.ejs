@@ -84,7 +84,7 @@
               <button
                 type="submit"
                 id="user-submit"
-                class="btn btn-outline-primary bg-gradient bg-opacity-25"
+                class="w-25 btn btn-outline-primary bg-gradient bg-opacity-25"
               >
                 Login <i class="bi bi-box-arrow-in-right ms-2"></i>
               </button>
@@ -100,47 +100,146 @@
         >
           <h3 class="my-5 text-center text-primary">Register</h3>
           <form
-            class="row g-3 needs-validation"
+            class="row g-3 m-2 needs-validation"
             action="/user/register"
             id="personal"
             method="POST"
             novalidate
+            autocomplete
+            autocapitalize
           >
-            <div class="col-md-6">
-              <label for="userLastName" class="form-label"
-                >Nom Utilisateur</label
-              >
+            <div class="form-floating col-md-6">
               <input
-                id="userLastName"
-                name="user[username]"
+                id="firstname"
+                name="user[firstname]"
                 type="text"
-                placeholder="Nom Utilisateur"
                 class="form-control"
                 required
               />
+              <label for="firstname" class="form-label"
+                ><%= t('firstname') %></label
+              >
+            </div>
+            <div class="form-floating col-md-6">
+              <input
+                id="lastname"
+                name="user[lastname]"
+                type="text"
+                class="form-control"
+                required
+              />
+              <label for="lastname" class="form-label"
+                ><%= t('lastname') %></label
+              >
+            </div>
+
+            <div class="form-floating col-md-6">
+              <input id="birthDate" name="user[birthdate]" type="date"
+              class="form-control" max="<%=moment().format('YYYY-MM-DD')%>"
+              min="<%=moment("01/01/1900").format('YYYY-MM-DD')%>" required />
+              <label for="birthDate" class="form-label"
+                ><%= t('birthdate') %>
+              </label>
+            </div>
+            <div class="form-floating col-md-6">
+              <select
+                id="gender"
+                name="user[gender]"
+                class="form-select"
+                required
+              >
+                <option selected value="" disabled></option>
+                <option class="option" value="Male"><%= t('male') %></option>
+                <option class="option" value="Female">
+                  <%= t('female') %>
+                </option>
+              </select>
+              <label for="gender" class="form-label"
+                ><%= t('gender') %></label
+              >
+            </div>
+            <div class="form-floating col-md-6">
+              <input
+                class="form-select"
+                id="city"
+                name="user[city]"
+                list="cities"
+                onchange="makeSubmenu(this.value, '')"
+              />
+              <datalist id="cities">
+                <option class="option" value=""></option>
+                <% for (city of states) { %>
+                <option class="option" value="<%= city.name %>">
+                  <%= city.id + " - " + city.name %>
+                </option>
+                <%} %>
+              </datalist>
+              <label for="city" class="form-label">Wilaya</label>
               <div class="valid-feedback">BIEN</div>
             </div>
 
-            <div class="col-md-6">
-              <label for="userPassword" class="form-label">Mot de pass</label>
+            <div class="form-floating col-md-6">
               <input
-                id="userPassword"
-                placeholder="Mot de pass"
+                id="email"
+                name="user[email]"
+                type="email"
+                class="form-control"
+                required
+              />
+              <label for="email" class="form-label"
+                ><%= t('email') %></label
+              >
+              <div class="valid-feedback">BIEN</div>
+            </div>
+            <div class="form-floating col-md-6 mb-3">
+              <input
                 type="password"
                 class="form-control"
-                name="user[password]"
+                id="userLoginPassword"
+                name="password"
+                placeholder="Password"
                 required
               />
+              <label for="userLoginPassword" class="form-label">Password</label>
               <div class="valid-feedback">BIEN</div>
             </div>
 
-            <div class="mb-3 text-center">
+            <div class="form-floating col-md-6">
+              <input
+                type="text"
+                class="form-control"
+                id="phone"
+                name="user[phone]"
+                required
+                maxlength="10"
+              />
+              <label for="phone" class="form-label"
+                ><%= t('phone') %></label
+              >
+              <div class="valid-feedback">BIEN</div>
+            </div>
+            <div class="form-floating col-md-6">
+              <input
+                type="text"
+                class="form-control"
+                name="user[job]"
+                id="job"
+                required
+              />
+              <label for="job" class="form-label"
+                ><%= t('job') %></label
+              >
+              <div class="valid-feedback">BIEN</div>
+            </div>
+
+            <div class="mt-3 text-center">
               <button
                 type="submit"
-                id="user-register"
-                class="btn btn-outline-primary bg-gradient bg-opacity-25"
+                id="register"
+                class="w-50 btn btn-outline-primary bg-gradient bg-opacity-25"
               >
-                Register <i class="bi bi-person-plus-fill ms-2"></i>
+                Inscrire
+                <i class="bi bi-person-plus-fill ms-2"></i>
               </button>
             </div>
           </form>

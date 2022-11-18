@@ -6,7 +6,7 @@ const underscore = require("underscore");
 const opts = { toJSON: { virtuals: true } };
 const UserObject = {
   type: Schema.Types.ObjectId,
-  ref: "Participant",
+  ref: "User",
 };
 const EventSchema = new Schema(
   {
@@ -23,17 +23,14 @@ const EventSchema = new Schema(
       start: Date,
       end: Date,
     },
-    type:String,
-    author: [UserObject],
+    type: String,
+    author: UserObject,
     speakers: [UserObject],
     program: [ProgramSchema],
     participants: [
       {
-        role: String,
-        participant: {
-          type: Schema.Types.ObjectId,
-          ref: "Participant",
-        },
+        role: { type: String, default: "participant" },
+        participant: { UserObject },
       },
     ],
   },

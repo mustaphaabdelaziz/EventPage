@@ -46,6 +46,7 @@ const videosRoutes = require("./routes/videos/video");
 const articlesRoutes = require("./routes/articles/article");
 const programRoutes = require("./routes/events/program");
 const Article = require("./models/articles/article");
+const eventUserAction = require("./routes/events/eventUserAction");
 const Event = require("./models/event");
 const DBConnection = require("./database/connection");
 const { errorPage } = require("./middleware/middleware");
@@ -80,19 +81,16 @@ app.use(passport.initialize());
 app.use(passport.session());
 passport.use(
   "user",
-  new LocalStrategy((username, password, done) => {
-    User.findOne({ username: username.toLowerCase() }, function (err, user) {
+  new LocalStrategy((email,password, done) => {
+    console.log(email)
+    User.findOne({ email: email.toLowerCase() }, function (err, user) {
       if (err) {
         return done(err);
       }
       if (!user) {
         return done(null, false);
       } else {
-        if (user.approved) {
-          return done(null, user);
-        } else {
-          return done(null, false, "Your account is not approved yet");
-        }
+        return done(null, user);
       }
     });
   })
@@ -117,15 +115,12 @@ app.use(cors());
 app.use("/about", (req, res) => {
   res.send("Welcome to the about Page");
 });
-// app.get("/events", async (req, res) => {
-//   //  res.send(req.ip)
-//   res.render("events/index", { moment });
-// });
 // ===== User Routes ====
+app.use("/user", userRoutes); 
 app.use("/events/:id/program", programRoutes);
+app.use("/events/:id/:userid/", eventUserAction);
 app.use("/participants/:eventid", participantRoutes);
 // app.use("/events/:id/participants", participant);
-app.use("/user", userRoutes);
 app.use("/events", eventRoutes);
 app.use("/videos", videosRoutes);
 app.use("/articles", articlesRoutes);

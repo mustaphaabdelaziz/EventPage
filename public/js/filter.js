@@ -1,4 +1,5 @@
 var table = document.getElementById("patientTable");
+console.log(table);
 var tr = table.getElementsByTagName("tr");
 var txtValue;
 

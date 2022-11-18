@@ -11,16 +11,40 @@ module.exports.renderRegisterForm = async (req, res) => {
 
 // ===========================================================================
 module.exports.register = async (req, res) => {
+  console.log("new Register");
   try {
-    const { username, password } = req.body.user;
+    const { user, password } = req.body;
+    const { firstname, lastname, phone, email, birthdate, city, gender, job } =
+      req.body.user;
 
-    const user = new User({
-      username: username.toLowerCase(),
+    console.log(user);
+    const newUser = new User({
+      firstname:
+        firstname.charAt(0).toUpperCase() + firstname.slice(1).toLowerCase(),
+      lastname:
+        lastname.charAt(0).toUpperCase() + lastname.slice(1).toLowerCase(),
+      birthdate,
+      gender,
+      city,
+      email: email.toLowerCase(),
+      phone,
+      job,
       privileges: ["user"],
     });
-    const registeredUser = await User.register(user, password);
-    req.flash("success", "Contact the admin to ativate your account");
-    res.redirect("/user/login");
+    console.log(newUser);
+    // var str = newUser.firstname;
+    // // make the name start with a capitalized letter
+    // newUser.firstname = str.charAt(0).toUpperCase() + str.slice(1);
+    // str = newUser.lastname;
+    // newUser.lastname = str.charAt(0).toUpperCase() + str.slice(1);
+    // str = newUser.job;
+    // newUser.job = str.charAt(0).toUpperCase() + str.slice(1);
+    const registeredUser = await User.register(newUser, password);
+    req.login(registeredUser, (err) => {
+      if (err) return next(err);
+      req.flash("success", "Welcome to  Oasis Event");
+      res.redirect("/events");
+    });
   } catch (e) {
     req.flash("error", e.message);
     res.redirect("register");

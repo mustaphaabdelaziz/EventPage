@@ -49,6 +49,7 @@
               value="<%=MyEvent.title%>"
               required
               style="text-transform: capitalize"
+              autofocus
             />
             <label for="title" class="form-label fw-bold fs-6"
               ><%= t('title') %>
@@ -84,7 +85,6 @@
               name="period[start]"
               placeholder="<%= t('date') %>"
               required
-              min="<%= moment().format('YYYY-MM-DD')%>"
               value="<%=moment(MyEvent.period.start).format('YYYY-MM-DD')%>"
             />
             <label for="start" class="form-label fs-6"><%= t('begin') %></label>
@@ -97,7 +97,6 @@
               id="end"
               name="period[end]"
               required
-              min="<%= moment().format('YYYY-MM-DD')%>"
               value="<%=moment(MyEvent.period.end).format('YYYY-MM-DD')%>"
             />
             <label for="end" class="form-label fs-6"><%= t('finish') %></label>
@@ -165,7 +164,7 @@
   </div>
 </div>
 <script>
-  $("#newPatient").on("shown.bs.modal", function () {
+  $("#editEvent").on("shown.bs.modal", function () {
     $(this).find("[autofocus]").focus();
   });
 </script>

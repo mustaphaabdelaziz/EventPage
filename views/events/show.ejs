@@ -1,69 +1,91 @@
 <% layout('layouts/boilerplate')%>
 
 <div class="col-xxl-8 px-3 py-5">
-  
-  <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-    <div class="col-6 headline">
+  <div class="row flex-lg-row-reverse g-5 py-3">
+    <div class="col-6 col-lg-6 col-6 col-xl-6 col-md-12 col-sm-12 headline">
       <img
         src="<%= MyEvent.picture.url %>"
-        class="d-block mx-lg-auto img-fluid shadow-lg"
+        class="d-block mx-lg-auto img-fluid shadow col-12"
         alt="<%= MyEvent.picture.name %>"
         loading="lazy"
       />
     </div>
-    <div class="col-lg-6 col-6 col-xl-6 headline">
+    <div class="col-6 col-md-12 col-sm-12 col-lg-6 col-6 col-xl-6 headline">
+      <div class="col-12">
       <h2 class="display-5 fw-bold mb-3"><%= MyEvent.title %></h2>
       <p class="lead"><%= MyEvent.description %></p>
-      <span class="text-muted mb-4">
-        <%=MyEvent.location  %> <i class="bi bi-geo-alt"></i>
+      <span class="text-muted">
+        <%=MyEvent.location %> <i class="bi bi-geo-alt"></i>
       </span>
+    </div>
+    <div class="col-12 mt-3">
       <% if(!currentUser) {%>
-      <div class="d-md-flex justify-content-md-start mb-2 mt-2">
-        <a href="/participants/<%=MyEvent.id%>/register" class="btn btn-outline-success bg-gradient px-4">
-          <%= t('register') %>
-        </a>
+      <div class="d-md-flex justify-content-md-start">
+        <a href="/user/login" class="col-12 btn btn-outline-hookersGreen rounded-pill bg-gradient"
+          ><%= t('attends') %></a>
       </div>
+      <% } else { %>
+        <% if ( currentUser){%>
+        <% if(MyEvent.author._id.equals(currentUser._id)) {%>
+      <%- include("./edit")%>
+      <%- include("./delete")%> 
+      <% }else { %>
+      <% if(MyEvent.participants.filter(participant => participant._id.equals(currentUser._id)).length > 0) {%>
+      <button class="col-12 btn btn-outline-hookersGreen rounded-pill bg-gradient subscribed" id="subscribe">
+        <%= t('going') %>
+      </button>
       <% }else{%>
-        <%- include("./edit")%>
-        <%- include("./delete")%>
-      <% } %> 
+      <!-- if there is a loggedIn user and he is not yet going -->
+      <button class="col-12 btn btn-outline-hookersGreen rounded-pill bg-gradient" id="subscribe">
+        <%= t('attends') %>
+      </button>
+      <% }}}} %>
+    </div>
     </div>
   </div>
   <div class="row headline">
     <div class="col-12 col-sm-12 col-lg-12">
       <div class="col-12 col-sm-12 col-lg-12">
         <!-- <div class="card-body"> -->
-          <h1 class="card-title title-timeline"><%= t('program') %></h1>
-          <% if(currentUser) {%>
-          <%- include("./addProgram")%> 
-          <% } %> 
-          <% for(program of MyEvent.program){ %>
-          <h2 class="title-timeline mt-5 headline">
-            <%=`${program.day}: ${moment(program.date).format('dddd, MMMM Do,YYYY')}`%>
-          </h2>
-          <div id="content">
-            <% if(program.timeline.length>0){ %> 
-            <ul class="timeline shadow-lg">
-              <% for(timeline of program.timeline) {%>
-              <li
-                class="event headline"
-                data-date="<%=timeline.time.start%> - <%=timeline.time.end%>"
-              >
-                <h3 class="title-timeline">
-                  <%=timeline.title %>
-                </h3>
-                <p>
-                  Get here on time, it's first come first serve. Be late, get
-                  turned away.
-                </p>
-              </li>
-              <% } %>
-            </ul>
-            <% } %> 
-          </div>
+        <h1 class="card-title title-timeline"><%= t('program') %></h1>
+        <% if ( currentUser){%>
+        <% if(MyEvent.author._id.equals(currentUser._id)) {%>
+          <%- include("./addProgram")%>
+        <% } }%>
+        <% for(program of MyEvent.program){ %>
+        <h2 class="title-timeline mt-5 headline">
+          <%=`${program.day}: ${moment(program.date).format('dddd, MMMM Do,YYYY')}`%>
+        </h2>
+        <div id="content">
+          <% if(program.timeline.length>0){ %>
+          <ul class="timeline shadow-lg">
+            <% for(timeline of program.timeline) {%>
+            <li
+              class="event headline"
+              data-date="<%=timeline.time.start%> - <%=timeline.time.end%>"
+            >
+              <h3 class="title-timeline"><%=timeline.title %></h3>
+              <p>
+                Get here on time, it's first come first serve. Be late, get
+                turned away.
+              </p>
+            </li>
+            <% } %>
+          </ul>
           <% } %>
+        </div>
+        <% } %>
         <!-- </div> -->
       </div>
     </div>
   </div>
 </div>
+<script>
+  const MyEvent = <%- JSON.stringify(MyEvent) %>;
+</script>
+<script>
+  const serverURL = '<%- process.env.SERVER_URL %>';
+  const localURL = '<%- process.env.LOCAL_URL %>';
+  const user = <%- JSON.stringify(currentUser) %>;
+</script>
+<script src="/js/subscribe.js"></script>

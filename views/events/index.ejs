@@ -29,7 +29,7 @@
           <% if(currentUser) {%>
           <li class="tag__item">
             <a href="events/<%= event.id %>/participants"
-              ><i class="bi bi-people"></i>participants</a
+              ><i class="bi bi-people"></i> <%= event.participants.length %> participants</a
             >
           </li>
           <% } %>

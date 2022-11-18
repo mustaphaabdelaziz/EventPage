@@ -148,4 +148,27 @@
   color: #fff;
   background-color: #eff5f5;
   opacity: 0.8;
+}
+
+.btn-hookersGreen {
+  color: #fff;
+  background-color: #497174;
+  border-color: #497174;
+}
+
+.btn-hookersGreen {
+  color: #fff;
+  background-color: #497174;
+  border-color: #497174;
+}
+
+.btn-outline-hookersGreen {
+  color: #497174;
+  border-color: #497174;
+}
+
+.btn-outline-hookersGreen:hover {
+  color: #fff;
+  background-color: #497174;
+  border-color: #497174;
 }/*# sourceMappingURL=color.css.map */

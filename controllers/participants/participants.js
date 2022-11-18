@@ -13,9 +13,6 @@ module.exports.renderRegisterForm = async (req, res) => {
 module.exports.register = async (req, res) => {
   const { user } = req.body;
   const { eventid } = req.params;
-  console.log(eventid);
-  // console.log(user);
-  // res.send(eventid);
   try {
     const participant = new Participant({
       firstname: user.firstname,
@@ -23,7 +20,7 @@ module.exports.register = async (req, res) => {
       birthday: user.birthday,
       gender: user.gender,
       city: user.city,
-      email: user.email,
+      email: user.email.toLowerCase(),
       phone: user.phone,
       job: user.job,
     });

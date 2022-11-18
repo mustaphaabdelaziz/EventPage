@@ -10,34 +10,34 @@ const passportLocalMongoose = require("passport-local-mongoose");
 const Schema = mongoose.Schema;
 const UserSchema = new Schema(
   {
-    username: {
-      type: String,
-      required: true,
-      unique: true,
-      lowercase: true,
-      trim: true,
-    },
+    firstname: { type: String, trim: true },
+    lastname: { type: String, trim: true, required: true },
+    birthday: String,
+    phone: String,
+    gender: String,
+    firstname: { type: String, trim: true },
+    city: String,
+    attendedEvents: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Event",
+      },
+    ],
     privileges: [
       {
         type: String,
       },
     ],
-    approved: {
-      type: Boolean,
-      default: false,
-    },
   },
   opts
 );
 // creating a virtual field named fullname and it's made of firstname and lastname
 // this virtual property is not stored in the mongo DB
 UserSchema.plugin(passportLocalMongoose, {
-  usernameField: "username",
+  usernameField: "email",
   passwordField: "password",
 });
-UserSchema.virtual("name").get(function () {
-  return (
-    this.username.charAt(0).toUpperCase() + this.username.slice(1).toLowerCase()
-  );
+UserSchema.virtual("fullname").get(function () {
+  return this.firstname + " " + this.lastname;
 });
 module.exports = mongoose.model("User", UserSchema);
