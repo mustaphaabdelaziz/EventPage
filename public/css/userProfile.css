@@ -1,12 +1,12 @@
 .cover-profile {
-  height: 250px;
+  height: 350px;
   overflow: hidden;
 
 
 }
 
 .cover-profile img {
-  object-fit: cover;  
+  object-fit:cover;  
 }
 
 

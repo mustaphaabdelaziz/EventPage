@@ -1,4 +1,5 @@
 const User = require("../../models/user/user");
+const Event = require("../../models/event");
 const Country = require("../../models/country");
 const moment = require("moment");
 const i18next = require("../../config/i18next");
@@ -72,15 +73,11 @@ module.exports.logout = (req, res) => {
 };
 
 module.exports.updateUser = async (req, res) => {
-  const { user, socialMedia } = req.body;
+  const { user,picture } = req.body;
   //  const currentUser = req.user._id;
-  const newUser = new User({ ...user });
-  newUser.socialMedia = { ...socialMedia };
-
   const updatedUser = await User.findByIdAndUpdate(
     { _id: req.user._id },
     {
-      socialMedia: socialMedia,
       ...user,
     },
     { new: true }
@@ -94,4 +91,18 @@ module.exports.deleteUser = async (req, res) => {
   req.logout();
   req.flash("success", "Goodbey");
   res.redirect("/events");
+};
+module.exports.showProfile = async (req, res) => {
+
+  const user = await User.findById(req.params.id);
+
+  const events = await Event.find({ "author.id": req.params.id }).sort({
+    "period.start": -1,
+  });
+
+  // const speakEvents = await Event.find({ speakers: { $in: [req.params.id] } })
+  //   .sort({ "period.start": -1 })
+  const speakEvents = await Event.find({}).sort({ "period.start": -1 });
+  // res.send(speakEvents)
+  res.render("users/profile", { user, events, speakEvents, moment });
 };

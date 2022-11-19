@@ -12,10 +12,10 @@ const UserSchema = new Schema(
   {
     firstname: { type: String, trim: true },
     lastname: { type: String, trim: true, required: true },
-    birthday: String,
+    birthdate: String,
     phone: String,
     gender: String,
-    firstname: { type: String, trim: true },
+    job: { type: String, trim: true },
     city: String,
     attendedEvents: [
       {

@@ -1,0 +1,172 @@
+<button
+  id="item2"
+  type="button"
+  class="btn btn-outline-warning bg-gradient px-2 py-1"
+  data-bs-toggle="modal"
+  data-bs-target="#editProfile"
+>
+  <i class="bi bi-pencil-fill"></i>
+</button>
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="editProfile"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Edit Profile</h5>
+
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <div class="modal-body">
+        <form
+          action="/user/<%= user._id%>?_method=PUT"
+          method="POST"
+          class="needs-validation row"
+          novalidate
+        >
+          <div class="form-floating mb-3 col-md-6">
+            <input
+              class="form-control"
+              type="text"
+              id="firstname"
+              name="user[firstname]"
+              placeholder="FirstName"
+              value="<%=user.firstname%>"
+              required
+              autofocus
+            />
+            <label for="firstname" class="form-label fs-6">First Name</label>
+            <div class="valid-feedback">looks good</div>
+          </div>
+          <div class="form-floating mb-3 col-md-6">
+            <input
+              class="form-control"
+              type="text"
+              id="lastname"
+              name="user[lastname]"
+              placeholder="Lastname"
+              value="<%=user.lastname%>"
+              required
+            />
+            <label for="lastname" class="form-label fs-6">Last Name</label>
+            <div class="valid-feedback">looks good</div>
+          </div>
+          <div class="form-floating mb-3 col-md-6">
+            <input
+              class="form-control"
+              type="date"
+              id="birthdate"
+              name="user[birthdate]"
+              placeholder="Date of Birth"
+              value="<%=moment(user.birthdate).format('YYYY-MM-DD')%>"
+              required
+            />
+            <label for="birthdate" class="form-label fs-6">Birth Date</label>
+            <div class="valid-feedback">looks good</div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <select class="form-select" name="user[gender]" required>
+              <option selected disabled value="">Gender</option>
+              <% if(user.gender==="Male" ) { %>
+              <option value="Male" selected>Male</option>
+              <option value="Female">Female</option>
+              <% } else { %>
+              <option value="Male">Female</option>
+              <option value="Female" selected>Female</option>
+              <% } %>
+            </select>
+            <div class="invalid-feedback">Please select Your Gender</div>
+          </div>
+
+          <div class="form-floating mb-3 col-md-6">
+            <input
+              class="form-control"
+              type="email"
+              id="email"
+              name="user[email]"
+              placeholder="Email"
+              value="<%=user.email%>"
+              required
+            />
+            <label for="email" class="form-label fs-6">Email</label>
+            <div class="valid-feedback">looks good</div>
+          </div>
+
+          <div class="form-floating mb-3 col-md-6">
+            <input
+              class="form-control"
+              type="text"
+              id="phone"
+              name="user[phone]"
+              placeholder="Phone Number"
+              value="<%=user.phone%>"
+              required
+            />
+            <label for="phone" class="form-label fs-6">Phone</label>
+            <div class="valid-feedback">looks good</div>
+          </div>
+
+          <div class="form-floating mb-3 col-md-6">
+            <input
+              class="form-control"
+              type="text"
+              id="job"
+              name="user[job]"
+              placeholder="Job Title"
+              value="<%=user.job%>"
+              required
+            />
+            <label for="job" class="form-label fs-6">Job</label>
+            <div class="valid-feedback">looks good</div>
+          </div>
+
+          <div class="input-group mb-3 col-md-12">
+            <input
+              type="file"
+              class="form-control"
+              id="certificate"
+              name="picture"
+              multiple
+            />
+          </div>
+
+          <div class="modal-footer mt-3">
+            <button
+              type="button"
+              class="btn btn-outline-danger bg-gradient"
+              data-bs-dismiss="modal"
+            >
+              Annuler
+            </button>
+            <button
+              type="submit"
+              id="edit"
+              class="btn btn-outline-warning bg-gradient"
+            >
+              Modifier
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $("#editProfile").on("shown.bs.modal", function () {
+    $(this).find("[autofocus]").focus();
+  });
+</script>

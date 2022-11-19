@@ -5,10 +5,18 @@ const catchAsync = require("../../utils/catchAsync");
 const {
   register,
   renderRegisterForm,
+  renderUserForm,
   login,
   logout,
+  showProfile,
+  updateUser,
+  deleteUser,
 } = require("../../controllers/users/user");
 const { isLoggedIn } = require("../../middleware/middleware");
+router
+  .route("/register")
+  .get(catchAsync(renderRegisterForm))
+  .post(catchAsync(register));
 router
   .route("/login")
   .get(renderRegisterForm)
@@ -22,8 +30,9 @@ router
   );
 router.route("/logout").get(isLoggedIn, logout);
 router
-  .route("/register")
-  .get(catchAsync(renderRegisterForm))
-  .post(catchAsync(register));
-
+  .route("/:id")
+  .get(catchAsync(renderUserForm))
+  .put(isLoggedIn, catchAsync(updateUser))
+  .delete(isLoggedIn, catchAsync(deleteUser));
+router.route("/:id/profile").get(catchAsync(showProfile));
 module.exports = router;

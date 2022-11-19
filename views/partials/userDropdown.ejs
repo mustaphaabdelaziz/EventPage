@@ -30,6 +30,11 @@
   <li><a class="dropdown-item" href="/user/login">Login</a></li>
   <% } else { %>
   <li>
+    <a class="dropdown-item" href="/user/<%= currentUser._id %>/profile"
+      >Profile</a
+    >
+  </li>
+  <li>
     <a class="dropdown-item" href="/user/logout">Logout</a>
   </li>
   <% } %>
