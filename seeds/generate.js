@@ -3,11 +3,12 @@ if (process.env.NODE_ENV !== "production") {
 }
 const mongoose = require("mongoose");
 
-const Country = require("../model/country");
+const Country = require("../models/country");
 const algeria = require("./algeriaState");
 const wilaya = require("./wilaya_Of_Algeria");
 const DBConnection = require("../database/connection");
 console.log(algeria.states.length);
+
 const seedDB = async () => {
   await Country.deleteMany({});
   const country = new Country({

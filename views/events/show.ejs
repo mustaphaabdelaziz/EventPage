@@ -2,7 +2,7 @@
 
 <div class="col-xxl-8 px-3 py-5">
   <div class="row flex-lg-row-reverse g-5 py-3">
-    <div class="col-6 col-lg-6 col-6 col-xl-6 col-md-12 col-sm-12 headline">
+    <div class="col-lg-6 col-6 col-xl-6 col-12 col-md-12 col-sm-12 headline">
       <img
         src="<%= MyEvent.picture.url %>"
         class="d-block mx-lg-auto img-fluid shadow col-12"
@@ -10,37 +10,54 @@
         loading="lazy"
       />
     </div>
-    <div class="col-6 col-md-12 col-sm-12 col-lg-6 col-6 col-xl-6 headline">
+    <div class="col-12 col-md-12 col-sm-12 col-lg-6 col-xl-6 headline">
       <div class="col-12">
-      <h2 class="display-5 fw-bold mb-3"><%= MyEvent.title %></h2>
-      <p class="lead"><%= MyEvent.description %></p>
-      <span class="text-muted">
-        <%=MyEvent.location %> <i class="bi bi-geo-alt"></i>
-      </span>
-    </div>
-    <div class="col-12 mt-3">
-      <% if(!currentUser) {%>
-      <div class="d-md-flex justify-content-md-start">
-        <a href="/user/login" class="col-12 btn btn-outline-hookersGreen rounded-pill bg-gradient"
-          ><%= t('attends') %></a>
+        <h2 class="display-5 fw-bold mb-3"><%= MyEvent.title %></h2>
+        <p class="lead"><%= MyEvent.description %></p>
+        <span class="text-muted">
+          <%=MyEvent.location %> <i class="bi bi-geo-alt"></i>
+        </span>
       </div>
-      <% } else { %>
-        <% if ( currentUser){%>
+      <div class="col-12 mt-3">
+        <% if(!currentUser) {%>
+        <div class="d-md-flex justify-content-md-start">
+          <a
+            href="/user/login"
+            class="col-12 btn btn-outline-hookersGreen rounded-pill bg-gradient"
+            ><%= t('attends') %></a
+          >
+        </div>
+        <% } else { if (currentUser){%> 
         <% if(MyEvent.author._id.equals(currentUser._id)) {%>
-      <%- include("./edit")%>
-      <%- include("./delete")%> 
-      <% }else { %>
-      <% if(MyEvent.participants.filter(participant => participant._id.equals(currentUser._id)).length > 0) {%>
-      <button class="col-12 btn btn-outline-hookersGreen rounded-pill bg-gradient subscribed" id="subscribe">
-        <%= t('going') %>
-      </button>
-      <% }else{%>
-      <!-- if there is a loggedIn user and he is not yet going -->
-      <button class="col-12 btn btn-outline-hookersGreen rounded-pill bg-gradient" id="subscribe">
-        <%= t('attends') %>
-      </button>
-      <% }}}} %>
-    </div>
+          <%- include("./edit")%>
+           <%- include("./delete")%> 
+           <% }else { if(MyEvent.participants.filter(p => p.participant._id.equals(currentUser._id)).length > 0) {%>
+        <button
+          class="col-12 btn btn-outline-hookersGreen rounded-pill bg-gradient subscribed"
+          id="subscribe"
+        >
+          <%= t('going') %>
+        </button>
+        <% for(event of currentUser.attendedEvents){%> 
+          <% if(MyEvent._id.equals(event.event)) {%>
+            <% if(event.file) {%> 
+        <a
+          href="<%= event.file.url %>"
+          target="_blank"
+          class="btn btn-outline-secondary rounded-pill bg-gradient  mt-2"
+          >Download <i class="bi bi-file-earmark-arrow-down"></i
+        ></a>
+          
+        <% }}}}else{%>
+        <!-- if there is a loggedIn user and he is not yet going -->
+        <button
+          class="col-12 btn btn-outline-hookersGreen rounded-pill bg-gradient"
+          id="subscribe"
+        >
+          <%= t('attends') %>
+        </button>
+        <%}}}} %>
+      </div>
     </div>
   </div>
   <div class="row headline">
@@ -48,10 +65,10 @@
       <div class="col-12 col-sm-12 col-lg-12">
         <!-- <div class="card-body"> -->
         <h1 class="card-title title-timeline"><%= t('program') %></h1>
-        <% if ( currentUser){%>
+        <% if ( currentUser){%> 
         <% if(MyEvent.author._id.equals(currentUser._id)) {%>
-          <%- include("./addProgram")%>
-        <% } }%>
+          <%- include("./addProgram")%> 
+        <% } }%> 
         <% for(program of MyEvent.program){ %>
         <h2 class="title-timeline mt-5 headline">
           <%=`${program.day}: ${moment(program.date).format('dddd, MMMM Do,YYYY')}`%>

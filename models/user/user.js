@@ -19,8 +19,16 @@ const UserSchema = new Schema(
     city: String,
     attendedEvents: [
       {
-        type: Schema.Types.ObjectId,
-        ref: "Event",
+        _id: false,
+        event: {
+          type: Schema.Types.ObjectId,
+          ref: "Event",
+        },
+        role: { type: String, default: "Participant" },
+        file: {
+          url: String,
+          filename: String,
+        },
       },
     ],
     privileges: [

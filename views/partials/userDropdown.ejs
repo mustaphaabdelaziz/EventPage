@@ -6,10 +6,13 @@
   role="button"
   data-bs-toggle="dropdown"
   aria-expanded="false"
->
-  <i class="bi bi-person-circle"></i>
-  <span> <%= currentUser.firstname %> </span>
-</a>
+  ><img
+    src="https://www.gravatar.com/avatar/EMAIL_MD5?d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/<%= currentUser.firstname%>+<%= currentUser.lastname%>/200/AAD4A6"
+    alt=""
+    width="30"
+    height="30"
+    class="rounded-circle me-2"
+/></a>
 <% } else { %>
 <a
   class="nav-link dropdown-toggle"
@@ -23,7 +26,7 @@
 </a>
 <% } %>
 <ul
-  class="dropdown-menu bg-antiqueSteel"
+  class="dropdown-menu "
   aria-labelledby="navbarDarkDropdownMenuLink"
 >
   <% if (!currentUser) {%>

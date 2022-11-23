@@ -20,7 +20,10 @@ const Video = new Schema(
       type: String,
       trim: true,
     },
-   
+    chosen: {
+      type: Boolean,
+      default: false,
+    }
   },
   opts
 );

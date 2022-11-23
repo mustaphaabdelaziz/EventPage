@@ -1,9 +1,11 @@
 const Event = require("../../models/event");
 const moment = require("moment");
 const Country = require("../../models/country");
-const { cloudinary } = require("../../cloudinary");
 const { resolve } = require("path");
 const User = require("../../models/user/user");
+const { populate } = require("../../models/event");
+const { cloudinary } = require("../../cloudinary/index");
+
 // ===============================================================================
 module.exports.index = async (req, res) => {
   const events = await Event.find({}).sort({
@@ -27,7 +29,8 @@ module.exports.showEvent = async (req, res) => {
   }
   const algeria = await Country.find({});
   const states = algeria[0].states;
-  // res.send(MyEvent)
+
+  // res.send(MyEvent);
   res.render("events/show", { MyEvent, moment, states });
 };
 // ===============================================================================
@@ -61,12 +64,10 @@ module.exports.createEvent = async (req, res) => {
     url: req.file.path,
     filename: req.file.filename,
   };
-  createdEvent.author = {
-    _id: req.user._id,
-  };
+  createdEvent.author = req.user._id;
   createdEvent.participants.push({
     role: "Organiser",
-    _id: req.user._id,
+    participant: req.user._id,
   });
   const nbrOfDays = Math.abs(
     moment(period.end).diff(moment(period.start), "days")
@@ -78,9 +79,16 @@ module.exports.createEvent = async (req, res) => {
     });
 
   await createdEvent.save();
-  User.findByIdAndUpdate(
+  await User.findByIdAndUpdate(
     req.user._id,
-    { $addToSet: { attendedEvents: { _id: id } } },
+    {
+      $addToSet: {
+        attendedEvents: {
+          role: "Organizer",
+          event: createdEvent._id,
+        },
+      },
+    },
     { new: true }
   );
   req.flash("success", "Successfully made a new events !!!");
@@ -138,13 +146,12 @@ module.exports.deleteEvent = async (req, res) => {
   req.flash("success", "Successfully deleted event");
   res.redirect("/events");
 };
-module.exports.participantsList = async (req, res) => {
+module.exports.downloadFile = async (req, res) => {
   const { id } = req.params;
-  const event = await Event.findById(id).populate({
-    path: "participants.participant",
-  });
-  const algeria = await Country.find({});
-  const states = algeria[0].states;
-  res.render("events/participants/index", { event, states });
-  // res.send(event);
+  const { filename } = req.query;
+  const file = cloudinary.utils.cloudinary_url(filename, resource_type = "raw")
+  res.send({ file });
+  // await Event.findByIdAndDelete(id);
+  // req.flash("success", "Successfully deleted event");
+  // res.redirect("/events");
 };

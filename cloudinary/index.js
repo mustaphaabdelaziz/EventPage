@@ -8,20 +8,20 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary,
   params: {
-    folder: "CardioEvent/EventsPictures",
-    allowedFormats: ["jpeg", "png", "jpg", "webp", "svg"],
+    folder: "OasisEvent/EventsPictures",
+    allowedFormats: ["jpeg", "png", "jpg", "webp", "svg", "pdf"],
   },
 });
-const ArticleStorage = new CloudinaryStorage({
+const CertificateStorage = new CloudinaryStorage({
   cloudinary,
   params: {
-    folder: "CardioEvent/ArticlePictures",
-    allowedFormats: ["jpeg", "png", "jpg", "webp", "svg"],
+    folder: "OasisEvent/Certificate",
+    allowedFormats: ["jpeg", "png", "jpg", "webp", "svg", "pdf"],
   },
 });
 
 module.exports = {
   cloudinary,
   storage,
-  ArticleStorage,
+  CertificateStorage,
 };

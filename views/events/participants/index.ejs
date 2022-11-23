@@ -35,13 +35,12 @@
           </tr>
         </thead>
         <tbody id="tablebody">
-          <% var i=1 %> 
-          <% for (p of event.participants){%>
+          <% var i=1 %> <% for (p of event.participants){%>
           <tr>
             <th scope="row"><%= i%><% i=i+1; %></th>
             <td><%= p.participant.firstname %></td>
             <td><%= p.participant.lastname %></td>
-            <td><%= p.participant.birthday %></td>
+            <td><%= moment(p.participant.birthdate).format("l")%></td>
             <td><%=p.participant.email %></td>
             <td><%=p.participant.phone %></td>
             <td><%=p.participant.job %></td>
@@ -49,9 +48,9 @@
             <td><%=p.role %></td>
             <th>
               <div class="d-flex justify-content-center align-items-center">
-                <%- include("./edit")%> 
-                <%- include("./delete")%>
+                <%- include("./edit")%> <%- include("./delete")%>
               </div>
+              <!-- <a href="" class="btn btn-outline-secondary px-2 py-1 ms-2"><i class="bi bi-file-earmark-arrow-down"></i></a> -->
             </th>
           </tr>
           <% }%>

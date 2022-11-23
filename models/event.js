@@ -29,8 +29,9 @@ const EventSchema = new Schema(
     program: [ProgramSchema],
     participants: [
       {
-        role: { type: String, default: "participant" },
-        participant: { UserObject },
+        _id: false,
+        participant: UserObject,
+        role: { type: String, default: "Participant" },
       },
     ],
   },

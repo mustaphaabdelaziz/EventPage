@@ -11,25 +11,25 @@ module.exports.subscribe = async (req, res) => {
   if (req.body.subscribe) {
     event = await Event.findByIdAndUpdate(
       eventId,
-      { $addToSet: { participants: { _id: req.user._id } } },
+      { $addToSet: { participants: { participant: req.user._id } } },
       { new: true }
     );
 
     user = await User.findByIdAndUpdate(
       userId,
-      { $addToSet: { attendedEvents: { _id: eventId } } },
+      { $addToSet: { attendedEvents: { event: eventId } } },
       { new: true }
     );
   } else {
     // if he's not going
     event = await Event.findByIdAndUpdate(
       eventId,
-      { $pull: { participants: { _id: req.user._id } } },
+      { $pull: { participants: { participant: req.user._id } } },
       { new: true }
     );
     user = await User.findByIdAndUpdate(
       userId,
-      { $pull: { attendedEvents: { _id: eventId } } },
+      { $pull: { attendedEvents: { event: eventId } } },
       { new: true }
     );
   }

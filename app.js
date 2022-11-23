@@ -46,6 +46,7 @@ const videosRoutes = require("./routes/videos/video");
 const articlesRoutes = require("./routes/articles/article");
 const programRoutes = require("./routes/events/program");
 const Article = require("./models/articles/article");
+const Video = require("./models/videos/video");
 const eventUserAction = require("./routes/events/eventUserAction");
 const Event = require("./models/event");
 const DBConnection = require("./database/connection");
@@ -66,9 +67,9 @@ app.use(i18nextMiddleware.handle(i18next));
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-app.use(express.urlencoded({ extended: true }));
 // in order to get the data from a request we need to use this express.json()
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 // This is a built-in middleware function in Express. It serves static files
 app.use(express.static(path.join(__dirname, "public")));
@@ -81,8 +82,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 passport.use(
   "user",
-  new LocalStrategy((email,password, done) => {
-    console.log(email)
+  new LocalStrategy((email, password, done) => {
+    console.log(email);
     User.findOne({ email: email.toLowerCase() }, function (err, user) {
       if (err) {
         return done(err);
@@ -116,11 +117,11 @@ app.use("/about", (req, res) => {
   res.send("Welcome to the about Page");
 });
 // ===== User Routes ====
-app.use("/user", userRoutes); 
+app.use("/user", userRoutes);
+app.use("/events/:id/participants", participantRoutes);
 app.use("/events/:id/program", programRoutes);
 app.use("/events/:id/:userid/", eventUserAction);
-app.use("/participants/:eventid", participantRoutes);
-// app.use("/events/:id/participants", participant);
+// app.use("/participants/:eventid", participantRoutes);
 app.use("/events", eventRoutes);
 app.use("/videos", videosRoutes);
 app.use("/articles", articlesRoutes);
@@ -143,7 +144,9 @@ app.get("/:lang", (req, res) => {
 
 app.get("/", async (req, res) => {
   const articles = await Article.find({}).sort({ date: -1 }).limit(2);
-  const latestEvents = await Event.find({})
+  const latestEvents = await Event.find({
+    "period.start": { $lt: moment().format("l") },
+  })
     .sort({ "period.start": -1 })
     .limit(2);
   const upcomingEvents = await Event.find({
@@ -151,9 +154,16 @@ app.get("/", async (req, res) => {
   })
     .sort({ "period.start": 1 })
     .limit(2);
+  const videos = await Video.find({});
 
-  //  res.send(articles)
-  res.render("home/home", { articles, latestEvents, upcomingEvents, moment });
+  //  res.send(videos)
+  res.render("home/home", {
+    articles,
+    latestEvents,
+    upcomingEvents,
+    moment,
+    videos,
+  });
 });
 // ========== if none of the routes match then it's error ==========
 app.all("*", (req, res, next) => {

@@ -12,12 +12,10 @@ module.exports.topicForm = async (req, res) => {
 module.exports.createTopic = async (req, res) => {
   const eventId = req.params.id;
   const { title, day, start, end } = req.body.program;
-  console.log(day);
   const time = {
     start,
     end,
   };
-  console.log(time);
   // find the event by eventId and the insert the new topic where day == day
   const event = await Event.findOneAndUpdate(
     { _id: eventId, "program.day": day },

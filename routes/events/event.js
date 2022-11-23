@@ -11,7 +11,7 @@ const {
   createEvent,
   updateEvent,
   deleteEvent,
-  participantsList,
+  downloadFile,
 } = require("../../controllers/events/events");
 // const { isLoggedIn } = require("../../middleware/middleware");
 router
@@ -24,5 +24,5 @@ router
   .get(catchAsync(showEvent))
   .put(upload.single("picture"), catchAsync(updateEvent))
   .delete(catchAsync(deleteEvent));
-router.route("/:id/participants").get(catchAsync(participantsList));
+router.route("/:id/download").get(catchAsync(downloadFile));
 module.exports = router;
