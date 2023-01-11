@@ -22,6 +22,7 @@ module.exports.ParticipantsManagement = async (req, res) => {
     }
   );
   if (req.file) {
+    console.log("file");
     await User.findOneAndUpdate(
       { _id: idp, "attendedEvents.event": id },
       {
@@ -36,7 +37,7 @@ module.exports.ParticipantsManagement = async (req, res) => {
       { new: true }
     );
   } else {
-    await User.find(
+    await User.findOneAndUpdate(
       { _id: idp, "attendedEvents.event": id },
       {
         $set: {

@@ -1,0 +1,72 @@
+<button
+  type="button"
+  class="btn btn-outline-warning bg-gradient px-2 py-1 me-2"
+  data-bs-toggle="modal"
+  data-bs-target="#edit-<%= video.id %>"
+>
+  <i class="bi bi-pencil-fill"></i>
+</button>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="edit-<%= video.id %>"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Modifier Video</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          required
+        ></button>
+      </div>
+
+      <div class="modal-body">
+        <form
+          class="row g-3 needs-validation"
+          action="/videos/<%=video.id %>/?_method=PUT"
+          enctype="multipart/form-data"
+          method="POST"
+          novalidate
+        >
+          <div class="col-12 input-group mb-3">
+            <input type="file" class="form-control" id="file" name="file" />
+            <label class="input-group-text" for="pictures"
+              ><%= t('upload') %> <%= t('video') %></label
+            >
+          </div>
+
+          <div class="modal-footer mt-3">
+            <button
+              type="button"
+              class="btn btn-outline-danger bg-gradient"
+              data-bs-dismiss="modal"
+            >
+              Annuler
+            </button>
+            <button
+              type="submit"
+              id="staff-edit"
+              class="btn btn-outline-warning bg-gradient"
+            >
+              Modifier
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $("#edit-<%=video.id %>").on("shown.bs.modal", function () {
+    $(this).find("[autofocus]").focus();
+  });
+</script>

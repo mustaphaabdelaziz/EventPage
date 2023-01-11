@@ -5,9 +5,8 @@
         type="button"
         data-bs-target="#myCarousel"
         data-bs-slide-to="0"
-        class="active"
-        aria-current="true"
         aria-label="Slide 1"
+        class="active"
       ></button>
       <button
         type="button"
@@ -31,17 +30,28 @@
         type="button"
         data-bs-target="#myCarousel"
         data-bs-slide-to="4"
+        aria-current="true"
         aria-label="Slide 5"
       ></button>
-      <button
-        type="button"
-        data-bs-target="#myCarousel"
-        data-bs-slide-to="5"
-        aria-label="Slide 6"
-      ></button>
+      
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active slide" data-bs-interval="2000">
+        <img
+          class="bd-placeholder-img card-img-top"
+          width="100%"
+          height="100%"
+          src="/assets/oasis_cover.jpg"
+          alt="oasis_cover"
+        />
+
+        <div class="container">
+          <div class="carousel-caption">
+            <p class="text-dark"></p>          
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item  slide" data-bs-interval="2000">
         <img
           class="bd-placeholder-img"
           width="100%"
@@ -58,10 +68,11 @@
           </div>
         </div>
       </div>
+      
       <% for(event of upcomingEvents){ %>
       <div class="carousel-item slide" data-bs-interval="2000">
         <img
-          class="bd-placeholder-img"
+          class="bd-placeholder-img card-img-top"
           width="100%"
           height="100%"
           src="<%= event.picture.url %>"
@@ -82,13 +93,12 @@
       <% } %> <% for(event of latestEvents){ %>
       <div class="carousel-item slide" data-bs-interval="2000">
         <img
-          class="bd-placeholder-img"
+          class="bd-placeholder-img card-img-top"
           width="100%"
           height="100%"
           src="<%= event.picture.url %>"
           alt="<%= event.picture.filename %>"
         />
-
         <div class="container">
           <div class="carousel-caption">
             <p class="text-dark"></p>
@@ -128,7 +138,7 @@
         class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative bg-antiqueSteel"
       >
         <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-primary">World</strong>
+          <strong class="d-inline-block mb-2 text-lightCoral">Médicale</strong>
           <h3 class="mb-0 text-hookersGreen"><%=article.title%></h3>
           <div class="mb-1 text-muted">
             <%=moment(article.date).format("l")%>
@@ -155,9 +165,21 @@
   <div class="row justify-content-center">
     <div class="col-md-7 col-xlg-7 me-3 shadow-sm bg-light rounded">
       <article class="blog-post text-gunmetal py-4">
-        
+        <h2 class="blog-post-title">Clinique Des Oasis</h2>
+
+        <p>
+          La clinique des OASIS est dotée d'un plateau technique conforme aux
+          normes internationales en vigueur, et répond ainsi aux exigences des
+          chirurgiens cardiaques et orthopédistes en particulier. Le personnel
+          paramédical est hautement qualifié dans les spécialités, rompu à la
+          prise en charge des pathologies chirurgicales lourdes. Au niveau des
+          équipements annexes tous les moyens de sécurité (générateur d'oxygène,
+          groupe électrogène, réserve d'eau) autorise un confort maximal pour
+          les patients.
+        </p>
+        <hr />
         <% for(video of videos) {%>
-        <div class="ratio ratio-21x9 border border-dark shadow">
+        <div class="ratio ratio-21x9 shadow-sm">
           <iframe
             id="<%= video._id %>"
             src="<%= video.url %>"
@@ -167,30 +189,17 @@
             allowfullscreen
           >
           </iframe>
-          
         </div>
         <hr />
-        <h2 class="blog-post-title">Clinique Des Oasis</h2>
-
         
-        <p>
-          La clinique des OASIS est dotée d'un plateau technique conforme aux
-          normes internationales en vigueur, et répond ainsi aux exigences des
-          chirurgiens cardiaques et orthopédistes en particulier. Le personnel
-          paramédical est hautement qualifié dans les spécialités, rompu à la
-          prise en charge des pathologies chirurgicales lourdes. Au niveau des
-          équipements annexes tous les moyens de sécurité (générateur d'oxygène,
-          groupe électrogène, réserve d'eau) autorise un confort maximal pour
-          les patients. 
-        </p>
         <% } %>
       </article>
     </div>
 
-    <div class="col-md-4 col-xlg-5  bg-light rounded">
+    <div class="col-md-4 col-xlg-5 bg-light rounded">
       <div class="position-sticky" style="top: 2rem">
         <div class="py-3 mb-3 rounded">
-          <% if(upcomingEvents) {%>
+          <% if(upcomingEvents.length>0) {%>
           <h4 class="fst text-lightCoral">Upcoming Events</h4>
           <div class="row">
             <% for(event of upcomingEvents){ %>
@@ -271,6 +280,4 @@
   </div>
 </main>
 
-<footer class="blog-footer bg-light shadow-sm rounded">
- 
-</footer>
+<footer class="blog-footer bg-light shadow-sm rounded"></footer>

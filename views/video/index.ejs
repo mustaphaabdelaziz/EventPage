@@ -35,12 +35,16 @@
       </thead>
       <tbody id="tablebody">
         <% var i=1 %> <% for (video of videos){%>
-        <tr>
+        <tr > 
           <th scope="row"><%= i%> <% i=i+1; %></th>
-          <td style="overflow-wrap: break-word"><%= video.title %></td>
-          <td><%=video.description %></td>
-          <td><%- include("./preview")%>
-            <%- include("./delete")%>
+          <td  style="overflow-wrap: break-word"><%= video.title %></td>
+          <td style="overflow-wrap: break-word"><%=video.description %></td>
+          <td>
+            <div class="d-flex flex-md-row overflow-wrap">
+              <%- include("./preview")%>
+              <%- include("./edit")%>
+              <%- include("./delete")%>
+            </div>
         </td>
                   
         </tr>

@@ -10,7 +10,7 @@
     <div class="d-flex flex-column justify-content-center align-items-center">
       <img
         class="photo"
-        src="https://www.gravatar.com/avatar/EMAIL_MD5?d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/<%= user.firstname%>+<%= user.lastname%>/200/AAD4A6"
+        src="https://ui-avatars.com/api/?name=<%= user.firstname%>+<%= user.lastname%>&background=AAD4A6&color=000000&size=200&font-size=0.5&rounded=true&bold=true"
       />
       <div class="mt-2">
         <h4><%= user.fullname %></h4>
@@ -21,11 +21,11 @@
       <div class="col-12 col-md-12 col-lg-6">
         <div class="border-1 border-bottom py-3 ps-3">
           <i class="bi bi-envelope fs-3 text-primary"></i>
-          <%= user.email %>
+           <%= user.email %>
         </div>
         <div class="my-2 py-3 ps-3">
           <i class="bi bi-telephone fs-3 text-primary"></i>
-          <%= user.phone %>
+           <%= user.phone %>
         </div>
       </div>
 

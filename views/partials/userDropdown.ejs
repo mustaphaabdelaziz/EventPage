@@ -7,7 +7,7 @@
   data-bs-toggle="dropdown"
   aria-expanded="false"
   ><img
-    src="https://www.gravatar.com/avatar/EMAIL_MD5?d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/<%= currentUser.firstname%>+<%= currentUser.lastname%>/200/AAD4A6"
+    src="https://ui-avatars.com/api/?name=<%= currentUser.firstname%>+<%= currentUser.lastname%>&background=AAD4A6&color=000000&size=200&font-size=0.5&rounded=true&bold=true"
     alt=""
     width="30"
     height="30"
@@ -25,20 +25,23 @@
   <i class="bi bi-person-circle"></i>
 </a>
 <% } %>
-<ul
-  class="dropdown-menu "
-  aria-labelledby="navbarDarkDropdownMenuLink"
->
+<ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
   <% if (!currentUser) {%>
-  <li><a class="dropdown-item" href="/user/login">Login</a></li>
+  <li>
+    <a class="dropdown-item" href="/user/login"
+      ><%= t('login') %>  <i class="bi bi-box-arrow-in-right"></i
+    ></a>
+  </li>
   <% } else { %>
   <li>
     <a class="dropdown-item" href="/user/<%= currentUser._id %>/profile"
-      >Profile</a
-    >
+      ><%= t('profile') %> <i class="bi bi-person-fill fw-bold"></i
+    ></a>
   </li>
   <li>
-    <a class="dropdown-item" href="/user/logout">Logout</a>
+    <a class="dropdown-item" href="/user/logout"
+      ><%= t('logout') %> <i class="bi bi-box-arrow-right fw-bold"></i
+    ></a>
   </li>
   <% } %>
 </ul>

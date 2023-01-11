@@ -1,6 +1,6 @@
 <% layout('layouts/boilerplate')%>
 
-<div class="col-xxl-8 px-3 py-5">
+<div class="col-xl-12 col-lg-12 col-12 px-3 py-5">
   <div class="row flex-lg-row-reverse g-5 py-3">
     <div class="col-lg-6 col-6 col-xl-6 col-12 col-md-12 col-sm-12 headline">
       <img
@@ -11,7 +11,7 @@
       />
     </div>
     <div class="col-12 col-md-12 col-sm-12 col-lg-6 col-xl-6 headline">
-      <div class="col-12">
+      <div class="col-12">  
         <h2 class="display-5 fw-bold mb-3"><%= MyEvent.title %></h2>
         <p class="lead"><%= MyEvent.description %></p>
         <span class="text-muted">
@@ -19,36 +19,38 @@
         </span>
       </div>
       <div class="col-12 mt-3">
-        <% if(!currentUser) {%>
+        <% if(!currentUser){%>
         <div class="d-md-flex justify-content-md-start">
+          <% if(!expires){%>
           <a
             href="/user/login"
             class="col-12 btn btn-outline-hookersGreen rounded-pill bg-gradient"
             ><%= t('attends') %></a
           >
+          <% } %>
         </div>
-        <% } else { if (currentUser){%> 
-        <% if(MyEvent.author._id.equals(currentUser._id)) {%>
-          <%- include("./edit")%>
-           <%- include("./delete")%> 
-           <% }else { if(MyEvent.participants.filter(p => p.participant._id.equals(currentUser._id)).length > 0) {%>
+        <% } else { if (currentUser){%>
+        <%if(MyEvent.author._id.equals(currentUser._id)) {%>
+        <%-include("./edit")%> <%- include("./delete")%>
+         <%}else {if(MyEvent.participants.filter(p => p.participant._id.equals(currentUser._id)).length > 0) {%>
+          <% if(!expires){%>
         <button
           class="col-12 btn btn-outline-hookersGreen rounded-pill bg-gradient subscribed"
           id="subscribe"
         >
-          <%= t('going') %>
+          <%= t('going') %> <i class="bi bi-check-circle"></i>
         </button>
-        <% for(event of currentUser.attendedEvents){%> 
-          <% if(MyEvent._id.equals(event.event)) {%>
-            <% if(event.file) {%> 
+        <% } %>
+        <% for(event of currentUser.attendedEvents){%>
+        <% if(MyEvent._id.equals(event.event)) {%>
+          <% if(event.file) {%>
         <a
           href="<%= event.file.url %>"
           target="_blank"
-          class="btn btn-outline-secondary rounded-pill bg-gradient  mt-2"
-          >Download <i class="bi bi-file-earmark-arrow-down"></i
+          class="btn btn-outline-secondary rounded-pill bg-gradient mt-2"
+          >Download <i class="bi bi-file-arrow-down-fill"></i
         ></a>
-          
-        <% }}}}else{%>
+        <% }}}} else if(!expires) {%>
         <!-- if there is a loggedIn user and he is not yet going -->
         <button
           class="col-12 btn btn-outline-hookersGreen rounded-pill bg-gradient"
@@ -61,15 +63,15 @@
     </div>
   </div>
   <div class="row headline">
-    <div class="col-12 col-sm-12 col-lg-12">
+    <div class="col-xl-12 col-12 col-sm-12 col-lg-12">
       <div class="col-12 col-sm-12 col-lg-12">
         <!-- <div class="card-body"> -->
         <h1 class="card-title title-timeline"><%= t('program') %></h1>
-        <% if ( currentUser){%> 
-        <% if(MyEvent.author._id.equals(currentUser._id)) {%>
-          <%- include("./addProgram")%> 
+        <% if ( currentUser){%>
+        <%if(MyEvent.author._id.equals(currentUser._id)) {%>
+        <%- include("./addProgram")%> 
         <% } }%> 
-        <% for(program of MyEvent.program){ %>
+        <% for(program of MyEvent.program){%>
         <h2 class="title-timeline mt-5 headline">
           <%=`${program.day}: ${moment(program.date).format('dddd, MMMM Do,YYYY')}`%>
         </h2>
@@ -82,10 +84,6 @@
               data-date="<%=timeline.time.start%> - <%=timeline.time.end%>"
             >
               <h3 class="title-timeline"><%=timeline.title %></h3>
-              <p>
-                Get here on time, it's first come first serve. Be late, get
-                turned away.
-              </p>
             </li>
             <% } %>
           </ul>
@@ -104,5 +102,9 @@
   const serverURL = '<%- process.env.SERVER_URL %>';
   const localURL = '<%- process.env.LOCAL_URL %>';
   const user = <%- JSON.stringify(currentUser) %>;
+  const buttonInfo = <%- JSON.stringify({
+    going:t('going'),
+    attend:t('attends')
+  }) %>;
 </script>
 <script src="/js/subscribe.js"></script>

@@ -12,16 +12,16 @@ const {
 
   removeArticle,
 } = require("../../controllers/articles/article");
-const { isLoggedIn } = require("../../middleware/middleware");
+const { isLoggedIn, isAdmin } = require("../../middleware/middleware");
 router;
 router
   .route("/")
   .get(isLoggedIn, catchAsync(showArticles))
-  .post(upload.single("picture"), catchAsync(addArticle));
+  .post(isLoggedIn, isAdmin, upload.single("picture"), catchAsync(addArticle));
 
 router
   .route("/:idarticle")
-  .delete(isLoggedIn, catchAsync(removeArticle))
-  .get(isLoggedIn, catchAsync(showArticle));
+  .delete(isLoggedIn, isAdmin, catchAsync(removeArticle))
+  .get(catchAsync(showArticle));
 
 module.exports = router;

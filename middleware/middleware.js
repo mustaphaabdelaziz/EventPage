@@ -1,8 +1,14 @@
-
 // const { eventSchema, comentSchema } = require("../schemas.js");
 // const ExpressError = require("../utils/ExpressError");
 // ALL MIDDLEWARE GOES HERE
 
+module.exports.isAdmin = (req, res, next) => {
+  if (!req.user.privileges.includes("admin")) {
+    req.flash("error", "You do not have permission to do that!");
+    return res.redirect("/events");
+  }
+  next();
+};
 module.exports.isLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
     req.session.returnTo = req.originalUrl;

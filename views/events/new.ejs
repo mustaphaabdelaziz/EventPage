@@ -22,7 +22,7 @@
         <label for="title" class="form-labelfs-6"><%= t('title') %></label>
         <div class="valid-feedback">looks good</div>
       </div>
-      <div class="form-floating mb-3 col-md-6 ">
+      <div class="form-floating mb-3 col-md-6">
         <input
           class="form-select"
           id="location"
@@ -49,26 +49,19 @@
           name="period[start]"
           placeholder="<%= t('date') %>"
           required
-          min="<%= moment().format('YYYY-MM-DD')%>"
         />
-        <label for="start" class="form-label fs-6">
-          <%= t('begin') %>
-        </label
-        >
+        <label for="start" class="form-label fs-6"> <%= t('begin') %> </label>
         <div class="valid-feedback">looks good</div>
       </div>
-      <div class="form-floating  col-md-6 mb-3">
+      <div class="form-floating col-md-6 mb-3">
         <input
           class="form-control"
           type="date"
           id="end"
           name="period[end]"
-          min="<%= moment().format('YYYY-MM-DD')%>"
           required
         />
-        <label for="end" class="form-label fs-6">
-        <%= t('finish') %></label
-        >
+        <label for="end" class="form-label fs-6"> <%= t('finish') %></label>
         <div class="valid-feedback">looks good</div>
       </div>
 

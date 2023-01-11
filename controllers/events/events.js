@@ -5,7 +5,7 @@ const { resolve } = require("path");
 const User = require("../../models/user/user");
 const { populate } = require("../../models/event");
 const { cloudinary } = require("../../cloudinary/index");
-
+const i18next = require("../../config/i18next");
 // ===============================================================================
 module.exports.index = async (req, res) => {
   const events = await Event.find({}).sort({
@@ -29,9 +29,12 @@ module.exports.showEvent = async (req, res) => {
   }
   const algeria = await Country.find({});
   const states = algeria[0].states;
-
+  moment.locale(i18next.language);
   // res.send(MyEvent);
-  res.render("events/show", { MyEvent, moment, states });
+  moment.locale("");
+  const expires = moment(MyEvent.period.end).isBefore(moment());
+  // if(moment(MyEvent.period.end,"DD/M/YYYY").isBefore(moment(),"DD/MM/YYYY"))
+  res.render("events/show", { MyEvent, moment, states,expires });
 };
 // ===============================================================================
 module.exports.renderEventForm = async (req, res) => {
@@ -56,7 +59,8 @@ module.exports.createEvent = async (req, res) => {
   const createdEvent = new Event({
     ...event,
   });
-
+  createdEvent.title =
+    event.title.charAt(0).toUpperCase() + event.title.slice(1).toLowerCase();
   createdEvent.period = {
     ...p,
   };
@@ -121,7 +125,7 @@ module.exports.updateEvent = async (req, res) => {
   }
   if (hasChanged) {
     MyEvent = await Event.findByIdAndUpdate(id, {
-      title,
+      title: title.charAt(0).toUpperCase() + title.slice(1).toLowerCase(),
       description,
       location,
       period: p,
@@ -129,7 +133,7 @@ module.exports.updateEvent = async (req, res) => {
     });
   } else {
     MyEvent = await Event.findByIdAndUpdate(id, {
-      title,
+      title: title.charAt(0).toUpperCase() + title.slice(1).toLowerCase(),
       description,
       location,
       period: p,
@@ -149,7 +153,10 @@ module.exports.deleteEvent = async (req, res) => {
 module.exports.downloadFile = async (req, res) => {
   const { id } = req.params;
   const { filename } = req.query;
-  const file = cloudinary.utils.cloudinary_url(filename, resource_type = "raw")
+  const file = cloudinary.utils.cloudinary_url(
+    filename,
+    (resource_type = "raw")
+  );
   res.send({ file });
   // await Event.findByIdAndDelete(id);
   // req.flash("success", "Successfully deleted event");

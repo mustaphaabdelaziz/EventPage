@@ -71,7 +71,7 @@
   "date": "Date",
   "job": "Métier",
   "email": "E-mail",
-  "password": "Mot Pass ",
+  "password": "Mot de Passe ",
   "phone": "Téléphone",
   "address": "adresse",
   "interests": "Intérêts",
@@ -137,5 +137,7 @@
   "my": "Mes",
   "participant": "Participant",
   "are you": "Vous êtes",
-  "instructor": "Formateur"
+  "instructor": "Formateur",
+  "state": "Wilaya",
+  "good": "Bien"
 }

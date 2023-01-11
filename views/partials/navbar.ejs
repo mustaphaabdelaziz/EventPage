@@ -36,7 +36,7 @@
         <% }else{ %>
         <li class="dropdown nav-item" id="navbarNavDarkDropdown">
           <a
-            class="nav-link dropdown-toggle bg-antiqueSteel"
+            class="nav-link dropdown-toggle"
             href="#"
             id="navbarDarkDropdownMenuLink"
             role="button"
@@ -45,7 +45,7 @@
           >
             <%= t('events') %>
           </a>
-          <div class="dropdown-content bg-antiqueSteel">
+          <div class="dropdown-content">
             <a class="dropdown-item text-dark" href="/events/new">
               <%= t('add')%> <%= t('event') %>
             </a>
@@ -68,15 +68,18 @@
       </ul>
       <ul class="navbar-nav mb-2 mb-lg-0">
         <div
-          class="d-flex flex-md-row justify-content-center align-items-center"
+          class="d-flex flex-md-row justify-content-center align-items-center px-4 me-5"
         >
-          <li class="dropdown nav-item"><%-include("./userDropdown") %></li>
-          <li class="dropdown nav-item"><%-include("./langDropdown") %></li>
-         
+          <li class="dropdown nav-item me-2">
+            <%-include("./userDropdown") %>
+          </li>
+          <li class="dropdown nav-item me-2">
+            <%-include("./langDropdown") %>
+          </li>
 
-          <li class="nav-item ms-3 me-2">
+          <li class="nav-item ms-3">
             <a href="https://www.facebook.com/Oasisclinique" target="_blank"
-              ><i class="facebook bi bi-facebook fs-4"></i
+              ><i class="facebook bi bi-facebook fs-3"></i
             ></a>
           </li>
         </div>

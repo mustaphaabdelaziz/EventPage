@@ -2,7 +2,7 @@ let eventId = MyEvent._id;
 let userId = user._id;
 // the localURL variable is in .env file and is just local and it won't be added to the deployed site
 // so the serverURL is added to the deployed site so it will be taken
-let url = localURL || serverURL;
+let url = serverURL;
 // let url = localURL;
 console.log("URL:", url);
 if (user) {
@@ -11,12 +11,13 @@ if (user) {
   let subscribe = false;
   $(function () {
     $("#subscribe").on("click", function () {
-      console.log($(this).hasClass("subscribed"))
       // the user is already subscribed
       if ($(this).hasClass("subscribed")) {
-        $(this).text("Attend");
+        // $(this).text("Assister");
+        $(this).text(buttonInfo.attend);
       } else {
-        $(this).text("Going");
+        // $(this).text("Aller");
+        $(this).text(buttonInfo.going);
         subscribe = true;
       }
       $(this).toggleClass("subscribed");
@@ -33,7 +34,6 @@ if (user) {
         .then((response) => response.json())
         .then((data) => {
           console.log("Success:", data);
-          
         })
         .catch((error) => {
           console.error("Error:", error);

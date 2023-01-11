@@ -136,8 +136,7 @@ app.get("/:lang", (req, res) => {
     t("hello_message");
   });
   res.cookie("lang", lang);
-  if (res.locals.currentUser)
-    res.locals.updateUserLng(lang, res.locals.currentUser.userType);
+  
   res.redirect("/events");
 });
 // === Home Page ===

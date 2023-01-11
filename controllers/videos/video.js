@@ -22,11 +22,26 @@ module.exports.addVideo = async (req, res) => {
   req.flash("success", "Vidéo a été ajouté avec succès");
   res.redirect("/videos");
 };
+module.exports.editVideo = async (req, res) => {
+  // get the materiel id from the materiels table
+  const { title, url, description, isSelected } = req.body.video;
+  let ytUrl = url;
+
+  // replace:
+  ytUrl = ytUrl.replace("/watch?v=", "/embed/");
+
+  const video = new Video({
+    title,
+    url: ytUrl,
+    description,
+  });
+  await video.save();
+  req.flash("success", "Vidéo a été ajouté avec succès");
+  res.redirect("/videos");
+};
 module.exports.removeVideo = async (req, res) => {
   const { idvideo } = req.params;
-
   const video = await Video.findByIdAndDelete(idvideo);
   // send it to the client
-
   res.redirect(`/videos`);
 };

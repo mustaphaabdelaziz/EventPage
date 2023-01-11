@@ -3,18 +3,19 @@ const passport = require("passport");
 const router = express.Router();
 const catchAsync = require("../../utils/catchAsync");
 const {
- showVideos,
- addVideo,
-removeVideo,
-
-
- 
+  showVideos,
+  addVideo,
+  removeVideo,
+  editVideo,
 } = require("../../controllers/videos/video");
 const { isLoggedIn } = require("../../middleware/middleware");
+router;
 router
-router.route("/").get(isLoggedIn, catchAsync(showVideos)).post(catchAsync(addVideo));
+  .route("/")
+  .get(isLoggedIn, catchAsync(showVideos))
+  .post(catchAsync(addVideo));
 
-router.route("/:idvideo").delete(isLoggedIn, catchAsync(removeVideo))
-
+router.route("/:idvideo").put(isLoggedIn, catchAsync(editVideo));
+router.route("/:idvideo").delete(isLoggedIn, catchAsync(removeVideo));
 
 module.exports = router;

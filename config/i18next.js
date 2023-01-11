@@ -8,9 +8,9 @@ i18next
   .use(i18nextMiddleware.LanguageDetector)
   .init(
     {
-      lng: "en",
-      fallbackLng: ["en", "fr", "ar"],
-      preload: ["en", "fr", "ar"],
+      lng: "fr",
+      fallbackLng: ["fr", "en", "ar"],
+      preload: ["fr", "en", "ar"],
       queryParameter: "lang",
       cookie: "lang",
       ns: ["translation"],

@@ -1,8 +1,8 @@
 <% layout('layouts/boilerplate')%>
-<div class="container">
+<div class="container-fluid">
   <div class="card my-5">
     <div class="row">
-      <div class="col-12">
+      <div class="col-xl-12 col-lg-12 col-12">
         <div class="d-flex flex-column align-items-center my-5">
           <a href="/">
             <img src="/assets/logo.png" alt="" height="100px" />
@@ -21,7 +21,7 @@
               aria-controls="userLoginForm"
               aria-selected="true"
             >
-              Login <i class="bi bi-box-arrow-in-right"></i>
+              <%= t('login') %> <i class="bi bi-box-arrow-in-right"></i>
             </button>
           </li>
           <li class="nav-item">
@@ -34,7 +34,7 @@
               aria-controls="userRegisterForm"
               aria-selected="false"
             >
-              Register <i class="bi bi-person-plus-fill"></i>
+              <%= t('register') %> <i class="bi bi-person-plus-fill"></i>
             </button>
           </li>
         </ul>
@@ -48,7 +48,7 @@
           class="px-5 my-5 tab-pane fade active show"
           id="userLoginForm"
         >
-          <h3 class="my-5 text-center text-primary">Login</h3>
+          <h3 class="my-5 text-center text-primary"><%= t('login') %></h3>
           <form
             action="/user/login"
             method="POST"
@@ -56,39 +56,45 @@
             novalidate
             autocomplete="off"
           >
-            <div class="form-floatingmb-3">
-              <label for="userLoginEmail" class="form-label">Email</label>
+            <div class="form-floating mb-3">
               <input
                 type="text"
                 class="form-control"
                 name="username"
                 id="userLoginUsername"
-                placeholder="Username"
+                placeholder="<%= t('email') %>"
                 style="text-transform: lowercase"
                 required
                 autofocus
+                autocomplete="off"
               />
-              <div class="valid-feedback">BIEN</div>
+              <label for="userLoginEmail" class="form-label"
+                ><%= t('email') %></label
+              >
+              <div class="valid-feedback"><%= t('good') %></div>
             </div>
-            <div class="mb-3">
-              <label for="userLoginPassword" class="form-label">Password</label>
+            <div class="form-floating mb-3">
               <input
                 type="password"
                 class="form-control"
                 id="userLoginPassword"
                 name="password"
-                placeholder="Password"
+                placeholder="<%= t('password') %>"
                 required
+                autocomplete="off"
               />
-              <div class="valid-feedback">BIEN</div>
+              <label for="userLoginPassword" class="form-label"
+                ><%= t('password') %></label
+              >
+              <div class="valid-feedback"><%= t('good') %></div>
             </div>
             <div class="mb-3 text-center">
               <button
                 type="submit"
                 id="user-submit"
-                class="w-25 btn btn-outline-primary bg-gradient bg-opacity-25"
+                class="w-100 btn btn-outline-primary bg-gradient bg-opacity-25"
               >
-                Login <i class="bi bi-box-arrow-in-right ms-2"></i>
+                <%= t('login') %> <i class="bi bi-box-arrow-in-right ms-2"></i>
               </button>
             </div>
           </form>
@@ -100,7 +106,7 @@
           class="px-5 my-5 tab-pane fade"
           id="userRegisterForm"
         >
-          <h3 class="my-5 text-center text-primary">Register</h3>
+          <h3 class="my-5 text-center text-primary"><%= t('register') %></h3>
           <form
             class="row g-3 m-2 needs-validation"
             action="/user/register"
@@ -121,6 +127,7 @@
               <label for="firstname" class="form-label"
                 ><%= t('firstname') %></label
               >
+              <div class="valid-feedback"><%= t('good') %></div>
             </div>
             <div class="form-floating col-md-6">
               <input
@@ -133,6 +140,7 @@
               <label for="lastname" class="form-label"
                 ><%= t('lastname') %></label
               >
+              <div class="valid-feedback"><%= t('good') %></div>
             </div>
 
             <div class="form-floating col-md-6">
@@ -142,6 +150,7 @@
               <label for="birthDate" class="form-label"
                 ><%= t('birthdate') %>
               </label>
+              <div class="valid-feedback"><%= t('good') %></div>
             </div>
             <div class="form-floating col-md-6">
               <select
@@ -156,9 +165,8 @@
                   <%= t('female') %>
                 </option>
               </select>
-              <label for="gender" class="form-label"
-                ><%= t('gender') %></label
-              >
+              <label for="gender" class="form-label"><%= t('gender') %></label>
+              <div class="valid-feedback"><%= t('good') %></div>
             </div>
             <div class="form-floating col-md-6">
               <input
@@ -176,8 +184,8 @@
                 </option>
                 <%} %>
               </datalist>
-              <label for="city" class="form-label">Wilaya</label>
-              <div class="valid-feedback">BIEN</div>
+              <label for="city" class="form-label"><%= t('state') %></label>
+              <div class="valid-feedback"><%= t('good') %></div>
             </div>
 
             <div class="form-floating col-md-6">
@@ -188,10 +196,8 @@
                 class="form-control"
                 required
               />
-              <label for="email" class="form-label"
-                ><%= t('email') %></label
-              >
-              <div class="valid-feedback">BIEN</div>
+              <label for="email" class="form-label"><%= t('email') %></label>
+              <div class="valid-feedback"><%= t('good') %></div>
             </div>
             <div class="form-floating col-md-6 mb-3">
               <input
@@ -199,11 +205,13 @@
                 class="form-control"
                 id="userLoginPassword"
                 name="password"
-                placeholder="Password"
+                placeholder="<%= t('password') %>"
                 required
               />
-              <label for="userLoginPassword" class="form-label">Password</label>
-              <div class="valid-feedback">BIEN</div>
+              <label for="userLoginPassword" class="form-label"
+                ><%= t('password') %></label
+              >
+              <div class="valid-feedback"><%= t('good') %></div>
             </div>
 
             <div class="form-floating col-md-6">
@@ -215,11 +223,10 @@
                 required
                 maxlength="10"
               />
-              <label for="phone" class="form-label"
-                ><%= t('phone') %></label
-              >
-              <div class="valid-feedback">BIEN</div>
+              <label for="phone" class="form-label"><%= t('phone') %></label>
+              <div class="valid-feedback"><%= t('good') %></div>
             </div>
+
             <div class="form-floating col-md-6">
               <input
                 type="text"
@@ -228,10 +235,8 @@
                 id="job"
                 required
               />
-              <label for="job" class="form-label"
-                ><%= t('job') %></label
-              >
-              <div class="valid-feedback">BIEN</div>
+              <label for="job" class="form-label"><%= t('job') %></label>
+              <div class="valid-feedback"><%= t('good') %></div>
             </div>
 
             <div class="mt-3 text-center">
@@ -240,7 +245,7 @@
                 id="register"
                 class="w-50 btn btn-outline-primary bg-gradient bg-opacity-25"
               >
-                Inscrire
+                <%= t('register') %>
                 <i class="bi bi-person-plus-fill ms-2"></i>
               </button>
             </div>
