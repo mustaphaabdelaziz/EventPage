@@ -59,6 +59,29 @@
           <%= t('attends') %>
         </button>
         <%}}}} %>
+        <% if ( currentUser){%>
+          <%if(MyEvent.author._id.equals(currentUser._id)) {%>
+          <%- include("./addVideo")%> 
+          <% } }%> 
+        <% if(MyEvent.videos){ %>
+          <% for(video of MyEvent.videos) {%>
+            <h2 class="mt-2"><%= video.title %></h2>
+          <div class="ratio ratio-21x9 shadow-sm mt-2">
+            
+            <iframe
+              src="<%= video.url %>"
+              title="<%= video.title %>"
+              frameborder="0"
+              allow="accelerometer;autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            >
+            </iframe>
+
+            
+          </div>
+          <hr />  
+          <% }} %>  
+        
       </div>
     </div>
   </div>

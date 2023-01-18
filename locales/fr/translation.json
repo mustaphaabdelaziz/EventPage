@@ -139,5 +139,6 @@
   "are you": "Vous êtes",
   "instructor": "Formateur",
   "state": "Wilaya",
-  "good": "Bien"
+  "good": "Bien",
+  "include_in_home_page": "Inclure dans la page d'accueil"
 }

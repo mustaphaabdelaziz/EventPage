@@ -29,7 +29,7 @@ module.exports.createTopic = async (req, res) => {
     },
     { new: true }
   );
-  // console.log(event);
+
   // res.send(event);
   res.redirect(`/events/${eventId}`);
 };

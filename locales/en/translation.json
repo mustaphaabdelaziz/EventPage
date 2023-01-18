@@ -142,7 +142,8 @@
     "file": "File",
     "certificate": "Certificate",
     "state": "State",
-    "good": "Good"
+    "good": "Good",
+    "include_in_home_page":"Include in Home Page"
 
    
     

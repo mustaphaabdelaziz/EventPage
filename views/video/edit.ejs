@@ -33,15 +33,73 @@
         <form
           class="row g-3 needs-validation"
           action="/videos/<%=video.id %>/?_method=PUT"
-          enctype="multipart/form-data"
+        
           method="POST"
           novalidate
         >
-          <div class="col-12 input-group mb-3">
-            <input type="file" class="form-control" id="file" name="file" />
-            <label class="input-group-text" for="pictures"
-              ><%= t('upload') %> <%= t('video') %></label
-            >
+          <div class="form-floating mb-3">
+            <input
+              id="idtitle"
+              name="video[title]"
+              type="text"
+              class="form-control"
+              style="text-transform: capitalize"
+              autofocus
+              required
+              value="<%= video.title %>"
+            />
+            <label for="idtitle" class="form-label"><%= t("title") %></label>
+            <div class="valid-feedback"><%= t("good") %></div>
+          </div>
+
+          <div class="form-floating">
+            <input
+              id="idurl"
+              name="video[url]"
+              type="text"
+              class="form-control"
+              required
+              value="<%= video.url %>"
+            />
+            <label for="idurl" class="form-label"><%= t("url") %></label>
+            <div class="valid-feedback"><%= t("good") %></div>
+          </div>
+          <div class="">
+            <label for="description" class="form-label fw-bold fs-6"
+              ><%= t('description') %>
+            </label>
+            <textarea
+              class="form-control"
+              name="video[description]"
+              id="description"
+              rows="3"
+              placeholder="<%= t('description') %>"
+              style="text-transform: capitalize"
+            ><%= video.description %></textarea>
+          </div>
+          <div class="form-floating">
+            <div class="d-flex align-item-start form-check form-switch ms-2">
+              <% if (video.chosen){%>
+              <input
+                class="form-check-input me-2"
+                type="checkbox"
+                name="video[chosen]"
+                role="switch"
+                id="chosen"
+                checked
+              />
+              <% }else{ %>
+              <input
+                class="form-check-input me-2"
+                type="checkbox"
+                name="video[chosen]"
+                role="switch"
+                id="chosen"
+              />
+              <% } %>
+              <label class="form-check-label" for="video[chosen]"><%= t('include_in_home_page') %></label>
+              <div class="valid-feedback"><%= t('good') %></div>
+            </div>
           </div>
 
           <div class="modal-footer mt-3">

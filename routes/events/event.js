@@ -12,17 +12,19 @@ const {
   updateEvent,
   deleteEvent,
   downloadFile,
+
 } = require("../../controllers/events/events");
 const { isLoggedIn, isAdmin } = require("../../middleware/middleware");
 router
   .route("/")
   .get(catchAsync(index))
   .post(isLoggedIn, isAdmin, upload.single("picture"), catchAsync(createEvent));
-router.route("/new").get(catchAsync(renderEventForm));
-router
+  router.route("/new").get(catchAsync(renderEventForm));
+  router
   .route("/:id")
   .get(catchAsync(showEvent))
   .put(isLoggedIn, isAdmin, upload.single("picture"), catchAsync(updateEvent))
   .delete(isLoggedIn, isAdmin, catchAsync(deleteEvent));
-router.route(isLoggedIn, "/:id/download").get(catchAsync(downloadFile));
+ 
+  router.route(isLoggedIn, "/:id/download").get(catchAsync(downloadFile));
 module.exports = router;

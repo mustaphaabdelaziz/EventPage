@@ -4,10 +4,10 @@ let userId = user._id;
 // so the serverURL is added to the deployed site so it will be taken
 let url = serverURL;
 // let url = localURL;
-console.log("URL:", url);
+
 if (user) {
   url = url + "/events/" + eventId + "/" + userId + "/";
-  console.log("Sending... to:", url);
+  
   let subscribe = false;
   $(function () {
     $("#subscribe").on("click", function () {
@@ -33,7 +33,7 @@ if (user) {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log("Success:", data);
+   
         })
         .catch((error) => {
           console.error("Error:", error);

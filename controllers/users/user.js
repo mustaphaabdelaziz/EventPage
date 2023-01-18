@@ -12,13 +12,13 @@ module.exports.renderRegisterForm = async (req, res) => {
 
 // ===========================================================================
 module.exports.register = async (req, res) => {
-  console.log("new Register");
+
   try {
     const { user, password } = req.body;
     const { firstname, lastname, phone, email, birthdate, city, gender, job } =
       req.body.user;
 
-    console.log(user);
+
     const newUser = new User({
       firstname:
         firstname.charAt(0).toUpperCase() + firstname.slice(1).toLowerCase(),
@@ -32,7 +32,6 @@ module.exports.register = async (req, res) => {
       job,
       privileges: ["user"],
     });
-    console.log(newUser);
     // var str = newUser.firstname;
     // // make the name start with a capitalized letter
     // newUser.firstname = str.charAt(0).toUpperCase() + str.slice(1);

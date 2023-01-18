@@ -16,7 +16,12 @@ const EventSchema = new Schema(
       url: String,
       filename: String,
     },
-
+    videos: [
+      {
+        url: String,
+        title: String,
+      },
+    ],
     logo: String,
     location: String,
     period: {

@@ -22,7 +22,7 @@ module.exports.ParticipantsManagement = async (req, res) => {
     }
   );
   if (req.file) {
-    console.log("file");
+   
     await User.findOneAndUpdate(
       { _id: idp, "attendedEvents.event": id },
       {

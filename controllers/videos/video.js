@@ -7,35 +7,33 @@ module.exports.showVideos = async (req, res) => {
 };
 module.exports.addVideo = async (req, res) => {
   // get the materiel id from the materiels table
-  const { title, url, description } = req.body.video;
+  const { title, url, description, chosen } = req.body.video;
   let ytUrl = url;
-  console.log(ytUrl);
+  const isChosen = chosen;
   // replace:
   ytUrl = ytUrl.replace("/watch?v=", "/embed/");
-  console.log(ytUrl);
   const video = new Video({
     title,
     url: ytUrl,
     description,
+    chosen: isChosen === "on" ? true : false,
   });
   await video.save();
   req.flash("success", "Vidéo a été ajouté avec succès");
   res.redirect("/videos");
 };
 module.exports.editVideo = async (req, res) => {
-  // get the materiel id from the materiels table
-  const { title, url, description, isSelected } = req.body.video;
-  let ytUrl = url;
+  const { title, url, description, chosen } = req.body.video;
+  const { idvideo } = req.params;
+  const isChosen = chosen;
+  console.log(chosen);
 
-  // replace:
-  ytUrl = ytUrl.replace("/watch?v=", "/embed/");
-
-  const video = new Video({
+  await Video.findByIdAndUpdate(idvideo, {
     title,
-    url: ytUrl,
+    url,
     description,
+    chosen: isChosen === "on" ? true : false,
   });
-  await video.save();
   req.flash("success", "Vidéo a été ajouté avec succès");
   res.redirect("/videos");
 };

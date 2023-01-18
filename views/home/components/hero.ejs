@@ -163,7 +163,7 @@
   </div>
 
   <div class="row justify-content-center">
-    <div class="col-md-7 col-xlg-7 me-3 shadow-sm bg-light rounded">
+    <div class="col-md-7 col-xlg-7 me-3   rounded">
       <article class="blog-post text-gunmetal py-4">
         <h2 class="blog-post-title">Clinique Des Oasis</h2>
 
@@ -177,8 +177,12 @@
           groupe électrogène, réserve d'eau) autorise un confort maximal pour
           les patients.
         </p>
+      </article>
         <hr />
         <% for(video of videos) {%>
+          <% if(video.chosen){ %> 
+            <h2 class="p-2"><%= video.title %> </h2>
+            <p><%= video.description %> </p>
         <div class="ratio ratio-21x9 shadow-sm">
           <iframe
             id="<%= video._id %>"
@@ -191,9 +195,7 @@
           </iframe>
         </div>
         <hr />
-        
-        <% } %>
-      </article>
+        <% }} %>      
     </div>
 
     <div class="col-md-4 col-xlg-5 bg-light rounded">
@@ -280,4 +282,4 @@
   </div>
 </main>
 
-<footer class="blog-footer bg-light shadow-sm rounded"></footer>
+<!-- <footer class="blog-footer bg-light shadow-sm rounded"></footer> -->

@@ -34,7 +34,7 @@ module.exports.showEvent = async (req, res) => {
   moment.locale("");
   const expires = moment(MyEvent.period.end).isBefore(moment());
   // if(moment(MyEvent.period.end,"DD/M/YYYY").isBefore(moment(),"DD/MM/YYYY"))
-  res.render("events/show", { MyEvent, moment, states,expires });
+  res.render("events/show", { MyEvent, moment, states, expires });
 };
 // ===============================================================================
 module.exports.renderEventForm = async (req, res) => {
@@ -102,7 +102,7 @@ module.exports.createEvent = async (req, res) => {
 module.exports.updateEvent = async (req, res) => {
   const { id } = req.params;
   const { deleteImage, period } = req.body;
-  const { title, description, location } = req.body.event;
+  const { title, description, location, video } = req.body.event;
   let start = moment(period.start).format("MM/DD/YYYY");
   let end = moment(period.end).format("MM/DD/YYYY");
   const p = {
@@ -125,6 +125,7 @@ module.exports.updateEvent = async (req, res) => {
   }
   if (hasChanged) {
     MyEvent = await Event.findByIdAndUpdate(id, {
+      $push: { videos: { url: video, title: title } },
       title: title.charAt(0).toUpperCase() + title.slice(1).toLowerCase(),
       description,
       location,
@@ -141,7 +142,7 @@ module.exports.updateEvent = async (req, res) => {
   }
 
   req.flash("success", "Successfully updated event!");
-  res.redirect(`/events/${MyEvent._id}`);
+  res.redirect(`/events/${id}`);
 };
 // ===============================================================================
 module.exports.deleteEvent = async (req, res) => {
@@ -150,6 +151,7 @@ module.exports.deleteEvent = async (req, res) => {
   req.flash("success", "Successfully deleted event");
   res.redirect("/events");
 };
+
 module.exports.downloadFile = async (req, res) => {
   const { id } = req.params;
   const { filename } = req.query;

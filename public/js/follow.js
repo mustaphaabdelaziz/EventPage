@@ -5,26 +5,26 @@ let userId = user._id;
 // so the serverURL is added to the deployed site so it will be taken
 let url = localURL || serverURL;
 // let url = localURL;
-// console.log("URL:", url);
+
 
 if (user) {
-  // console.log(followedUser.userType);
+  
   if (followedUser.userType === "user") {
     url = url + "/user/" + userId + "/follow";
-    // console.log("Sending... to:", url);
+    
   } else {
     url = url + "/company/" + userId + "/follow";
-    // console.log("Sending... to:", url);
+
   }
   let follow = false;
   $(function () {
     $("#follow").on("click", function () {
       if ($(this).text() === "Follow") {
         follow = true;
-        // console.log("text equal to Follow");
+     
         $(this).text("Following");
       } else {
-        // console.log("text equal to Following");
+
         follow = false;
         $(this).text("Follow");
       }
@@ -35,7 +35,7 @@ if (user) {
           follwedUserId,
         })
         .then(function (response) {
-          // console.log(response.status);
+      
           $("#followers").text(response.data.nbrFollowers);
         })
         .catch(function (error) {

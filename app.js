@@ -42,6 +42,7 @@ const ExpressError = require("./utils/ExpressError");
 const participantRoutes = require("./routes/participants/participants");
 const userRoutes = require("./routes/users/user");
 const eventRoutes = require("./routes/events/event");
+const eventVideoRoutes = require("./routes/events/eventVideo");
 const videosRoutes = require("./routes/videos/video");
 const articlesRoutes = require("./routes/articles/article");
 const programRoutes = require("./routes/events/program");
@@ -83,7 +84,6 @@ app.use(passport.session());
 passport.use(
   "user",
   new LocalStrategy((email, password, done) => {
-    console.log(email);
     User.findOne({ email: email.toLowerCase() }, function (err, user) {
       if (err) {
         return done(err);
@@ -117,11 +117,13 @@ app.use("/about", (req, res) => {
   res.send("Welcome to the about Page");
 });
 // ===== User Routes ====
+app.use("/events/:id/video", eventVideoRoutes);
 app.use("/user", userRoutes);
 app.use("/events/:id/participants", participantRoutes);
 app.use("/events/:id/program", programRoutes);
 app.use("/events/:id/:userid/", eventUserAction);
 // app.use("/participants/:eventid", participantRoutes);
+
 app.use("/events", eventRoutes);
 app.use("/videos", videosRoutes);
 app.use("/articles", articlesRoutes);
@@ -131,12 +133,12 @@ app.use("/videos/:idvideo", videosRoutes);
 // ==== set language ===
 app.get("/:lang", (req, res) => {
   var { lang } = req.params;
-  // console.log(lang);
+
   i18next.changeLanguage(lang).then((t) => {
     t("hello_message");
   });
   res.cookie("lang", lang);
-  
+
   res.redirect("/events");
 });
 // === Home Page ===
@@ -144,12 +146,12 @@ app.get("/:lang", (req, res) => {
 app.get("/", async (req, res) => {
   const articles = await Article.find({}).sort({ date: -1 }).limit(2);
   const latestEvents = await Event.find({
-    "period.start": { $lt: moment().format("l") },
+    "period.start": { $lt: moment() },
   })
     .sort({ "period.start": -1 })
     .limit(2);
   const upcomingEvents = await Event.find({
-    "period.start": { $gt: moment().format("l") },
+    "period.start": { $gt: moment() },
   })
     .sort({ "period.start": 1 })
     .limit(2);
