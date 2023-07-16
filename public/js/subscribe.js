@@ -1,4 +1,12 @@
-let eventId = MyEvent._id;
+var js_script = $('script[src*=subscribe]');
+var eventId = js_script.attr('eventId');  
+var going = js_script.attr('going');  
+var attend = js_script.attr('attend');  
+// console.log("MyEvent")
+console.log(eventId)
+console.log(attend);
+console.log(going)
+// let eventId = MyEvent._id;
 let userId = user._id;
 // the localURL variable is in .env file and is just local and it won't be added to the deployed site
 // so the serverURL is added to the deployed site so it will be taken
@@ -14,14 +22,14 @@ if (user) {
       // the user is already subscribed
       if ($(this).hasClass("subscribed")) {
         // $(this).text("Assister");
-        $(this).text(buttonInfo.attend);
+        $(this).text(attend);
       } else {
         // $(this).text("Aller");
-        $(this).text(buttonInfo.going);
+        $(this).text(going);
         subscribe = true;
       }
       $(this).toggleClass("subscribed");
-
+      console.log(url)
       fetch(url, {
         method: "POST", // or 'PUT'
         headers: {

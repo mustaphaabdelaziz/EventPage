@@ -1,5 +1,4 @@
 <% layout('layouts/boilerplate')%>
-
 <div class="col-xl-12 col-lg-12 col-12 px-3 py-5">
   <div class="row flex-lg-row-reverse g-5 py-3">
     <div class="col-lg-6 col-6 col-xl-6 col-12 col-md-12 col-sm-12 headline">
@@ -19,7 +18,7 @@
         </span>
       </div>
       <div class="col-12 mt-3">
-        <% if(!currentUser){%>
+        <% if(!currentUser){ %>
         <div class="d-md-flex justify-content-md-start">
           <% if(!expires){%>
           <a
@@ -31,8 +30,10 @@
         </div>
         <% } else { if (currentUser){%>
         <%if(MyEvent.author._id.equals(currentUser._id)) {%>
-        <%-include("./edit")%> <%- include("./delete")%>
-         <%}else {if(MyEvent.participants.filter(p => p.participant._id.equals(currentUser._id)).length > 0) {%>
+        <%-include("./edit")%> 
+        <%-include("./delete")%>
+         <%}else {
+          if(MyEvent.participants.filter(p => p.participant._id.equals(currentUser._id)).length > 0) {%>
           <% if(!expires){%>
         <button
           class="col-12 btn btn-outline-hookersGreen rounded-pill bg-gradient subscribed"
@@ -67,7 +68,6 @@
           <% for(video of MyEvent.videos) {%>
             <h2 class="mt-2"><%= video.title %></h2>
           <div class="ratio ratio-21x9 shadow-sm mt-2">
-            
             <iframe
               src="<%= video.url %>"
               title="<%= video.title %>"
@@ -76,8 +76,6 @@
               allowfullscreen
             >
             </iframe>
-
-            
           </div>
           <hr />  
           <% }} %>  
@@ -118,16 +116,18 @@
     </div>
   </div>
 </div>
+
 <script>
-  const MyEvent = <%- JSON.stringify(MyEvent) %>;
-</script>
-<script>
+  const user =<%- JSON.stringify(currentUser) %>;
+
   const serverURL = '<%- process.env.SERVER_URL %>';
   const localURL = '<%- process.env.LOCAL_URL %>';
-  const user = <%- JSON.stringify(currentUser) %>;
-  const buttonInfo = <%- JSON.stringify({
-    going:t('going'),
-    attend:t('attends')
-  }) %>;
 </script>
-<script src="/js/subscribe.js"></script>
+
+<script type="text/javascript"
+  eventId ="<%=MyEvent.id%>"
+  attend = "<%=t('attends')%>"
+  going = "<%=t('going')%>"
+  src="/js/subscribe.js">
+</script>
+

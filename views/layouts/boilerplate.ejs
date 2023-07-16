@@ -23,11 +23,13 @@
         <link rel="stylesheet" href="/css/userProfile.css" />
         <link rel="stylesheet" href="/css/table.css" />
         <link rel="stylesheet" href="/css/color.css" />
-        <link rel="stylesheet" href="/css/nav.css" />
+        <!-- <link rel="stylesheet" href="/css/nav.css" /> -->
         <link rel="stylesheet" href="/css/eventpageCard.css" />
         <link rel="stylesheet" href="/css/timeline.css" />
         <link rel="stylesheet" href="/css/blog.css" />
-        <link href="/css/heroes.css" rel="stylesheet" />
+        <link rel="stylesheet" href="/css/hero.css" />
+        <!-- <link href="/css/heroes.css" rel="stylesheet" /> -->
+        <!-- <link href="/css/navbar1.css" rel="stylesheet" /> -->
         <link
           rel="canonical"
           href="https://getbootstrap.com/docs/5.0/examples/blog/"
@@ -80,10 +82,11 @@
         <script src="https://unpkg.com/scrollreveal"></script>
       </head>
 
-      <body class="d-flex flex-column">
+      <body class="">
         <%- include("../partials/navbar")%>
-        <main class="container-fluid">
-          <%- include("../partials/flash")%><%- body %>
+        <main class="">
+          <%- include("../partials/flash")%>
+          <%- body %>
         </main>
         <script
           src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment-with-locales.min.js"

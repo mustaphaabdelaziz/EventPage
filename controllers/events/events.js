@@ -164,3 +164,29 @@ module.exports.downloadFile = async (req, res) => {
   // req.flash("success", "Successfully deleted event");
   // res.redirect("/events");
 };
+module.exports.gallery = async (req, res) => {
+  const { deleteImages } = req.body;
+  const event = await Event.findById(id);
+  const imgs = req.files.map((f) => ({
+    url: f.path,
+    filename: f.filename,
+  }));
+  event.pictures.push(...imgs);
+  await event.save();
+  if (deleteImages) {
+    for (let filename of deleteImages) {
+      await cloudinary.uploader.destroy(filename);
+    }
+    await event.updateOne({
+      $pull: {
+        pictures: {
+          filename: {
+            $in: deleteImages,
+          },
+        },
+      },
+    });
+  }
+  req.flash("success", "Successfully updated event!");
+  res.redirect(`/events/${event._id}`);
+};

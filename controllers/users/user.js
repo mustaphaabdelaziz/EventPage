@@ -12,13 +12,10 @@ module.exports.renderRegisterForm = async (req, res) => {
 
 // ===========================================================================
 module.exports.register = async (req, res) => {
-
   try {
     const { user, password } = req.body;
     const { firstname, lastname, phone, email, birthdate, city, gender, job } =
       req.body.user;
-
-
     const newUser = new User({
       firstname:
         firstname.charAt(0).toUpperCase() + firstname.slice(1).toLowerCase(),
@@ -56,7 +53,7 @@ module.exports.login = (req, res) => {
   const preferedLng = req.user.preferedLng;
   i18next.changeLanguage(preferedLng).then((t) => {
     t("hello_message");
-  });
+  }); 
   req.flash("success", `${i18next.t("welcome_back")} ${req.user.fullname}`);
   const redirectUrl = req.session.returnTo || "/events";
   delete req.session.returnTo;

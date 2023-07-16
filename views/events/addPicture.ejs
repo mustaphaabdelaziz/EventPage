@@ -1,0 +1,95 @@
+<button
+  id="item2"
+  type="button"
+  class="btn btn-outline-warning bg-gradient px-2 py-1"
+  data-bs-toggle="modal"
+  data-bs-target="#gallery"
+>
+  <i class="bi bi-pencil-fill"></i>
+</button>
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="gallery"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel"><%=t("event") %></h5>
+
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <div class="modal-body">
+        <form
+          action="/events/<%= MyEvent._id%>/gallery?_method=PUT"
+          method="POST"
+          class="row needs-validation"
+          novalidate
+          enctype="multipart/form-data"
+        >
+
+          <div class="input-group mb-3 col-md-12">
+            <input
+              type="file"
+              class="form-control"
+              id="gallery"
+              name="gallery"
+              multiple
+            />
+            <label class="input-group-text" for="gallery"
+              ><%= t('gallery') %></label
+            >
+          </div>
+          <div class="mb-3">
+            <% MyEvent.gallery.forEach(function(img, i) { %>
+            <img src="<%=img.thumbnail %>" class="img-thumbnail" alt="" />
+            <div class="form-check-inline">
+              <input
+                type="checkbox"
+                id="picture-<%=i%>"
+                name="deleteImages[]"
+                value="<%=img.filename%>"
+              />
+            </div>
+            <label for="picture-<%=i%>"><i class="bi bi-trash-fill"></i></label>
+            <% })%>
+          </div>
+
+          <div class="modal-footer mt-3">
+            <button
+              type="button"
+              class="btn btn-outline-danger bg-gradient"
+              data-bs-dismiss="modal"
+            >
+              Annuler
+            </button>
+            <button
+              type="submit"
+              id="patient-register"
+              class="btn btn-outline-warning bg-gradient"
+            >
+              Modifier
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $("#gallery").on("shown.bs.modal", function () {
+    $(this).find("[autofocus]").focus();
+  });
+</script>

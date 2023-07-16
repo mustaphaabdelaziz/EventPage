@@ -8,6 +8,7 @@
   "event_delete_confirmation": "Voulez-vous vraiment supprimer cet événement",
   "invalid_id_exception": "Identifiant invalide",
   "validation_exception": "Corps de requête invalide",
+  "video_addition_message":"Vidéo ajoutée avec succès",
   "username_null": "Le nom d'utilisateur ne peut pas être nul",
   "username_size": "Le nom d'utilisateur doit avoir min 4 max 32 caractères",
   "email_invalid": "Doit être une adresse e-mail valide",

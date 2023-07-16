@@ -16,10 +16,17 @@ const EventSchema = new Schema(
       url: String,
       filename: String,
     },
+
     videos: [
       {
         url: String,
         title: String,
+      },
+    ],
+    gallery: [
+      {
+        url: String,
+        filename: String,
       },
     ],
     logo: String,
@@ -48,6 +55,9 @@ EventSchema.virtual("properties.popUpMarkup").get(function () {
 });
 EventSchema.virtual("thumbnail").get(function () {
   return this.picture.url.replace("/upload", "/upload/w_200");
+});
+EventSchema.virtual("galleryThumbnail").get(function () {
+  return this.gallery.url.replace("/upload", "/upload/w_200");
 });
 EventSchema.virtual("sortedProgram").get(function () {
   return underscore.sortBy(this.program.timeline, "time");

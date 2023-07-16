@@ -59,6 +59,7 @@ const i18next = require("./config/i18next");
 const { locals } = require("./config/local");
 
 const app = express();
+const axios = require("axios");
 app.set("trust proxy", true);
 // ====================================================
 // =========================== Language Configuration =========================
@@ -84,7 +85,7 @@ app.use(passport.session());
 passport.use(
   "user",
   new LocalStrategy((email, password, done) => {
-    User.findOne({ email: email.toLowerCase() }, function (err, user) {
+    User.findOne({ email: email.toLowerCase() }).then((user,err ) => {
       if (err) {
         return done(err);
       }
@@ -123,7 +124,23 @@ app.use("/events/:id/participants", participantRoutes);
 app.use("/events/:id/program", programRoutes);
 app.use("/events/:id/:userid/", eventUserAction);
 // app.use("/participants/:eventid", participantRoutes);
-
+app.get("/test", async (req, res) => {
+  console.log("patient");
+  axios
+    .get("http://127.0.0.1:8000/patient/634583c161cea2357be9e122")
+    .then(function (response) {
+      // handle success
+      console.log(response.data);
+      res.send(response.data);
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .finally(function () {
+      // always executed
+    });
+});
 app.use("/events", eventRoutes);
 app.use("/videos", videosRoutes);
 app.use("/articles", articlesRoutes);
@@ -141,20 +158,20 @@ app.get("/:lang", (req, res) => {
 
   res.redirect("/events");
 });
-// === Home Page ===
 
+// === Home Page ===
 app.get("/", async (req, res) => {
   const articles = await Article.find({}).sort({ date: -1 }).limit(2);
   const latestEvents = await Event.find({
     "period.start": { $lt: moment() },
   })
     .sort({ "period.start": -1 })
-    .limit(2);
+    .limit(1);
   const upcomingEvents = await Event.find({
     "period.start": { $gt: moment() },
   })
     .sort({ "period.start": 1 })
-    .limit(2);
+    .limit(1);
   const videos = await Video.find({});
 
   //  res.send(videos)
