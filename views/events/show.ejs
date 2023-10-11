@@ -1,18 +1,18 @@
 <% layout('layouts/boilerplate')%>
-<div class="col-xl-12 col-lg-12 col-12 px-3 py-5">
-  <div class="row flex-lg-row-reverse g-5 py-3">
-    <div class="col-lg-6 col-6 col-xl-6 col-12 col-md-12 col-sm-12 headline">
+<div class="container col-xl-12 col-lg-12 col-12 px-3 py-5">
+  <div class="row flex-lg-row-reverse py-3">
+    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
       <img
         src="<%= MyEvent.picture.url %>"
-        class="d-block mx-lg-auto img-fluid shadow col-12"
+        class="img-fluid rounded shadow-sm col-12"
         alt="<%= MyEvent.picture.name %>"
         loading="lazy"
       />
     </div>
-    <div class="col-12 col-md-12 col-sm-12 col-lg-6 col-xl-6 headline">
+    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
       <div class="col-12">  
-        <h2 class="display-5 fw-bold mb-3"><%= MyEvent.title %></h2>
-        <p class="lead"><%= MyEvent.description %></p>
+        <h2 class="display-4 fw-bold mb-3"><%= MyEvent.title %></h2>
+        <p class="fs-5 paragraph"><%= MyEvent.description %></p>
         <span class="text-muted">
           <%=MyEvent.location %> <i class="bi bi-geo-alt"></i>
         </span>
@@ -113,6 +113,69 @@
         <% } %>
         <!-- </div> -->
       </div>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="d-flex flex-row justify-content-start">
+      <h1 class="card-title title-timeline align-self-center"><%= t('gallery') %></h1>
+      <%- include("./addPicture")%> 
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6 col-12  mt-2 ">
+      <img
+        class="bd-placeholder-img card-img-top shadow"
+        src="https://picsum.photos/510/501"
+        alt=""
+      />
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6 col-12 mt-2 ">
+      <img
+        class="bd-placeholder-img card-img-top shadow"
+        src="https://picsum.photos/510/502"
+        alt=""
+      />
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6 colcol-12 mt-2 ">
+      <img
+        class="bd-placeholder-img card-img-top shadow"
+        src="https://picsum.photos/510/503"
+        alt=""
+      />
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6 colcol-12 mt-2 ">
+      <img
+        class="bd-placeholder-img card-img-top shadow"
+        src="https://picsum.photos/510/504"
+        alt=""
+      />
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6 col-12 mt-2 ">
+      <img
+        class="bd-placeholder-img card-img-top shadow"
+        src="https://picsum.photos/510/505"
+        alt=""
+      />
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6 col-12 mt-2 ">
+      <img
+        class="bd-placeholder-img card-img-top shadow"
+        src="https://picsum.photos/510/506"
+        alt=""
+      />
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6 col-12 mt-2 ">
+      <img
+        class="bd-placeholder-img card-img-top shadow"
+        src="https://picsum.photos/510/507"
+        alt=""
+      />
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6 col-12 mt-2 ">
+      <img
+        class="bd-placeholder-img card-img-top shadow"
+        src="https://picsum.photos/510/508"
+        alt=""
+      />
     </div>
   </div>
 </div>
