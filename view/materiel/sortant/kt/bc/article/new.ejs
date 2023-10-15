@@ -1,0 +1,107 @@
+<button
+  type="button"
+  class="btn btn-outline-greenSea bg-gradient px-2 py-1"
+  data-bs-toggle="modal"
+  data-bs-target="#bc-<%= bc.id %>"
+>
+  <i class="bi bi-plus-lg"></i>
+</button>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="bc-<%= bc.id %>"
+  data-bs-keyboard="true"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="bc-<%= bc.id %>">Ajouter Article</h5>
+
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <div class="modal-body">
+        <!-- /kt/bc/:id/:idbc/articles/ -->
+        <form
+        
+          action="/kt/bc/<%=patient.id%>/<%=bc.id %>/articles"
+          method="POST"
+          class="needs-validation"
+          novalidate
+          autocomplete="off"
+        >
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              id="designation"
+              name="articles[designation]"
+              list="materials"
+              onchange="MaterielArticles(this.value,'')"
+              required
+            />
+            <datalist id="materials">
+              <% for (material of materials) { %>
+
+              <option class="option" value="<%= material.designation %>">
+                <%= material.designation %>
+              </option>
+              <%} %>
+            </datalist>
+            <label for="designation" class="form-labelfs-6">Désignation</label>
+            <div class="valid-feedback">BIEN</div>
+          </div>
+
+          <div class="form-floating mb-3">
+            <select
+              id="article"
+              name="articles[marque]"
+              class="form-select"
+              onchange="ArticleDetails(this.value,'')"
+            >
+              <option class="option" value="" disabled selected>Article</option>
+            </select>
+            <label for="article" class="form-label">Article</label>
+            <div class="valid-feedback">BIEN</div>
+          </div>
+
+          <div class="form-floating mb-3">
+            <select id="serialN" name="articles[serialN]" class="form-select">
+              <option class="option" value="" disabled selected>
+                N° Série
+              </option>
+            </select>
+            <label for="serialN" class="form-label">N° Série</label>
+            <div class="valid-feedback">BIEN</div>
+          </div>
+          <div class="modal-footer mt-4">
+            <button
+              type="button"
+              class="btn btn-outline-lightCoral bg-gradient"
+              data-bs-dismiss="modal"
+            >
+              Annuler
+            </button>
+            <button class="btn btn-outline-greenSea bg-gradient">Ajouter</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $("#bc-<%= bc.id %>").on("shown.bs.modal", function () {
+    $(this).find("[autofocus]").focus();
+  });
+</script>
+<script>
+  let materials = <%- JSON.stringify(materials) %>;
+</script>

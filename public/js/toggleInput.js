@@ -16,25 +16,81 @@ function selectActe2(id, acte) {
     technicien2.style.display = "none";
   }
 }
+
+function selectFilter2(filter, id) {
+  let period = document.getElementById("surveillanceperiod-" + id);
+  let per = document.getElementById("period-" + id);
+
+  if (filter === "Surveillance médical") {
+    period.disabled = "";
+    per.disabled = "";
+  } else {
+    period.disabled = "disabled";
+    per.disabled = "disabled";
+  }
+  if (filter.value === "Autre") {
+    $("#conduiteMedicale-" + id).toggle();
+  } else {
+    $("#conduiteMedicale-" + id).hide();
+  }
+}
+
+function selectFilter(filter, id) {
+  let period = document.getElementById("surveillanceperiod-" + id);
+  let per = document.getElementById("period-" + id);
+
+  if (filter.value === "Surveillance médical") {
+    period.disabled = "";
+    per.disabled = "";
+  } else {
+    period.disabled = "disabled";
+    per.disabled = "disabled";
+  }
+  if (filter.value === "Autre") {
+    $("#conduiteMedicale-" + id).toggle();
+  } else {
+    $("#conduiteMedicale-" + id).hide();
+  }
+}
+
+function makeSubmenuAct(value, id) {
+  let elementId;
+
+  if (id.length == 0) elementId = "#acte";
+  else elementId = "#acte" + id;
+
+  let actes = examens
+    .filter((examen) => examen.service === value)
+    .map((examen) => examen.speciality);
+
+  $("#acteDiv").show();
+  $(elementId)
+    .empty()
+    .append("<option class='option' selected disabled value=''>Acte</option>");
+  for (const acte of actes[0]) {
+    $(elementId).append(new Option(acte, acte));
+  }
+  // }
+}
 function makeSubmenu(value, id) {
   let elementId;
-  if (id.length != "") elementId = "#city";
+
+  if (id.length == 0) elementId = "#city";
   else elementId = "#city" + id;
+
   let communes = states
     .filter((state) => state.name === value)
     .map((state) => state.communes);
+  // if (value == "") {
 
-  if (value.length == 0) {
-    $(elementId)
-      .empty()
-      .append(
-        "<option class='option' selected disabled value=''>Ville</option>"
-      );
-  } else {
-    for (const ville of communes[0]) {
-      $(elementId).append(new Option(ville, ville));
-    }
+  $(elementId)
+    .empty()
+    .append("<option class='option' selected disabled value=''>Ville</option>");
+  // } else {
+  for (const ville of communes[0]) {
+    $(elementId).append(new Option(ville, ville));
   }
+  // }
 }
 function MaterielArticles(value, id) {
   let elementId;
@@ -83,4 +139,77 @@ function ArticleDetails(value, id) {
   for (const detail of articles[0])
     if (!detail.taken)
       $(elementId).append(new Option(detail.serie, detail.serie));
+}
+function generateField(line) {
+  const type = $("#model-" + line).val();
+  for (const report of reports) {
+    if (report.type == type) {
+      $("#atcd-" + line).val(report.atcd);
+      $("#quality-" + line).val(report.quality);
+      $("#situs-" + line).val(report.indication.situs);
+      $("#aorte-" + line).val(report.indication.aorte);
+      $("#oreilletteGauche-" + line).val(report.indication.oreilletteGauche);
+      $("#sia-" + line).val(report.indication.sia);
+      $("#siv-" + line).val(report.indication.siv);
+      $("#valveAortique-" + line).val(report.indication.valveAortique);
+      $("#valveMitrale-" + line).val(report.indication.valveMitrale);
+      $("#motif-" + line).val(report.indication.ventriculeGauche.motif);
+      $("#ventGsiv-" + line).val(report.indication.ventriculeGauche.siv);
+      $("#dtd-" + line).val(report.indication.ventriculeGauche.dtd);
+      $("#fe-" + line).val(report.indication.ventriculeGauche.fe);
+      $("#cavitesDroites-" + line).val(report.indication.cavitesDroites);
+      $("#tricuspide-" + line).val(report.indication.tricuspide);
+      $("#arterePulmonaire-" + line).val(report.indication.arterePulmonaire);
+      $("#pericarde-" + line).val(report.indication.pericarde);
+      $("#conclusion-" + line).val(report.conclusion);
+      $("#conduiteMedicale-" + line).val(report.conduiteMedicale);
+    }
+  }
+}
+$(document).ready(function () {
+  // if ($("#patientRole : selected").val() != "Père") $("#bebe-info").hide();
+  // else $("#bebe-info").show();
+
+  if ($("#relation").text() == "Père") {
+    $("#bebe-info").show();
+  }else{
+    $("#bebe-info").hide();
+  };
+
+  $("#show_hide_login").on("click", function () {
+    var passInput = $("#loginPassword");
+    if (passInput.attr("type") === "password") {
+      passInput.attr("type", "text");
+      $("#icon-eye").toggleClass("bi-eye-slash-fill");
+    } else {
+      passInput.attr("type", "password");
+      $("#icon-eye").toggleClass("bi-eye-slash-fill");
+    }
+  });
+  $("#show_hide_register").on("click", function () {
+    var passInput = $("#registerPassword");
+    if (passInput.attr("type") === "password") {
+      passInput.attr("type", "text");
+      $("#icon-eye-register").toggleClass("bi-eye-slash-fill");
+    } else {
+      passInput.attr("type", "password");
+      $("#icon-eye-register").toggleClass("bi-eye-slash-fill");
+    }
+  });
+  $("#show_hide_confirmed").on("click", function () {
+    var passInput = $("#confirmedPassword");
+    if (passInput.attr("type") === "password") {
+      passInput.attr("type", "text");
+      $("#icon-eye-confirmed").toggleClass("bi-eye-slash-fill");
+    } else {
+      passInput.attr("type", "password");
+      $("#icon-eye-confirmed").toggleClass("bi-eye-slash-fill");
+    }
+  });
+});
+function toggleBebeInfo(value) {
+  $("#bebe-info").toggle();
+}
+function activateInput(id) {
+  $("#" + id).toggle();
 }
