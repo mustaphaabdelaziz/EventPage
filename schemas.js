@@ -24,21 +24,20 @@ const extension = (joi) => ({
 
 const Joi = BaseJoi.extend(extension);
 
-module.exports.patientSchema = Joi.object({
-  patient: Joi.object({
-    firstname: Joi.string().alphanum().min(3).max(30).required().escapeHTML(),
-    lastname: Joi.string().alphanum().min(3).max(30).required().escapeHTML(),
-    father: Joi.string().alphanum().min(3).max(30).required().escapeHTML(),
-    birthdate: Joi.date().max("now"),
-    phone: Joi.string()
-      .regex(/^[0-9]{10}$/)
-      .messages({ "string.pattern.base": `Phone number must have 10 digits.` })
-      .required(),
+module.exports.eventSchema = Joi.object({
+  event: Joi.object({
+    title: Joi.string().required().escapeHTML(),
+    category: Joi.string().required(),
+    start: Joi.date().required().greater("now"),
+    end: Joi.date().required().greater(Joi.ref("start")),
+    location: Joi.string().required().escapeHTML(),
+    description: Joi.string().required().escapeHTML(),
   }).required(),
+  deleteImages: Joi.array(),
 });
 
-module.exports.consultation = Joi.object({
-  consultatio: Joi.object({
-    
+module.exports.comentSchema = Joi.object({
+  coment: Joi.object({
+    body: Joi.string().required().escapeHTML(),
   }).required(),
 });
