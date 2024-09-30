@@ -85,19 +85,31 @@ app.use(passport.session());
 passport.use(
   "user",
   new LocalStrategy((email, password, done) => {
-    User.findOne({ email: email.toLowerCase() }).then((user,err ) => {
-      if (err) {
-        return done(err);
-      }
-      if (!user) {
-        return done(null, false);
-      } else {
-        return done(null, user);
-      }
-    });
+    User.findOne({ email: email.toLowerCase() })
+      .select("+salt +hash")
+      .then((user, err) => {
+        if (err) {
+          return done(err);
+        }
+        if (!user) {
+          return done(null, false, "User avec cet email n'existe pas");
+        } else {
+          if (user.verifyPassword(password, user.hash)) {
+            return done(null, user);
+          } else {
+            return done(
+              null,
+              false,
+              "Mot de passe incorrect, verifier votre mot de passe"
+            );
+          }
+        }
+      });
   })
 );
 
+// serialization refers to how to store user's
+// authentication user data will be stored in the session
 // serialization refers to how to store user's
 // authentication user data will be stored in the session
 passport.serializeUser((user, done) => {
@@ -189,7 +201,7 @@ app.all("*", (req, res, next) => {
 });
 app.use(errorPage);
 // the PORT variable is in .env file but it won't be added to the deployed site
-const port = process.env.PORT || 9000;
+const port = process.env.PORT;
 
 app.listen(port, () => {
   console.log("===================================================");

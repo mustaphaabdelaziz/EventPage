@@ -52,20 +52,7 @@
               ><%= t('gallery') %></label
             >
           </div>
-          <div class="mb-3">
-            <% MyEvent.gallery.forEach(function(img, i) { %>
-            <img src="<%=img.thumbnail %>" class="img-thumbnail" alt="" />
-            <div class="form-check-inline">
-              <input
-                type="checkbox"
-                id="picture-<%=i%>"
-                name="deleteImages[]"
-                value="<%=img.filename%>"
-              />
-            </div>
-            <label for="picture-<%=i%>"><i class="bi bi-trash-fill"></i></label>
-            <% })%>
-          </div>
+         
 
           <div class="modal-footer mt-3">
             <button

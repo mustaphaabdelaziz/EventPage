@@ -2,3 +2,5 @@ node_modules
 dist
 .env
 .vscode
+*.mp4
+*.mp3

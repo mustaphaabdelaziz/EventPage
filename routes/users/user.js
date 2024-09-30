@@ -1,6 +1,6 @@
 const express = require("express");
 const passport = require("passport");
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 const catchAsync = require("../../utils/catchAsync");
 const {
   register,
@@ -11,12 +11,17 @@ const {
   showProfile,
   updateUser,
   deleteUser,
+  showResetPasswordForm,
+  passwordReset,
+  changePassword,
+  showEmailSendingForm,
+  sendEmail,
 } = require("../../controllers/users/user");
 const { isLoggedIn } = require("../../middleware/middleware");
 router
   .route("/register")
   .get(catchAsync(renderRegisterForm))
-  .post(catchAsync(register));
+  .post((register));
 router
   .route("/login")
   .get(renderRegisterForm)
@@ -30,9 +35,19 @@ router
   );
 router.route("/logout").get(isLoggedIn, logout);
 router
+  .route("/reset-password/")
+  .get(catchAsync(showEmailSendingForm))
+  .post(catchAsync(sendEmail));
+router
   .route("/:id")
   .get(catchAsync(renderUserForm))
   .put(isLoggedIn, catchAsync(updateUser))
   .delete(isLoggedIn, catchAsync(deleteUser));
+router.route("/:id/reset-password/").put(catchAsync(changePassword));
+router
+  .route("/reset-password/:token")
+  .get(catchAsync(showResetPasswordForm))
+  .post(catchAsync(passwordReset));
 router.route("/:id/profile").get(catchAsync(showProfile));
+
 module.exports = router;
