@@ -8,18 +8,10 @@
     </div> -->
 
     <form class="d-flex">
-      <input
-        id="search"
-        class="form-control mb-2"
-        type="search"
-        placeholder="Search"
-        aria-label="Search"
-      />
+      <input id="search" class="form-control mb-2" type="search" placeholder="Search" aria-label="Search" />
     </form>
     <div class="table-responsive">
-      <table
-        class="table table-striped table-hover table-borderless text-center sortable"
-      >
+      <table class="table table-striped table-hover table-borderless text-center sortable">
         <thead class="table-greenSea">
           <tr>
             <th scope="col">N°</th>
@@ -28,7 +20,6 @@
             <th scope="col">Email</th>
             <th scope="col">Role</th>
             <th scope="col">Logged in at</th>
-            <th scope="col">Status</th>
             <% if (currentUser.privileges.includes("superadmin")){ %>
             <th id="item1" scope="col">Action</th>
             <% }%>
@@ -44,19 +35,7 @@
 
             <td><%=moment(user.loggedIn).format("DD/MM/YYYY-HH:mm:ss") %></td>
 
-            <% if (user.approved){%>
-            <th class="p-3">
-              <span class="rounded-pill badge bg-greenSea bg-gradient"
-                >OUI</span
-              >
-            </th>
-            <%}else{%>
-            <th class="p-3">
-              <span class="rounded-pill badge bg-lightCoral bg-gradient"
-                >NON</span
-              >
-            </th>
-            <%}%> <% if (currentUser.privileges.includes("superadmin")){ %>
+            <% if (currentUser.privileges.includes("superadmin")){ %>
             <th>
               <div class="d-flex justify-content-center align-items-center">
                 <%- include("./edit")%> <%- include("./delete")%>

@@ -60,7 +60,7 @@
               <input
                 type="text"
                 class="form-control"
-                name="username"
+                name="email"
                 id="userLoginUsername"
                 placeholder="<%= t('email') %>"
                 style="text-transform: lowercase"
@@ -144,12 +144,16 @@
             </div>
 
             <div class="form-floating col-md-6">
-              <input id="birthDate" name="user[birthdate]" type="date"
-              class="form-control" max="<%=moment().format('YYYY-MM-DD')%>"
-              min="<%=moment("01/01/1900").format('YYYY-MM-DD')%>" required />
-              <label for="birthDate" class="form-label"
-                ><%= t('birthdate') %>
-              </label>
+              <input
+                id="birthDate"
+                name="user[birthdate]"
+                type="date"
+                class="form-control"
+                max="<%= moment().format('YYYY-MM-DD') %>"
+                min="1900-01-01"
+                required
+              />
+              <label for="birthDate" class="form-label"><%= t('birthdate') %></label>
               <div class="valid-feedback"><%= t('good') %></div>
             </div>
             <div class="form-floating col-md-6">
@@ -203,12 +207,12 @@
               <input
                 type="password"
                 class="form-control"
-                id="userLoginPassword"
-                name="user[password]"
+                id="userRegisterPassword"
+                name="password"
                 placeholder="<%= t('password') %>"
                 required
               />
-              <label for="userLoginPassword" class="form-label"
+              <label for="userRegisterPassword" class="form-label"
                 ><%= t('password') %></label
               >
               <div class="valid-feedback"><%= t('good') %></div>
@@ -221,7 +225,7 @@
                 id="phone"
                 name="user[phone]"
                 required
-                maxlength="10"
+                maxlength="20"
               />
               <label for="phone" class="form-label"><%= t('phone') %></label>
               <div class="valid-feedback"><%= t('good') %></div>

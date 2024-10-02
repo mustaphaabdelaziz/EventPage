@@ -1,115 +1,103 @@
 <!DOCTYPE html>
 <html>
-  <% if(t("language")!=="اللغة"){%>
-  <html>
-    <% }else{ %>
-    <html dir="rtl" lang="ar">
-      <% } %>
-      <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="shortcut icon" type="x-icon" href="/assets/logo.png" />
-        <title>Oasis Event</title>
-        <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css" />
-        <link rel="stylesheet" href="/css/carousel.css" />
-        <link rel="stylesheet" href="/css/event.css" />
-        <link rel="stylesheet" href="/css/eventCard.css" />
-        <link rel="stylesheet" href="/css/loginForm.css" />
-        <link rel="stylesheet" href="/css/main.css" />
-        <link rel="stylesheet" href="/css/login.css" />
-        <link rel="stylesheet" href="/css/navbar.css" />
-        <link rel="stylesheet" href="/css/profileCard.css" />
-        <link rel="stylesheet" href="/css/userProfile.css" />
-        <link rel="stylesheet" href="/css/table.css" />
-        <link rel="stylesheet" href="/css/color.css" />
-        <!-- <link rel="stylesheet" href="/css/nav.css" /> -->
-        <link rel="stylesheet" href="/css/eventpageCard.css" />
-        <link rel="stylesheet" href="/css/timeline.css" />
-        <link rel="stylesheet" href="/css/blog.css" />
-        <link rel="stylesheet" href="/css/hero.css" />
-        <!-- <link href="/css/heroes.css" rel="stylesheet" /> -->
-        <!-- <link href="/css/navbar1.css" rel="stylesheet" /> -->
-        <link
-          rel="canonical"
-          href="https://getbootstrap.com/docs/5.0/examples/blog/"
-        />
+<% if(t("language")!=="اللغة"){%>
+<html>
+<% }else{ %>
+<html dir="rtl" lang="ar">
+<% } %>
 
-        <!-- Custom styles for this template -->
-        <link
-          href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap"
-          rel="stylesheet"
-        />
-        <link
-          href="https://unpkg.com/aos@2.3.1/dist/aos.css"
-          rel="stylesheet"
-        />
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
-        />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" type="x-icon" href="/assets/logo.png" />
+  <title>Oasis Event</title>
+  <!-- <script src="/dist/styles.bundle.js"></script> -->
+  <!-- <link rel="stylesheet" href="/dist/styles.bundle.js" /> -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/carousel.css" />
+  <link rel="stylesheet" href="/css/event.css" />
+  <link rel="stylesheet" href="/css/eventCard.css" />
+  <link rel="stylesheet" href="/css/loginForm.css" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/login.css" />
+  <link rel="stylesheet" href="/css/navbar.css" />
+  <link rel="stylesheet" href="/css/profileCard.css" />
+  <link rel="stylesheet" href="/css/userProfile.css" />
+  <link rel="stylesheet" href="/css/table.css" />
+  <link rel="stylesheet" href="/css/color.css" />
+  <link rel="stylesheet" href="/css/eventpageCard.css" />
+  <link rel="stylesheet" href="/css/timeline.css" />
+  <link rel="stylesheet" href="/css/blog.css" />
+  <link rel="stylesheet" href="/css/hero.css" />
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script
-          type="text/javascript"
-          src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
-        ></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Custom styles for this template -->
+  <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
 
-        <script>
-          $(document).ready(function () {
-            $("#search").on("keyup", function () {
-              var value = $(this).val().toLowerCase();
-              $("#tablebody tr").filter(function () {
-                $(this).toggle(
-                  $(this).text().toLowerCase().indexOf(value) > -1
-                );
-              });
-            });
-          });
-        </script>
-        <script
-          src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.5/pdfmake.min.js"
-          integrity="sha512-rDbVu5s98lzXZsmJoMa0DjHNE+RwPJACogUCLyq3Xxm2kJO6qsQwjbE5NDk2DqmlKcxDirCnU1wAzVLe12IM3w=="
-          crossorigin="anonymous"
-          referrerpolicy="no-referrer"
-        ></script>
-        <script
-          src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.5/vfs_fonts.min.js"
-          integrity="sha512-BDZ+kFMtxV2ljEa7OWUu0wuay/PAsJ2yeRsBegaSgdUhqIno33xmD9v3m+a2M3Bdn5xbtJtsJ9sSULmNBjCgYw=="
-          crossorigin="anonymous"
-          referrerpolicy="no-referrer"
-        ></script>
-        <script src="https://unpkg.com/scrollreveal"></script>
-      </head>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"
+    integrity="sha512-HGOnQO9+SP1V92SrtZfjqxxtLmVzqZpjFFekvzZVWoiASSQgSr4cw9Kqd2+l8Llp4Gm0G8GIFJ4ddwZilcdb8A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-      <body class="">
-        <%- include("../partials/navbar")%>
-        <main class=""><%- include("../partials/flash")%> <%- body %></main>
-        <script
-          src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment-with-locales.min.js"
-          integrity="sha512-vFABRuf5oGUaztndx4KoAEUVQnOvAIFs59y4tO0DILGWhQiFnFHiR+ZJfxLDyJlXgeut9Z07Svuvm+1Jv89w5g=="
-          crossorigin="anonymous"
-          referrerpolicy="no-referrer"
-        ></script>
+  <script>
+    $(document).ready(function () {
+      $("#search").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#tablebody tr").filter(function () {
+          $(this).toggle(
+            $(this).text().toLowerCase().indexOf(value) > -1
+          );
+        });
+      });
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.5/pdfmake.min.js"
+    integrity="sha512-rDbVu5s98lzXZsmJoMa0DjHNE+RwPJACogUCLyq3Xxm2kJO6qsQwjbE5NDk2DqmlKcxDirCnU1wAzVLe12IM3w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.5/vfs_fonts.min.js"
+    integrity="sha512-BDZ+kFMtxV2ljEa7OWUu0wuay/PAsJ2yeRsBegaSgdUhqIno33xmD9v3m+a2M3Bdn5xbtJtsJ9sSULmNBjCgYw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://unpkg.com/scrollreveal"></script>
+</head>
 
-        <script src="https://cdn.jsdelivr.net/npm/underscore@1.13.4/underscore-umd-min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        
-        <script src="/js/bootstrap/bootstrap.bundle.min.js"></script>
-        <script async src="/js/validate-form.js"></script>
-        <script src="/js/sorttable.js"></script>
-        <!-- <script src="/js/filter.js"></script> -->
-        <script src="/js/print.js"></script>
-        <script src="/js/hometest.js"></script>
-        <script src="/js/toggleInput.js"></script>
-        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-        <script>
-          AOS.init();
-        </script>
-        <script>
-          ScrollReveal().reveal(".headline", { delay: 200 });
-        </script>
-      </body>
-    </html>
-  </html>
+<body class="">
+  <%- include("../partials/navbar")%>
+  <main class=""><%- include("../partials/flash")%> <%- body %></main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment-with-locales.min.js"
+    integrity="sha512-vFABRuf5oGUaztndx4KoAEUVQnOvAIFs59y4tO0DILGWhQiFnFHiR+ZJfxLDyJlXgeut9Z07Svuvm+1Jv89w5g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/underscore@1.13.4/underscore-umd-min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <!-- <link rel="stylesheet" href="/dist/main.bundle.js" /> -->
+  <!-- <script src="/dist/main.bundle.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+  integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="/js/bootstrap.min.js"></script>
+  <script async src="/js/validate-form.js"></script>
+  <script src="/js/sorttable.js"></script>
+  <script src="/js/print.js"></script>
+  <script src="/js/hometest.js"></script>
+  <script src="/js/toggleInput.js"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+  <script>
+    ScrollReveal().reveal(".headline", { delay: 200 });
+  </script>
+</body>
+
+</html>
+
+</html>
+
 </html>

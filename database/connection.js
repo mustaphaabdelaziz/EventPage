@@ -25,9 +25,10 @@ db.once("open", async() => {
       lastname: process.env.ADMIN_LASTNAME,
       email: process.env.ADMIN_EMAIL,
       fonction: process.env.ADMIN_FONCTION,
+      gender:process.env.ADMIN_GENDER,
       phone:process.env.ADMIN_PHONE,
       hash: process.env.ADMIN_PASSWORD,
-      approved: true,
+      preferedLng: "fr",
     });
     user.privileges.push(
       "superadmin",

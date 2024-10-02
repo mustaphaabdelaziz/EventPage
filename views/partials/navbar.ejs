@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-chineseWhite shadow-sm">
   <div class="container-fluid">
     <a class="navbar-brand fw-bold" href="/">
-      <img id="assest" src="/assets/logo.png" alt="" width="80" height="60" class="d-inline-block align-text-center" />
+      <img id="assest" src="/assets/logo.png" alt="Company Logo" width="80" height="60"
+        class="d-inline-block align-text-center" />
     </a>
     <button class="navbar-toggler" type="button" id="navbarSupportedbutton" data-bs-toggle="collapse"
       data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -45,6 +46,18 @@
         <li class="nav-item">
           <a class="nav-link" href="/about"><%= t('about') %></a>
         </li>
+        <% if(currentUser){ %> 
+          <% if(currentUser.privileges.includes('admin')) {%>
+          <li class="nav-item">
+            <a class="nav-link" href="/user"
+              >Utilisateurs <i class="bi bi-people-fill"></i>
+              <% if(session.newUsers!=0) {%> 
+              <span class="badge bg-lightCoral"> <%=session.newUsers%></span>
+              <% } %> 
+            </a>
+          </li>
+          <% }} %>
+
       </ul>
       <ul class="navbar-nav mb-2 mb-lg-0">
         <div class="d-flex flex-md-row justify-content-center align-items-center px-4 me-5">

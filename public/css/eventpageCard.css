@@ -110,7 +110,6 @@ a:hover {
   cursor: default;
   -webkit-user-select: none;
      -moz-user-select: none;
-      -ms-user-select: none;
           user-select: none;
   transition: background-color 0.3s;
 }

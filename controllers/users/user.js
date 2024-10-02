@@ -1,20 +1,32 @@
 const User = require("../../models/user/user");
 const Event = require("../../models/event");
 const Country = require("../../models/country");
+const fonctions = require("../../seeds/fonction");
+const privileges = require("../../seeds/privileges");
 const moment = require("moment");
 const i18next = require("../../config/i18next");
 const { sendMail } = require("../../utils/sendEmail");
 const crypto = require("crypto");
 const bcrypt = require("bcrypt");
-const { body, validationResult } = require('express-validator');
-// ===========================================================================
+const { body, validationResult } = require("express-validator");
+// ======================= userList ====================================================
+module.exports.userList = async (req, res) => {
+  const users = await User.find({});
+  res.render("users/index", {
+    users,
+    fonctions: fonctions.fonction,
+    privileges: privileges.privileges,
+    moment,
+  });
+};
+// ============================= renderRegisterForm ==============================================
 module.exports.renderRegisterForm = async (req, res) => {
   const algeria = await Country.find({});
   const states = algeria[0].states;
   res.render("users/login", { states, moment });
 };
 
-// ===========================================================================
+
 // module.exports.register = async (req, res) => {
 //   try {
 //     // const { user, password } = req.body;
@@ -67,57 +79,93 @@ module.exports.renderRegisterForm = async (req, res) => {
 //     res.redirect("register");
 //   }
 // };
-
-
+// ======================== Register ===================================================
 module.exports.register = [
   // Validation and sanitization
-  body('user.firstname').trim().escape().isLength({ min: 1 }).withMessage('First name is required'),
-  body('user.lastname').trim().escape().isLength({ min: 1 }).withMessage('Last name is required'),
-  body('user.phone').trim().escape().isMobilePhone().withMessage('Invalid phone number'),
-  body('user.email').trim().isEmail().withMessage('Invalid email address').normalizeEmail(),
-  body('user.password').trim().isLength({ min: 6 }).withMessage('Password must be at least 6 characters long'),
+  body("user.firstname")
+    .trim()
+    .escape()
+    .isLength({ min: 1 })
+    .withMessage("First name is required"),
+  body("user.lastname")
+    .trim()
+    .escape()
+    .isLength({ min: 1 })
+    .withMessage("Last name is required"),
+  body("user.phone")
+    .trim()
+    .escape()
+    .isMobilePhone()
+    .withMessage("Invalid phone number"),
+  body("user.email").trim().isEmail().withMessage("Invalid email address"),
+  body("password")
+    .trim()
+    .isLength({ min: 6 })
+    .withMessage("Password must be at least 6 characters long"),
 
   async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      req.flash('error', errors.array().map(err => err.msg).join(', '));
-      return res.redirect('register');
+      req.flash(
+        "error",
+        errors
+          .array()
+          .map((err) => err.msg)
+          .join(", ")
+      );
+      return res.redirect("register");
     }
 
     try {
-      const { firstname, lastname, phone, email, birthdate, city, gender, job, password } = req.body.user;
+      const {
+        firstname,
+        lastname,
+        phone,
+        email,
+        birthdate,
+        city,
+        gender,
+        job,
+      } = req.body.user;
+      const { password } = req.body;
       const userExist = await User.findOne({ email: email });
       if (userExist) {
-        req.flash('error', 'User already exists');
-        return res.redirect('register');
+        req.flash("error", "User already exists");
+        return res.redirect("register");
       }
-
-      const hashedPassword = await bcrypt.hash(password, 10);
+      console.log("the email doesnn't exist");
+      // const hashedPassword = await bcrypt.hash(password, 10);
       const user = new User({
-        firstname: firstname.charAt(0).toUpperCase() + firstname.slice(1).toLowerCase(),
-        lastname: lastname.charAt(0).toUpperCase() + lastname.slice(1).toLowerCase(),
+        firstname:
+          firstname.charAt(0).toUpperCase() + firstname.slice(1).toLowerCase(),
+        lastname:
+          lastname.charAt(0).toUpperCase() + lastname.slice(1).toLowerCase(),
         phone: phone,
         email: email.toLowerCase(),
-        hash: hashedPassword,
+        hash: password,
         birthdate: moment(birthdate),
         city: city,
         gender: gender,
         job: job,
-        privileges: ['user'],
+        privileges: ["user"],
+        preferedLng: "fr",
       });
-
+      console.log("the user object created");
       await user.save();
+      console.log("the user is saved");
+
       req.login(user, (err) => {
         if (err) return next(err);
-        req.flash('success', 'Welcome to Oasis Event');
-        res.redirect('/events');
+        req.flash("success", "Welcome to Oasis Event");
+        res.redirect("/events");
       });
     } catch (e) {
       next(e); // Use next() to pass errors to the error-handling middleware
     }
-  }
+  },
 ];
 // =============== Login ==============================
+// module.exports.login = async (req, res, next) => {
 module.exports.login = async (req, res) => {
   const preferedLng = req.user.preferedLng;
   i18next.changeLanguage(preferedLng).then((t) => {
@@ -129,9 +177,35 @@ module.exports.login = async (req, res) => {
   delete req.session.returnTo;
   res.redirect(redirectUrl);
 };
+// try {
+//   const preferedLng = req.user.preferedLng;
+//   await i18next.changeLanguage(preferedLng);
+
+//   await User.findByIdAndUpdate(req.user.id, { loggedIn: moment() });
+
+//   req.flash("success", `${i18next.t("welcome_back")} ${req.user.fullname}`);
+
+//   // Regenerate session ID to prevent session fixation
+//   req.session.regenerate((err) => {
+//     if (err) {
+//       console.error(err);
+//       req.flash("error", "An error occurred during login. Please try again.");
+//       return res.redirect("/login");
+//     } else {
+//       const redirectUrl = req.session.returnTo || "/events";
+//       delete req.session.returnTo;
+//       res.redirect(redirectUrl);
+//     }
+//   });
+// } catch (e) {
+//   console.error(e);
+//   req.flash("error", "An error occurred during login. Please try again.");
+//   res.redirect("/login");
+// }
+// };
 // ======================= Logout ==============
 module.exports.logout = (req, res) => {
-  // logout require a callback function and a get request to work
+  // logout requere a callback function and a get request to work
   req.logout(() => {
     req.flash("success", `Goodbye`);
     res.redirect("login");
@@ -220,7 +294,10 @@ module.exports.sendEmail = async (req, res) => {
     }
 
     const resetToken = generateResetToken();
-    const hashedToken = crypto.createHash('sha256').update(resetToken).digest('hex');
+    const hashedToken = crypto
+      .createHash("sha256")
+      .update(resetToken)
+      .digest("hex");
     const createdAt = Date.now();
     const expires = Date.now() + 24 * 60 * 60 * 1000; // Token expires in 1 day
 

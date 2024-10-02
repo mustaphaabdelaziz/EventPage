@@ -2,7 +2,9 @@ const express = require("express");
 const passport = require("passport");
 const router = express.Router({ mergeParams: true });
 const catchAsync = require("../../utils/catchAsync");
+const { isLoggedIn,isAdmin } = require("../../middleware/middleware");
 const {
+  userList,
   register,
   renderRegisterForm,
   renderUserForm,
@@ -17,14 +19,14 @@ const {
   showEmailSendingForm,
   sendEmail,
 } = require("../../controllers/users/user");
-const { isLoggedIn } = require("../../middleware/middleware");
+router.route("/").get(isLoggedIn, isAdmin, catchAsync(userList));
 router
   .route("/register")
   .get(catchAsync(renderRegisterForm))
   .post((register));
 router
   .route("/login")
-  .get(renderRegisterForm)
+  .get(catchAsync(renderRegisterForm))
   .post(
     passport.authenticate("user", {
       failureFlash: true,

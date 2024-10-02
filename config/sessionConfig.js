@@ -18,8 +18,8 @@ module.exports.sessionConfig = {
  saveUninitialized: true,
  cookie: {
   httpOnly: true,
-  // secure: true, when set to true current User doesn't work
-  expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
-  maxAge: 1000 * 60 * 60 * 24 * 7,
+  // secure: true, // Uncomment this if using HTTPS 
+  expires: Date.now() + 1000 * 60 * 60 * 24 * 7,// 1 week
+  maxAge: 1000 * 60 * 60 * 24 * 7,// 1 week
  },
 };
