@@ -1,13 +1,25 @@
+.bg-temptress {
+  background-color: #3a2625;
+}
+
+.bg-unmetal {
+  background-color: #25393a;
+}
+
+.bg-chineseWhite {
+  background-color: #dbe3e3;
+}
+
+.bg-hookersGreen {
+  background-color: #497174;
+}
+
 .bg-pistachio {
-  background-color: #DCF4E4;
+  background-color: #dcf4e4;
 }
 
 .bg-greenSea {
-  background-color: #66b0a7;
-}
-
-.bg-pearlAqua {
-  background-color: rgba(91, 184, 173, 0.6196078431);
+  background-color: #5da49c;
 }
 
 .bg-crystalBlue {
@@ -19,19 +31,35 @@
 }
 
 .bg-mediumTurquoise {
-  background-color: #16a7ba;
+  background-color: #0fa2b6;
 }
 
 .bg-antiqueSteel {
-  background-color: #d4dede;
+  background-color: #eff5f5;
+}
+
+.text-temptress {
+  color: #3a2625;
+}
+
+.text-chineseWhite {
+  color: #dbe3e3;
+}
+
+.text-gunmetal {
+  color: #25393a;
+}
+
+.text-hookersGreen {
+  color: #497174;
 }
 
 .text-antiqueSteel {
-  color: #d4dede;
+  color: #eff5f5;
 }
 
 .text-pistachio {
-  color: #DCF4E4;
+  color: #dcf4e4;
 }
 
 .text-crystalBlue {
@@ -39,11 +67,7 @@
 }
 
 .text-greenSea {
-  color: #66b0a7;
-}
-
-.text-pearlAqua {
-  color: rgba(91, 184, 173, 0.6196078431);
+  color: #5da49c;
 }
 
 .text-lightCoral {
@@ -51,51 +75,18 @@
 }
 
 .text-mediumTurquoise {
-  color: #16a7ba;
+  color: #0fa2b6;
 }
 
 .btn-greenSea {
   color: #fff;
-  background-color: #66b0a7;
-  border-color: #66b0a7;
-}
-
-.btn-outline-greenSea {
-  color: #66b0a7;
-  border-color: #66b0a7;
-}
-
-.btn-outline-greenSea:hover {
-  color: #fffdfd;
-  background-color: #66b0a7;
-  border-color: #66b0a7;
+  background-color: #5da49c;
+  border-color: #5da49c;
 }
 
 .btn-greenSea:hover {
   color: #fff;
-  background-color: #66b0a7;
-  opacity: 0.8;
-}
-
-.btn-pearlAqua {
-  color: #545454;
-  background-color: rgba(91, 184, 173, 0.6196078431);
-  border-color: rgba(91, 184, 173, 0.6196078431);
-}
-
-.btn-outline-pearlAqua {
-  color: rgba(91, 184, 173, 0.6196078431);
-  border-color: rgba(91, 184, 173, 0.6196078431);
-}
-
-.btn-outline-pearlAqua:hover {
-  color: #fffdfd;
-  background-color: rgba(91, 184, 173, 0.6196078431);
-  border-color: rgba(91, 184, 173, 0.6196078431);
-}
-
-.btn-pearlAqua:hover {
-  background-color: rgba(91, 184, 173, 0.6196078431);
+  background-color: #5da49c;
   opacity: 0.8;
 }
 
@@ -113,25 +104,14 @@
 
 .btn-mediumTurquoise {
   color: #fff;
-  background-color: #16a7ba;
-  border-color: #16a7ba;
+  background-color: #0fa2b6;
+  border-color: #0fa2b6;
 }
 
 .btn-mediumTurquoise:hover {
   color: #fff;
-  background-color: #16a7ba;
+  background-color: #0fa2b6;
   opacity: 0.8;
-}
-
-.btn-outline-mediumTurquoise {
-  color: #16a7ba;
-  border-color: #16a7ba;
-}
-
-.btn-outline-mediumTurquoise:hover {
-  color: #fffdfd;
-  background-color: #16a7ba;
-  border-color: #16a7ba;
 }
 
 .btn-lightCoral {
@@ -146,55 +126,49 @@
   opacity: 0.8;
 }
 
-.btn-outline-lightCoral {
-  color: #e2564c;
-  border-color: #e2564c;
-}
-
-.btn-outline-lightCoral:hover {
-  color: #fffdfd;
-  background-color: #e2564c;
-  border-color: #e2564c;
-}
-
 .btn-pistachio {
   color: #fff;
-  background-color: #DCF4E4;
-  border-color: #DCF4E4;
+  background-color: #dcf4e4;
+  border-color: #dcf4e4;
 }
 
 .btn-pistachio:hover {
   color: #fff;
-  background-color: #DCF4E4;
+  background-color: #dcf4e4;
   opacity: 0.8;
 }
 
 .btn-antiqueSteel {
   color: #fff;
-  background-color: #d4dede;
-  border-color: #d4dede;
+  background-color: #eff5f5;
+  border-color: #eff5f5;
 }
 
 .btn-antiqueSteel:hover {
   color: #fff;
-  background-color: #d4dede;
+  background-color: #eff5f5;
   opacity: 0.8;
 }
 
-.alert-greenSea {
-  color: #4c837c;
-  background-color: #DCF4E4;
-  border-color: #DCF4E4;
+.btn-hookersGreen {
+  color: #fff;
+  background-color: #497174;
+  border-color: #497174;
 }
 
-.table-greenSea {
-  --bs-table-bg:#5bb8ad91;
-  --bs-table-striped-bg: #CAEDE9;
-  --bs-table-striped-color: #000;
-  --bs-table-active-bg: #bbd8d5;
-  --bs-table-active-color: #000;
-  --bs-table-hover-bg: #CAEDE9;
-  --bs-table-hover-color: #000;
-  color: #555353;
-  border-color: #bcd0c7;
+.btn-hookersGreen {
+  color: #fff;
+  background-color: #497174;
+  border-color: #497174;
+}
+
+.btn-outline-hookersGreen {
+  color: #497174;
+  border-color: #497174;
+}
+
+.btn-outline-hookersGreen:hover {
+  color: #fff;
+  background-color: #497174;
+  border-color: #497174;
 }/*# sourceMappingURL=color.css.map */

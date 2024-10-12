@@ -59,8 +59,7 @@ const i18next = require("./config/i18next");
 // the local file contain all the local variable
 const { locals } = require("./config/local");
 
-
-app.set('trust proxy', true);
+app.set("trust proxy", true);
 app.disable("x-powered-by");
 
 // Security Middleware
@@ -69,7 +68,11 @@ app.disable("x-powered-by");
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
-      defaultSrc: ["'self'"],
+      defaultSrc: [
+        "'self'",
+        "https://res.cloudinary.com",
+        "https://res.cloudinary.com/itclinic/image/upload/v1728731991/OasisEvent/EventsPictures/",
+      ],
       scriptSrc: [
         "'self'",
         "'unsafe-inline'",
@@ -87,6 +90,8 @@ app.use(
         "https://ajax.googleapis.com",
         "https://unpkg.com",
         "https://cdnjs.cloudflare.com",
+        "https://me.kis.v2.scr.kaspersky-labs.com",
+        "https://ui-avatars.com",
       ],
       styleSrc: [
         "'self'",
@@ -96,8 +101,29 @@ app.use(
         "https://unpkg.com",
         "https://getbootstrap.com",
         "https://cdnjs.cloudflare.com",
+        "https://cdn.mathpix.com",
       ],
-      imgSrc: ["'self'", "data:", "https://ui-avatars.com"],
+      frameAncestors: [
+        "'self'",
+        "https://res.cloudinary.com",
+        "https://www.youtube.com",
+      ],
+      frameSrc: [
+        "'self'",
+        "https://www.youtube.com",
+        "https://res.cloudinary.com",
+        "http://me.kis.v2.scr.kaspersky-labs.com",
+        "ws://me.kis.v2.scr.kaspersky-labs.com",
+      ],
+      imgSrc: [
+        "'self'",
+        "data:",
+        "https://ui-avatars.com",
+        "https://res.cloudinary.com",
+        "https://picsum.photos",
+        "ws://me.kis.v2.scr.kaspersky-labs.com",
+        "https://fastly.picsum.photos",
+      ],
       scriptSrcAttr: ["'self'", "'unsafe-inline'"],
       // Add other directives as needed
     },
@@ -131,7 +157,6 @@ passport.use(
       passwordField: "password",
     },
     async (email, password, done) => {
-     
       await User.findOne({ email: email.toLowerCase() })
         .select("+salt +hash")
         .then((user, err) => {
@@ -221,11 +246,8 @@ app.get("/:lang", async (req, res) => {
     t("hello_message");
   });
   res.cookie("lang", lang);
-  if(req.user){
-    await User.findByIdAndUpdate(
-      req.user.id,
-      { preferedLng: lang },
-    );
+  if (req.user) {
+    await User.findByIdAndUpdate(req.user.id, { preferedLng: lang });
   }
   res.redirect("/events");
 });

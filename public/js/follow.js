@@ -10,10 +10,10 @@ let url = localURL || serverURL;
 if (user) {
   
   if (followedUser.userType === "user") {
-    url = url + "/user/" + userId + "/follow";
+    url =  "/user/" + userId + "/follow";
     
   } else {
-    url = url + "/company/" + userId + "/follow";
+    url =  "/company/" + userId + "/follow";
 
   }
   let follow = false;

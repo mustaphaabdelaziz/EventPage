@@ -17,7 +17,7 @@ module.exports.createTopic = async (req, res) => {
     end,
   };
   // find the event by eventId and the insert the new topic where day == day
-  const event = await EventAndUpdate(
+  const event = await Event.findOneAndUpdate(
     { _id: eventId, "program.day": day },
     {
       $push: {

@@ -49,6 +49,7 @@
           href="<%= event.file.url %>"
           target="_blank"
           class="btn btn-outline-secondary rounded-pill bg-gradient mt-2"
+          download
           >Download <i class="bi bi-file-arrow-down-fill"></i
         ></a>
         <% }}}} else if(!expires) {%>
@@ -68,9 +69,17 @@
           <% for(video of MyEvent.videos) {%>
             <h2 class="mt-2"><%= video.title %></h2>
           <div class="ratio ratio-21x9 shadow-sm mt-2">
-            <video controls width="250">
-              <source src="Clinique Des Oasis V3.Mp4" />
-            </video>
+            <div class="ratio ratio-21x9 shadow-sm">
+      <iframe
+        id="<%= video._id %>"
+        src="<%= video.url %>"
+        title="<%= video.title %>"
+        frameborder="0"
+        allow="accelerometer;autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      >
+      </iframe>
+    </div>
             
           </div>
           <hr />  

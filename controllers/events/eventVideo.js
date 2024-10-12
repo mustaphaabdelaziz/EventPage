@@ -4,10 +4,13 @@ module.exports.addVideo = async (req, res) => {
   // res.send("good");
   const { id } = req.params;
   const { title, url } = req.body;
+  const videoIdMatch = url.match(/v=([^&]+)/);
+  const videoId = videoIdMatch[1];
+  const embedUrl = `https://www.youtube.com/embed/${videoId}`;
   await Event.findByIdAndUpdate(id, {
     $push: {
       videos: {
-        url,
+        url:embedUrl,
         title,
       },
     },

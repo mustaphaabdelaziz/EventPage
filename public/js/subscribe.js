@@ -14,7 +14,7 @@ let url = serverURL;
 // let url = localURL;
 
 if (user) {
-  url = url + "/events/" + eventId + "/" + userId + "/";
+  url = "/events/" + eventId + "/" + userId + "/";
   
   let subscribe = false;
   $(function () {
