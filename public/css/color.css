@@ -165,10 +165,30 @@
 .btn-outline-hookersGreen {
   color: #497174;
   border-color: #497174;
+  background-color: #fff;
 }
 
 .btn-outline-hookersGreen:hover {
-  color: #fff;
   background-color: #497174;
-  border-color: #497174;
+  color: #fff;
+}
+
+.btn-outline-lightCoral {
+  color: #e2564c;
+  background-color: #fff;
+  border-color: #e2564c;
+}
+
+.btn-outline-lightCoral:hover {
+  background-color: #e2564c;
+}
+
+.btn-outline-antiqueSteel {
+  color: #eff5f5;
+  background-color: #fff;
+  border-color: #eff5f5;
+}
+
+.btn-outline-antiqueSteel:hover {
+  background-color: #eff5f5;
 }/*# sourceMappingURL=color.css.map */

@@ -124,6 +124,11 @@ app.use(
         "ws://me.kis.v2.scr.kaspersky-labs.com",
         "https://fastly.picsum.photos",
       ],
+      connectSrc: [
+        "'self'",
+        "https://me.kis.v2.scr.kaspersky-labs.com",
+        "wss://me.kis.v2.scr.kaspersky-labs.com",
+      ],
       scriptSrcAttr: ["'self'", "'unsafe-inline'"],
       // Add other directives as needed
     },

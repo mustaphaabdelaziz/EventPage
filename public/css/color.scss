@@ -141,9 +141,27 @@ $temptress: #3a2625;
 .btn-outline-hookersGreen {
   color: $hookersGreen;
   border-color: $hookersGreen;
+  background-color: #fff;
 }
 .btn-outline-hookersGreen:hover {
-  color: #fff;
   background-color: $hookersGreen;
-  border-color: $hookersGreen;
+  color: #fff;
+}
+.btn-outline-lightCoral {
+  color: $lightCoral;
+  background-color: #fff;
+  border-color: $lightCoral;
+}
+.btn-outline-lightCoral:hover {
+  background-color:  $lightCoral;
+ 
+}
+.btn-outline-antiqueSteel {
+  color: $antiqueSteel;
+  background-color: #fff;
+  border-color: $antiqueSteel;
+}
+.btn-outline-antiqueSteel:hover {
+  background-color:  $antiqueSteel;
+ 
 }

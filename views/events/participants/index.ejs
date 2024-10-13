@@ -8,18 +8,10 @@
     </div> -->
 
     <form class="d-flex">
-      <input
-        id="search"
-        class="form-control mb-2"
-        type="search"
-        placeholder="Search"
-        aria-label="Search"
-      />
+      <input id="search" class="form-control mb-2" type="search" placeholder="Search" aria-label="Search" />
     </form>
     <div class="table-responsive">
-      <table
-        class="table table-striped table-hover table-borderless text-center sortable"
-      >
+      <table class="table table-striped table-hover table-borderless text-center sortable">
         <thead class="table-success">
           <tr>
             <th scope="col">N°</th>
@@ -31,6 +23,7 @@
             <th scope="col">Job</th>
             <th scope="col">City</th>
             <th scope="col">Role</th>
+            <th scope="col">File</th>
             <th id="item1" scope="col">Action</th>
           </tr>
         </thead>
@@ -46,6 +39,10 @@
             <td><%=p.participant.job %></td>
             <td><%=p.participant.city %></td>
             <td><%=p.role %></td>
+            <td>
+
+              <i class="bi bi-file-arrow-down-fill"></i>
+            </td>
             <th>
               <div class="d-flex justify-content-center align-items-center">
                 <%- include("./edit")%> <%- include("./delete")%>
