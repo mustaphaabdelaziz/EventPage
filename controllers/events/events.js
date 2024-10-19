@@ -8,12 +8,16 @@ const { cloudinary } = require("../../cloudinary/index");
 const i18next = require("../../config/i18next");
 // ===============================================================================
 module.exports.index = async (req, res) => {
+  const algeria = await Country.find({});
+  const states = algeria[0].states;
   const events = await Event.find({}).sort({
     "period.start": -1,
   });
   res.render("events/index", {
     events,
     moment,
+    moment,
+    states,
   });
 };
 
@@ -120,12 +124,17 @@ module.exports.updateEvent = async (req, res) => {
       filename: req.file.filename,
     };
   }
+  console.log(deleteImage)
   if (deleteImage) {
-    await cloudinary.uploader.destroy(deleteImage);
+    try {
+      await cloudinary.uploader.destroy(deleteImage);
+    } catch (error) {
+      console.error(`Failed to delete image ${deleteImage}:`, error);
+    }
+   
   }
   if (hasChanged) {
     MyEvent = await Event.findByIdAndUpdate(id, {
-      $push: { videos: { url: video, title: title } },
       title: title.charAt(0).toUpperCase() + title.slice(1).toLowerCase(),
       description,
       location,
@@ -147,7 +156,25 @@ module.exports.updateEvent = async (req, res) => {
 // ===============================================================================
 module.exports.deleteEvent = async (req, res) => {
   const { id } = req.params;
+
+  // Find the event to get image filenames
+  const event = await Event.findById(id);
+
+  if (event.picture && event.gallery.length > 0) {
+    let result = await cloudinary.uploader.destroy(event.picture.filename); // Assuming image has a filename property
+    console.log(`Deleted image ${event.picture.filename}:`, result); // Log the result for debugging
+    for (let image of event.gallery) {
+    try {
+      result = await cloudinary.uploader.destroy(image.filename); // Assuming image has a filename property
+        console.log(`Deleted image ${image.filename}:`, result); // Log the result for debugging
+      } catch (error) {
+        console.error(`Failed to delete image ${image.filename}:`, error);
+      }
+    }
+  }
+
   await Event.findByIdAndDelete(id);
+
   req.flash("success", "Successfully deleted event");
   res.redirect("/events");
 };
@@ -167,7 +194,7 @@ module.exports.downloadFile = async (req, res) => {
 module.exports.gallery = async (req, res) => {
   const { id } = req.params;
   // const { deleteImages } = req.body;
-  let event = await Event.findById({_id:id});
+  let event = await Event.findById({ _id: id });
   let imgs = req.files.map((f) => ({
     url: f.path,
     filename: f.filename,

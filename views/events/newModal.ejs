@@ -1,8 +1,38 @@
-<% layout('layouts/boilerplate')%>
-<div class="row mt-3">
-  <h1 class="card-title text-center mb-3"><%=t("add") %> <%=t("event") %></h1>
-  <div class="col-6 offset-3 mb-3">
-    <form
+<button
+  id="item2"
+  type="button"
+  class="btn btn-outline-success bg-gradient px-2 py-1"
+  data-bs-toggle="modal"
+  data-bs-target="#newEvent"
+>
+<%=t("add") %> <%=t("event") %> <i class="bi bi-plus-circle-fill"></i> 
+</button>
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="newEvent"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel"><%=t("event") %></h5>
+
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <div class="modal-body">
+        <form
       class="row g-3 m-2 needs-validation"
       action="/events"
       method="POST"
@@ -93,12 +123,25 @@
         ></textarea>
         <div class="valid-feedback">looks good</div>
       </div>
-      <div class="mb-3">
-        <button class="w-100 btn btn-lg btn-outline-success">
-          <%= t('add') %>
+      <div class="modal-footer mt-3">
+        <button
+          type="button"
+          class="btn btn-outline-danger bg-gradient"
+          data-bs-dismiss="modal"
+        >
+          <%= t('cancel') %>
+        </button>
+        <button class="btn btn-outline-success bg-gradient">
+          <%= t('save') %>
         </button>
       </div>
     </form>
-    <a href="/events"><%= t('all') %> <%= t('events') %></a>
+      </div>
+    </div>
   </div>
 </div>
+<script>
+  $("#editEvent").on("shown.bs.modal", function () {
+    $(this).find("[autofocus]").focus();
+  });
+</script>
