@@ -133,7 +133,6 @@ module.exports.register = [
         req.flash("error", "User already exists");
         return res.redirect("register");
       }
-      console.log("the email doesnn't exist");
       // const hashedPassword = await bcrypt.hash(password, 10);
       const user = new User({
         firstname:
@@ -150,9 +149,9 @@ module.exports.register = [
         privileges: ["user"],
         preferedLng: "fr",
       });
-      console.log("the user object created");
+   
       await user.save();
-      console.log("the user is saved");
+     
 
       req.login(user, (err) => {
         if (err) return next(err);

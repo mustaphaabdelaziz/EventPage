@@ -80,11 +80,9 @@
       >
       </iframe>
     </div>
-            
           </div>
           <hr />  
           <% }} %>  
-        
       </div>
     </div>
   </div>
@@ -93,8 +91,8 @@
       <div class="col-12 col-sm-12 col-lg-12">
         <!-- <div class="card-body"> -->
         <h1 class="card-title title-timeline"><%= t('program') %></h1>
-        <% if ( currentUser){%>
-        <%if(MyEvent.author._id.equals(currentUser._id)) {%>
+        <% if (currentUser){%>
+        <% if(MyEvent.author._id.equals(currentUser._id)) {%>
         <%- include("./addProgram")%> 
         <% } }%> 
         <% for(program of MyEvent.program){%>
@@ -122,12 +120,13 @@
     </div>
   </div>
   <div class="row">
+    <% if (currentUser){%>
     <%if(MyEvent.author._id.equals(currentUser._id)) {%>
     <div class="d-flex flex-row justify-content-start">
       <h1 class="card-title title-timeline align-self-center"><%= t('gallery') %></h1>
       <%- include("./addPicture")%> 
     </div>
-    <% } %>
+    <% }} %>
     <% for(picture of MyEvent.gallery) {%>
     <div class="col-lg-3 col-md-6 col-sm-12 col-12 mt-2 ">
       <img

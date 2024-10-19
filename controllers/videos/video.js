@@ -41,7 +41,7 @@ module.exports.editVideo = async (req, res) => {
   const { title, url, description, chosen } = req.body.video;
   const { idvideo } = req.params;
   const isChosen = chosen;
-  console.log(chosen);
+
 
   await Video.findByIdAndUpdate(idvideo, {
     title,

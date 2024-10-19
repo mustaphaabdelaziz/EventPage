@@ -2,10 +2,7 @@ var js_script = $('script[src*=subscribe]');
 var eventId = js_script.attr('eventId');  
 var going = js_script.attr('going');  
 var attend = js_script.attr('attend');  
-// console.log("MyEvent")
-console.log(eventId)
-console.log(attend);
-console.log(going)
+
 // let eventId = MyEvent._id;
 let userId = user._id;
 // the localURL variable is in .env file and is just local and it won't be added to the deployed site
@@ -29,7 +26,7 @@ if (user) {
         subscribe = true;
       }
       $(this).toggleClass("subscribed");
-      console.log(url)
+   
       fetch(url, {
         method: "POST", // or 'PUT'
         headers: {

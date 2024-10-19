@@ -34,8 +34,8 @@ const mongoSanitize = require("express-mongo-sanitize");
 // const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const i18nextMiddleware = require("i18next-http-middleware");
-var compression = require("compression");
-const helmet = require("helmet");
+// var compression = require("compression");
+// const helmet = require("helmet");
 // ========================= Models import =============================
 const User = require("./models/user/user");
 const ExpressError = require("./utils/ExpressError");
@@ -59,81 +59,79 @@ const i18next = require("./config/i18next");
 // the local file contain all the local variable
 const { locals } = require("./config/local");
 
-app.set("trust proxy", true);
-app.disable("x-powered-by");
+// app.set("trust proxy", true);
+// app.disable("x-powered-by");
 
-// Security Middleware
-app.set("trust proxy", true);
-app.disable("x-powered-by");
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: [
-        "'self'",
-        "https://res.cloudinary.com",
-        "https://res.cloudinary.com/itclinic/image/upload/v1728731991/OasisEvent/EventsPictures/",
-      ],
-      scriptSrc: [
-        "'self'",
-        "'unsafe-inline'",
-        "https://code.jquery.com/",
-        "https://cdn.jsdelivr.net",
-        "https://ajax.googleapis.com",
-        "https://unpkg.com",
-        "https://cdnjs.cloudflare.com",
-      ],
-      scriptSrcElem: [
-        "'self'",
-        "'unsafe-inline'",
-        "https://code.jquery.com/",
-        "https://cdn.jsdelivr.net",
-        "https://ajax.googleapis.com",
-        "https://unpkg.com",
-        "https://cdnjs.cloudflare.com",
-        "https://me.kis.v2.scr.kaspersky-labs.com",
-        "https://ui-avatars.com",
-      ],
-      styleSrc: [
-        "'self'",
-        "'unsafe-inline'",
-        "https://cdn.jsdelivr.net",
-        "https://fonts.googleapis.com",
-        "https://unpkg.com",
-        "https://getbootstrap.com",
-        "https://cdnjs.cloudflare.com",
-        "https://cdn.mathpix.com",
-      ],
-      frameAncestors: [
-        "'self'",
-        "https://res.cloudinary.com",
-        "https://www.youtube.com",
-      ],
-      frameSrc: [
-        "'self'",
-        "https://www.youtube.com",
-        "https://res.cloudinary.com",
-        "http://me.kis.v2.scr.kaspersky-labs.com",
-        "ws://me.kis.v2.scr.kaspersky-labs.com",
-      ],
-      imgSrc: [
-        "'self'",
-        "data:",
-        "https://ui-avatars.com",
-        "https://res.cloudinary.com",
-        "https://picsum.photos",
-        "ws://me.kis.v2.scr.kaspersky-labs.com",
-        "https://fastly.picsum.photos",
-      ],
-      connectSrc: [
-        "'self'",
-        "https://me.kis.v2.scr.kaspersky-labs.com",
-        "wss://me.kis.v2.scr.kaspersky-labs.com",
-      ],
-      scriptSrcAttr: ["'self'", "'unsafe-inline'"],
-      // Add other directives as needed
-    },
-  })
-);
+// // Security Middleware
+// app.use(
+//   helmet.contentSecurityPolicy({
+//     directives: {
+//       defaultSrc: [
+//         "'self'",
+//         "https://res.cloudinary.com",
+//         "https://res.cloudinary.com/itclinic/image/upload/v1728731991/OasisEvent/EventsPictures/",
+//       ],
+//       scriptSrc: [
+//         "'self'",
+//         "'unsafe-inline'",
+//         "https://code.jquery.com/",
+//         "https://cdn.jsdelivr.net",
+//         "https://ajax.googleapis.com",
+//         "https://unpkg.com",
+//         "https://cdnjs.cloudflare.com",
+//       ],
+//       scriptSrcElem: [
+//         "'self'",
+//         "'unsafe-inline'",
+//         "https://code.jquery.com/",
+//         "https://cdn.jsdelivr.net",
+//         "https://ajax.googleapis.com",
+//         "https://unpkg.com",
+//         "https://cdnjs.cloudflare.com",
+//         "https://me.kis.v2.scr.kaspersky-labs.com",
+//         "https://ui-avatars.com",
+//       ],
+//       styleSrc: [
+//         "'self'",
+//         "'unsafe-inline'",
+//         "https://cdn.jsdelivr.net",
+//         "https://fonts.googleapis.com",
+//         "https://unpkg.com",
+//         "https://getbootstrap.com",
+//         "https://cdnjs.cloudflare.com",
+//         "https://cdn.mathpix.com",
+//       ],
+//       frameAncestors: [
+//         "'self'",
+//         "https://res.cloudinary.com",
+//         "https://www.youtube.com",
+//       ],
+//       frameSrc: [
+//         "'self'",
+//         "https://www.youtube.com",
+//         "https://res.cloudinary.com",
+//         "http://me.kis.v2.scr.kaspersky-labs.com",
+//         "ws://me.kis.v2.scr.kaspersky-labs.com",
+//       ],
+//       imgSrc: [
+//         "'self'",
+//         "data:",
+//         "https://ui-avatars.com",
+//         "https://res.cloudinary.com",
+//         "https://picsum.photos",
+//         "ws://me.kis.v2.scr.kaspersky-labs.com",
+//         "https://fastly.picsum.photos",
+//       ],
+//       connectSrc: [
+//         "'self'",
+//         "https://me.kis.v2.scr.kaspersky-labs.com",
+//         "wss://me.kis.v2.scr.kaspersky-labs.com",
+//       ],
+//       scriptSrcAttr: ["'self'", "'unsafe-inline'"],
+//       // Add other directives as needed
+//     },
+//   })
+// );
 
 // Language Configuration
 app.use(i18nextMiddleware.handle(i18next));
@@ -169,16 +167,11 @@ passport.use(
             return done(err);
           }
           if (!user) {
-            console.log("the user n'existe pas");
             return done(null, false, "User avec cet email n'existe pas");
           } else {
-            console.log("the user exists but verify password first");
-
             if (user.verifyPassword(password, user.hash)) {
-              console.log("the user exists and password verified");
               return done(null, user);
             } else {
-              console.log("the user exists and password not verified");
               return done(
                 null,
                 false,
@@ -208,7 +201,7 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 app.use(locals);
-app.use(compression());
+// app.use(compression());
 // ============== Routes ================================
 app.use("/about", (req, res) => {
   res.send("Welcome to the about Page");
@@ -221,12 +214,11 @@ app.use("/events/:id/program", programRoutes);
 app.use("/events/:id/:userid/", eventUserAction);
 app.use("/participants/:eventid", participantRoutes);
 app.get("/test", async (req, res) => {
-  console.log("patient");
   axios
     .get("http://127.0.0.1:8000/patient/634583c161cea2357be9e122")
     .then(function (response) {
       // handle success
-      console.log(response.data);
+    
       res.send(response.data);
     })
     .catch(function (error) {
