@@ -9,8 +9,8 @@ const {
   showArticles,
   addArticle,
   showArticle,
-
-  removeArticle,
+  updateArticle,
+  removeArticle
 } = require("../../controllers/articles/article");
 const { isLoggedIn, isAdmin } = require("../../middleware/middleware");
 router;
@@ -21,6 +21,7 @@ router
 
 router
   .route("/:idarticle")
+  .put(isLoggedIn,isAdmin, upload.single("picture"),catchAsync(updateArticle))
   .delete(isLoggedIn, isAdmin, catchAsync(removeArticle))
   .get(catchAsync(showArticle));
 

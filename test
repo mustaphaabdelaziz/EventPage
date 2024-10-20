@@ -1,6 +1,0 @@
-<script>
-  const user =<%- JSON.stringify(currentUser) %>;
-  const MyEvent = <%- JSON.stringify(MyEvent) %>;
-  const buttonInfo =<%- JSON.stringify({
-    going:t('going'),attend:t('attends')
-  }) %>;

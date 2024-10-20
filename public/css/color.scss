@@ -8,160 +8,218 @@ $hookersGreen: #497174;
 $chineseWhite: #dbe3e3;
 $gunmetal: #25393a;
 $temptress: #3a2625;
+
 .bg-temptress {
   background-color: $temptress;
 }
+
 .bg-unmetal {
   background-color: $gunmetal;
 }
+
 .bg-chineseWhite {
   background-color: $chineseWhite;
 }
+
 .bg-hookersGreen {
   background-color: $hookersGreen;
 }
+
 .bg-pistachio {
   background-color: $pistachio;
 }
+
 .bg-greenSea {
   background-color: $greenSea;
 }
+
 .bg-crystalBlue {
   background-color: $crystalBlue;
 }
+
 .bg-lightCoral {
   background-color: $lightCoral;
 }
+
 .bg-mediumTurquoise {
   background-color: $mediumTurquoise;
 }
+
 .bg-antiqueSteel {
   background-color: $antiqueSteel;
 }
+
 .text-temptress {
   color: $temptress;
 }
+
 .text-chineseWhite {
   color: $chineseWhite;
 }
+
 .text-gunmetal {
   color: $gunmetal;
 }
+
 .text-hookersGreen {
   color: $hookersGreen;
 }
+
 .text-antiqueSteel {
   color: $antiqueSteel;
 }
+
 .text-pistachio {
   color: $pistachio;
 }
+
 .text-crystalBlue {
   color: $crystalBlue;
 }
+
 .text-greenSea {
   color: $greenSea;
 }
+
 .text-lightCoral {
   color: $lightCoral;
 }
+
 .text-mediumTurquoise {
   color: $mediumTurquoise;
 }
+
 .btn-greenSea {
   color: #fff;
   background-color: $greenSea;
   border-color: $greenSea;
 }
+
 .btn-greenSea:hover {
   color: #fff;
   background-color: $greenSea;
   opacity: 0.8;
 }
+
 .btn-crystalBlue {
   color: #fff;
   background-color: $crystalBlue;
   border-color: $crystalBlue;
 }
+
 .btn-crystalBlue:hover {
   color: #fff;
   background-color: $crystalBlue;
   opacity: 0.8;
 }
+
 .btn-mediumTurquoise {
   color: #fff;
   background-color: $mediumTurquoise;
   border-color: $mediumTurquoise;
 }
+
 .btn-mediumTurquoise:hover {
   color: #fff;
   background-color: $mediumTurquoise;
   opacity: 0.8;
 }
+
 .btn-lightCoral {
   color: #fff;
   background-color: $lightCoral;
   border-color: $lightCoral;
 }
+
 .btn-lightCoral:hover {
   color: #fff;
   background-color: $lightCoral;
   opacity: 0.8;
 }
+
 .btn-pistachio {
   color: #fff;
   background-color: $pistachio;
   border-color: $pistachio;
 }
+
 .btn-pistachio:hover {
   color: #fff;
   background-color: $pistachio;
   opacity: 0.8;
 }
+
 .btn-antiqueSteel {
   color: #fff;
   background-color: $antiqueSteel;
   border-color: $antiqueSteel;
 }
+
 .btn-antiqueSteel:hover {
   color: #fff;
   background-color: $antiqueSteel;
   opacity: 0.8;
 }
+
 .btn-hookersGreen {
   color: #fff;
   background-color: $hookersGreen;
   border-color: $hookersGreen;
 }
+
 .btn-hookersGreen {
   color: #fff;
   background-color: $hookersGreen;
   border-color: $hookersGreen;
 }
+
 .btn-outline-hookersGreen {
   color: $hookersGreen;
   border-color: $hookersGreen;
   background-color: #fff;
 }
+
 .btn-outline-hookersGreen:hover {
   background-color: $hookersGreen;
   color: #fff;
 }
+
 .btn-outline-lightCoral {
   color: $lightCoral;
   background-color: #fff;
   border-color: $lightCoral;
 }
+
 .btn-outline-lightCoral:hover {
-  background-color:  $lightCoral;
- 
+  background-color: $lightCoral;
+
 }
+
 .btn-outline-antiqueSteel {
   color: $antiqueSteel;
   background-color: #fff;
   border-color: $antiqueSteel;
 }
+
 .btn-outline-antiqueSteel:hover {
-  background-color:  $antiqueSteel;
- 
+  background-color: $antiqueSteel;
+
+}
+
+.alert-greenSea {
+  color: #4c837c;
+  background-color: $pistachio;
+  border-color: $pistachio;
+}
+
+.table-greenSea {
+  --bs-table-bg: #5bb8ad91;
+  --bs-table-striped-bg: #CAEDE9;
+  --bs-table-striped-color: #000;
+  --bs-table-active-bg: #bbd8d5;
+  --bs-table-active-color: #000;
+  --bs-table-hover-bg: #CAEDE9;
+  --bs-table-hover-color: #000;
+  color: #555353;
+  border-color: #bcd0c7;
 }

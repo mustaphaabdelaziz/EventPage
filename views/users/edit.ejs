@@ -3,14 +3,14 @@
   type="button"
   class="btn btn-outline-warning bg-gradient px-2 py-1"
   data-bs-toggle="modal"
-  data-bs-target="#editProfile"
+  data-bs-target="#edituser-<%= user.id %>"
 >
   <i class="bi bi-pencil-fill"></i>
 </button>
 <!-- Modal -->
 <div
   class="modal fade"
-  id="editProfile"
+  id="edituser-<%= user.id %>"
   data-bs-keyboard="false"
   tabindex="-1"
   aria-labelledby="staticBackdropLabel"
@@ -21,7 +21,7 @@
   >
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Edit Profile</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Edit User</h5>
 
         <button
           type="button"
@@ -78,7 +78,7 @@
             <label for="birthdate" class="form-label fs-6">Birth Date</label>
             <div class="valid-feedback">looks good</div>
           </div>
-          <div class="col-md-6 mb-3">
+          <div class="form-floating col-md-6 mb-3">
             <select class="form-select" name="user[gender]" required>
               <option selected disabled value="">Gender</option>
               <% if(user.gender==="Male" ) { %>

@@ -16,8 +16,8 @@
           <tr>
             <th scope="col">N°</th>
             <th scope="col">Nom utilisateur</th>
-
             <th scope="col">Email</th>
+            <th scope="col">Job</th>
             <th scope="col">Role</th>
             <th scope="col">Logged in at</th>
             <% if (currentUser.privileges.includes("superadmin")){ %>
@@ -31,6 +31,7 @@
             <th scope="row"><%= i%><% i=i+1; %></th>
             <td><%= user.fullname %></td>
             <td><%=user.email %></td>
+            <td><%=user.job %></td>
             <td><%=user.privileges[0] %></td>
 
             <td><%=moment(user.loggedIn).format("DD/MM/YYYY-HH:mm:ss") %></td>

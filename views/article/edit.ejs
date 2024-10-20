@@ -1,0 +1,129 @@
+<button
+  type="button"
+  class="btn btn-outline-warning bg-gradient px-2 py-1 me-2"
+  data-bs-toggle="modal"
+  data-bs-target="#edit-<%= article.id %>"
+>
+  <i class="bi bi-pencil-fill"></i>
+</button>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="edit-<%= article.id %>"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Modifier Article</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          required
+        ></button>
+      </div>
+
+      <div class="modal-body">
+        <form
+          class="row g-3 needs-validation"
+          action="/articles/<%=article.id %>/?_method=PUT"
+          method="POST"
+          novalidate
+        >
+        <div class="form-floating col-md-12">
+            <input class="form-control" type="date" id="date"
+            name="article[date]" placeholder="<%= t('date') %>" required
+            value="<%= moment(article.date).format("YYYY-MM-DD") %>" />
+            <label for="date" class="form-label fs-6"> <%= t('date') %> </label>
+            <div class="valid-feedback">looks good</div>
+          </div>
+          <div class="form-floating">
+            <input
+              id="idtitle"
+              name="article[title]"
+              type="text"
+              class="form-control"
+              style="text-transform: capitalize"
+              autofocus
+              required
+              value="<%= article.title%>"
+            />
+            <label for="idtitle" class="form-label">Titre</label>
+            <div class="valid-feedback">BIEN</div>
+          </div>
+
+          <div class="">
+            <textarea
+              class="form-control"
+              name="article[resume]"
+              id="resume"
+              rows="9"
+              placeholder="Résumé de l'article"
+            ><%= article.resume%></textarea>
+          </div>
+
+          <div class="">
+            <textarea
+              class="form-control"
+              name="article[body]"
+              id="idbody"
+              rows="9"
+              placeholder="Rédigez votre article ici"
+              style="text-transform: capitalize"
+            ><%= article.body%></textarea>
+          </div>
+          <div class="col-12 input-group mb-3">
+            <input
+              type="file"
+              class="form-control"
+              id="picture"
+              name="picture"
+            />
+            <label class="input-group-text" for="picture"
+              ><%= t('cover') %> <%= t('picture') %></label
+            >
+          </div>
+          <div class="mb-3">
+            <img src="<%=article.thumbnail %>" class="img-thumbnail" alt="" />
+            <div class="form-check-inline">
+              <input
+                type="checkbox"
+                id="picture"
+                name="deleteImage"
+                value="<%=article.picture.filename%>"
+              />
+            </div>
+            <label for="picture"><i class="bi bi-trash-fill"></i></label>
+          </div>
+          <div class="modal-footer mt-3">
+            <button
+              type="button"
+              class="btn btn-outline-danger bg-gradient"
+              data-bs-dismiss="modal"
+            >
+              Annuler
+            </button>
+            <button
+              type="submit"
+              id="staff-edit"
+              class="btn btn-outline-warning bg-gradient"
+            >
+              Modifier
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $("#edit-<%=article.id %>").on("shown.bs.modal", function () {
+    $(this).find("[autofocus]").focus();
+  });
+</script>

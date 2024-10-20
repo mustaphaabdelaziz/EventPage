@@ -29,6 +29,8 @@ const Article = new Schema(
   },
   opts
 );
-
+Article.virtual("thumbnail").get(function () {
+  return this.picture.url.replace("/upload", "/upload/w_200");
+});
 module.exports = mongoose.model("Article", Article);
 //# sourceMappingURL=materiel.js.map

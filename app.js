@@ -213,26 +213,10 @@ app.use("/events/:id/participants", participantRoutes);
 app.use("/events/:id/program", programRoutes);
 app.use("/events/:id/:userid/", eventUserAction);
 app.use("/participants/:eventid", participantRoutes);
-app.get("/test", async (req, res) => {
-  axios
-    .get("http://127.0.0.1:8000/patient/634583c161cea2357be9e122")
-    .then(function (response) {
-      // handle success
-    
-      res.send(response.data);
-    })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    })
-    .finally(function () {
-      // always executed
-    });
-});
 app.use("/events", eventRoutes);
 app.use("/videos", videosRoutes);
 app.use("/articles", articlesRoutes);
-app.use("/articles/:idarticle", articlesRoutes);
+// app.use("/articles/:idarticle", articlesRoutes);
 app.use("/videos/:idvideo", videosRoutes);
 
 // ==== set language ===

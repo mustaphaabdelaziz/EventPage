@@ -22,9 +22,33 @@ module.exports.addVideo = async (req, res) => {
   // const embedUrl = `https://www.youtube.com/embed/${videoId}`;
   // get the materiel id from the materiels table
   const { title, url, description, chosen } = req.body.video;
-  const videoIdMatch = url.match(/v=([^&]+)/);
-  const videoId = videoIdMatch[1];
-  const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+  let embedUrl;
+
+  const youtubeMatch =
+    url.match(/youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)&shorts=1/) ||
+    url.match(/youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/) ||
+    url.match(/youtu\.be\/([a-zA-Z0-9_-]+)/) ||
+    url.match(/youtube\.com\/embed\/([a-zA-Z0-9_-]+)/);
+
+  if (youtubeMatch) {
+    const videoId = youtubeMatch[1];
+    embedUrl = `https://www.youtube.com/embed/${videoId}`;
+  }
+
+  // Check if the URL is from Facebook
+
+  const facebookMatch =
+    url.match(/facebook\.com\/[^/]+\/videos\/(\d+)/) ||
+    url.match(/facebook\.com\/.*\/videos\/(\d+)/) ||
+    url.match(/facebook\.com\/reel\/(\d+)/) ||
+    url.match(/facebook\.com\/share\/v\/([a-zA-Z0-9]+)/) ||
+    url.match(/facebook\.com\/watch\/\?v=([a-zA-Z0-9]+)/);
+
+  if (facebookMatch) {
+    const videoId = facebookMatch[1];
+    // embedUrl = `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(url)}&show_text=false&width=560&height=314`;
+    embedUrl = `https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/watch/?v=${videoId}&show_text=false&width=560&height=314`;
+  }
   const isChosen = chosen;
   // replace:
   const video = new Video({
@@ -41,11 +65,36 @@ module.exports.editVideo = async (req, res) => {
   const { title, url, description, chosen } = req.body.video;
   const { idvideo } = req.params;
   const isChosen = chosen;
+  let embedUrl;
 
+  const youtubeMatch =
+    url.match(/youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)&shorts=1/) ||
+    url.match(/youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/) ||
+    url.match(/youtu\.be\/([a-zA-Z0-9_-]+)/) ||
+    url.match(/youtube\.com\/embed\/([a-zA-Z0-9_-]+)/);
 
+  if (youtubeMatch) {
+    const videoId = youtubeMatch[1];
+    embedUrl = `https://www.youtube.com/embed/${videoId}`;
+  }
+
+  // Check if the URL is from Facebook
+
+  const facebookMatch =
+    url.match(/facebook\.com\/[^/]+\/videos\/(\d+)/) ||
+    url.match(/facebook\.com\/.*\/videos\/(\d+)/) ||
+    url.match(/facebook\.com\/reel\/(\d+)/) ||
+    url.match(/facebook\.com\/share\/v\/([a-zA-Z0-9]+)/) ||
+    url.match(/facebook\.com\/watch\/\?v=([a-zA-Z0-9]+)/);
+
+  if (facebookMatch) {
+    const videoId = facebookMatch[1];
+    // embedUrl = `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(url)}&show_text=false&width=560&height=314`;
+    embedUrl = `https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/watch/?v=${videoId}&show_text=false&width=560&height=314`;
+  }
   await Video.findByIdAndUpdate(idvideo, {
     title,
-    url,
+    url: embedUrl,
     description,
     chosen: isChosen === "on" ? true : false,
   });

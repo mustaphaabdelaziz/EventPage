@@ -191,4 +191,22 @@
 
 .btn-outline-antiqueSteel:hover {
   background-color: #eff5f5;
+}
+
+.alert-greenSea {
+  color: #4c837c;
+  background-color: #dcf4e4;
+  border-color: #dcf4e4;
+}
+
+.table-greenSea {
+  --bs-table-bg: #5bb8ad91;
+  --bs-table-striped-bg: #CAEDE9;
+  --bs-table-striped-color: #000;
+  --bs-table-active-bg: #bbd8d5;
+  --bs-table-active-color: #000;
+  --bs-table-hover-bg: #CAEDE9;
+  --bs-table-hover-color: #000;
+  color: #555353;
+  border-color: #bcd0c7;
 }/*# sourceMappingURL=color.css.map */

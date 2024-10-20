@@ -5,8 +5,12 @@ module.exports.addVideo = async (req, res) => {
   const { title, url } = req.body;
   let embedUrl;
 
-  // Check if the URL is from YouTube
-  const youtubeMatch = url.match(/v=([^&]+)/);
+  const youtubeMatch =
+    url.match(/youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)&shorts=1/) ||
+    url.match(/youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/) ||
+    url.match(/youtu\.be\/([a-zA-Z0-9_-]+)/) ||
+    url.match(/youtube\.com\/embed\/([a-zA-Z0-9_-]+)/);
+
   if (youtubeMatch) {
     const videoId = youtubeMatch[1];
     embedUrl = `https://www.youtube.com/embed/${videoId}`;
@@ -14,11 +18,18 @@ module.exports.addVideo = async (req, res) => {
 
   // Check if the URL is from Facebook
 
-  const facebookMatch = url.match(/facebook\.com\/.*\/videos\/(\d+)/) || url.match(/facebook\.com\/reel\/(\d+)/);
-  if (facebookMatch) {
-    const videoId = facebookMatch[1];
-    embedUrl = `https://www.facebook.com/video/embed?video_id=${videoId}`;
-  }
+  const facebookMatch =
+  url.match(/facebook\.com\/[^/]+\/videos\/(\d+)/) ||
+  url.match(/facebook\.com\/.*\/videos\/(\d+)/) ||
+  url.match(/facebook\.com\/reel\/(\d+)/) ||
+  url.match(/facebook\.com\/share\/v\/([a-zA-Z0-9]+)/) ||
+  url.match(/facebook\.com\/watch\/\?v=([a-zA-Z0-9]+)/);
+
+if (facebookMatch) {
+  const videoId = facebookMatch[1];
+  // embedUrl = `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(url)}&show_text=false&width=560&height=314`;
+  embedUrl = `https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/watch/?v=${videoId}&show_text=false&width=560&height=314`;
+}
 
   if (embedUrl) {
     await Event.findByIdAndUpdate(id, {

@@ -1,8 +1,8 @@
 const User = require("../../models/user/user");
 const Event = require("../../models/event");
 const Country = require("../../models/country");
-const fonctions = require("../../seeds/fonction");
-const privileges = require("../../seeds/privileges");
+const { fonctions } = require("../../seeds/fonction");
+const { privileges } = require("../../seeds/privileges");
 const moment = require("moment");
 const i18next = require("../../config/i18next");
 const { sendMail } = require("../../utils/sendEmail");
@@ -14,8 +14,8 @@ module.exports.userList = async (req, res) => {
   const users = await User.find({});
   res.render("users/index", {
     users,
-    fonctions: fonctions.fonction,
-    privileges: privileges.privileges,
+    fonctions,
+    privileges,
     moment,
   });
 };
@@ -25,7 +25,6 @@ module.exports.renderRegisterForm = async (req, res) => {
   const states = algeria[0].states;
   res.render("users/login", { states, moment });
 };
-
 
 // module.exports.register = async (req, res) => {
 //   try {
@@ -149,9 +148,8 @@ module.exports.register = [
         privileges: ["user"],
         preferedLng: "fr",
       });
-   
+
       await user.save();
-     
 
       req.login(user, (err) => {
         if (err) return next(err);
@@ -212,16 +210,16 @@ module.exports.logout = (req, res) => {
 };
 
 module.exports.updateUser = async (req, res) => {
-  const { user, picture } = req.body;
-  //  const currentUser = req.user._id;
+  const { user } = req.body;
+  const { id } = req.params;
   const updatedUser = await User.findByIdAndUpdate(
-    { _id: req.user._id },
+    { _id: id },
     {
       ...user,
     },
     { new: true }
   );
-  res.redirect(`/user/${updatedUser._id}/profile`);
+  res.redirect(`/user`);
   // res.send(updatedUser);
 };
 module.exports.deleteUser = async (req, res) => {
@@ -240,7 +238,14 @@ module.exports.showProfile = async (req, res) => {
   //   .sort({ "period.start": -1 })
   const speakEvents = await Event.find({}).sort({ "period.start": -1 });
   // res.send(speakEvents)
-  res.render("users/profile", { user, events, speakEvents, moment });
+  res.render("users/profile", {
+    user,
+    events,
+    speakEvents,
+    moment,
+    fonctions,
+    privileges,
+  });
 };
 module.exports.changePassword = async (req, res) => {
   const { newPassword, oldPassword } = req.body;

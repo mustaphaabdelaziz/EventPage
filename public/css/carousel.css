@@ -3,7 +3,11 @@
 /* Padding below the footer and lighter body text */
 
 
-
+.carousel-img {
+  width: 100%;
+  height: auto; /* Maintain aspect ratio */
+  object-fit: cover; /* Ensure the image covers the entire area */
+}
 
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */

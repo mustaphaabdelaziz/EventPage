@@ -45,7 +45,10 @@
             <%= article.title %>
           </td>
 
-          <td><%- include("./delete")%></td>
+          <td>
+            <%- include("./edit")%>
+            <%- include("./delete")%>
+          </td>
         </tr>
         <% }%>
       </tbody>
