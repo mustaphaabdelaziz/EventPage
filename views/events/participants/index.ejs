@@ -40,13 +40,16 @@
             <td><%=p.participant.city %></td>
             <td><%=p.role %></td>
             <td>
-              <i class="btn btn-outline-secondary bi bi-file-earmark-arrow-down-fill"></i>
+              <% if(p.participant.file){ %>
+                <a href="<%= p.participant.file %>" target="_blank"><i class="btn btn-outline-secondary bi bi-file-earmark-arrow-down-fill"></i></a>
+              <% } else { %>
+             <span>/</span>
+              <% } %>
             </td>
             <th>
               <div class="d-flex justify-content-center align-items-center">
-                <%- include("./edit")%> <%- include("./delete")%>
+                <%- include("./edit")%>
               </div>
-              <!-- <a href="" class="btn btn-outline-secondary px-2 py-1 ms-2"><i class="bi bi-file-earmark-arrow-down"></i></a> -->
             </th>
           </tr>
           <% }%>

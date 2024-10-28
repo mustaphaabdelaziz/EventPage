@@ -80,9 +80,14 @@ module.exports.showArticle = async (req, res) => {
 };
 module.exports.removeArticle = async (req, res) => {
   const { idarticle } = req.params;
-
-  const article = await Article.findByIdAndDelete(idarticle);
+  const article = await Article.findById(idarticle);
+  try {
+    let result = await cloudinary.uploader.destroy(article.picture.filename);
+    console.log(`Deleted image ${article.picture.filename}:`, result);
+  } catch (error) {
+    console.error(`Failed to delete image ${article.picture.filename}:`, error);
+  }
+  await Article.findByIdAndDelete(idarticle);
   // send it to the client
-
   res.redirect(`/articles`);
 };

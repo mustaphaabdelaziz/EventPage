@@ -21,7 +21,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">
-          Suppression de <%=video.title %>
+          <%=t("delete")%><%=video.title %>
         </h5>
 
         <button
@@ -41,7 +41,7 @@
             src="/assets/close.png"
             alt="close"
           />
-          <p class="mt-3 ms-2">Vous êtes sûr?</p>
+          <p class="mt-3 ms-2"><%=t("are you sure")%></p>
         </div>
         <form
           class=""
@@ -55,9 +55,9 @@
               class="btn btn-outline-secondary bg-gradient"
               data-bs-dismiss="modal"
             >
-              Annuler
+            <%=t("cancel")%>
             </button>
-            <button class="btn btn-outline-danger bg-gradient">Supprimer</button>
+            <button class="btn btn-outline-danger bg-gradient"><%=t("delete")%></button>
           </div>
         </form>
       </div>

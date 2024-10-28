@@ -1,0 +1,58 @@
+<div class="card col-lg-3 col-md-6 col-sm-12 col-12 m-2 shadow-sm rounded" data-bs-toggle="modal" data-bs-target="#edit-<%= g.id %>">
+  <div class="p-2 text-secondary">
+    <%- include("./delete")%>
+    <%= moment(g.addedAt).fromNow() %>
+  </div>
+  <img class="img-fluid w-100 h-100" src="<%= g.picture.url %>" alt="<%= g.picture.filename %>"style="object-fit: cover;" />
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="edit-<%= g.id %>" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel"><%= t("edit")%> <%=t("picture") %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" required></button>
+      </div>
+
+      <div class="modal-body">
+        <form class="row g-3 needs-validation" action="/gallery/<%=g.id %>/?_method=PUT" method="POST" novalidate>
+          <div class="form-floating">
+            <select id="role" name="gallery[event]" class="form-select" required>
+              <option selected disabled value=""><%=t("event") %></option>
+              <% for(e of events){ %>
+              <% if(e.id=g.event) {%>
+              <option class="option" value="<%=e.id%>" selected>
+                <%=e.title%>
+              </option>
+              <% }else{ %>
+              <option class="option" value="<%=e.id%>">
+                <%=e.title%>
+              </option>
+              <% } %>
+              <% }%>
+            </select>
+            <label for="role" class="form-label"><%=t("event")%></label>
+            <div class="valid-feedback"><%=t("good")%></div>
+          </div>
+          <div class="">
+            <textarea class="form-control" name="gallery[description]" id="description" rows="3" placeholder="Déscription" style="text-transform: capitalize"><%=g.description%></textarea>
+          </div>
+          <div class="modal-footer mt-3">
+            <button type="button" class="btn btn-outline-danger bg-gradient" data-bs-dismiss="modal">
+              <%=t("cancel")%>
+            </button>
+            <button type="submit" id="staff-edit" class="btn btn-outline-warning bg-gradient">
+              <%=t("edit")%>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $("#edit-<%=g.id %>").on("shown.bs.modal", function() {
+    $(this).find("[autofocus]").focus();
+  });
+</script>

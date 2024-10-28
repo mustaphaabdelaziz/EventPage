@@ -44,11 +44,13 @@ const participantRoutes = require("./routes/participants/participants");
 const userRoutes = require("./routes/users/user");
 const eventRoutes = require("./routes/events/event");
 const eventVideoRoutes = require("./routes/events/eventVideo");
+const galleryRoutes = require("./routes/gallery/gallery");
 const videosRoutes = require("./routes/videos/video");
 const articlesRoutes = require("./routes/articles/article");
 const programRoutes = require("./routes/events/program");
 const Article = require("./models/articles/article");
 const Video = require("./models/videos/video");
+const Gallery = require("./models/gallery/gallery");
 const eventUserAction = require("./routes/events/eventUserAction");
 const Event = require("./models/event");
 const DBConnection = require("./database/connection");
@@ -214,6 +216,7 @@ app.use("/events/:id/program", programRoutes);
 app.use("/events/:id/:userid/", eventUserAction);
 app.use("/participants/:eventid", participantRoutes);
 app.use("/events", eventRoutes);
+app.use("/gallery", galleryRoutes);
 app.use("/videos", videosRoutes);
 app.use("/articles", articlesRoutes);
 // app.use("/articles/:idarticle", articlesRoutes);
@@ -249,6 +252,7 @@ app.get("/", async (req, res) => {
     .sort({ "period.start": 1 })
     .limit(1);
   const videos = await Video.find({});
+  const gallery = await Gallery.find({}).sort({ date: -1 });
 
   //  res.send(videos)
   res.render("home/home", {
@@ -257,6 +261,7 @@ app.get("/", async (req, res) => {
     upcomingEvents,
     moment,
     videos,
+    gallery,
   });
 });
 // ========== if none of the routes match then it's error ==========

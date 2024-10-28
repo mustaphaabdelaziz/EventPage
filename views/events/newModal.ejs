@@ -67,8 +67,8 @@
           </option>
           <%} %>
         </datalist>
-        <label for="location" class="form-label">Wilaya</label>
-        <div class="valid-feedback">BIEN</div>
+        <label for="location" class="form-label"><%=t("state")%></label>
+        <div class="valid-feedback"><%=t("good")%></div>
       </div>
 
       <div class="form-floating col-md-6 mb-3">
@@ -81,7 +81,7 @@
           required
         />
         <label for="start" class="form-label fs-6"> <%= t('begin') %> </label>
-        <div class="valid-feedback">looks good</div>
+        <div class="valid-feedback"><%=t("good")%></div>
       </div>
       <div class="form-floating col-md-6 mb-3">
         <input
@@ -92,7 +92,7 @@
           required
         />
         <label for="end" class="form-label fs-6"> <%= t('finish') %></label>
-        <div class="valid-feedback">looks good</div>
+        <div class="valid-feedback"><%=t("good")%></div>
       </div>
 
       <div class="col-12 input-group mb-3">
@@ -121,7 +121,7 @@
           rows="8"
           required
         ></textarea>
-        <div class="valid-feedback">looks good</div>
+        <div class="valid-feedback"><%=t("good")%></div>
       </div>
       <div class="modal-footer mt-3">
         <button

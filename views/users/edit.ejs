@@ -1,7 +1,7 @@
 <button
   id="item2"
   type="button"
-  class="btn btn-outline-warning bg-gradient px-2 py-1"
+  class="btn btn-outline-warning bg-gradient px-2 py-1 m-2"
   data-bs-toggle="modal"
   data-bs-target="#edituser-<%= user.id %>"
 >
@@ -21,7 +21,7 @@
   >
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Edit User</h5>
+        <h5 class="modal-title" id="staticBackdropLabel"><%=t("edit")%> <%=t("user")%></h5>
 
         <button
           type="button"
@@ -49,8 +49,8 @@
               required
               autofocus
             />
-            <label for="firstname" class="form-label fs-6">First Name</label>
-            <div class="valid-feedback">looks good</div>
+            <label for="firstname" class="form-label fs-6"><%=t("firstname")%></label>
+            <div class="valid-feedback"><%=t("good")%></div>
           </div>
           <div class="form-floating mb-3 col-md-6">
             <input
@@ -62,8 +62,8 @@
               value="<%=user.lastname%>"
               required
             />
-            <label for="lastname" class="form-label fs-6">Last Name</label>
-            <div class="valid-feedback">looks good</div>
+            <label for="lastname" class="form-label fs-6"><%=t("lastname")%></label>
+            <div class="valid-feedback"><%=t("good")%></div>
           </div>
           <div class="form-floating mb-3 col-md-6">
             <input
@@ -75,18 +75,18 @@
               value="<%=moment(user.birthdate).format('YYYY-MM-DD')%>"
               required
             />
-            <label for="birthdate" class="form-label fs-6">Birth Date</label>
-            <div class="valid-feedback">looks good</div>
+            <label for="birthdate" class="form-label fs-6"><%=t("birthdate")%></label>
+            <div class="valid-feedback"><%=t("good")%></div>
           </div>
           <div class="form-floating col-md-6 mb-3">
             <select class="form-select" name="user[gender]" required>
-              <option selected disabled value="">Gender</option>
+              <option selected disabled value=""><%=t("gender")%></option>
               <% if(user.gender==="Male" ) { %>
-              <option value="Male" selected>Male</option>
-              <option value="Female">Female</option>
+              <option value="Male" selected><%=t("male")%></option>
+              <option value="Female"><%=t("female")%></option>
               <% } else { %>
-              <option value="Male">Female</option>
-              <option value="Female" selected>Female</option>
+              <option value="Male"><%=t("female")%></option>
+              <option value="Female" selected><%=t("female")%></option>
               <% } %>
             </select>
             <div class="invalid-feedback">Please select Your Gender</div>
@@ -102,8 +102,8 @@
               value="<%=user.email%>"
               required
             />
-            <label for="email" class="form-label fs-6">Email</label>
-            <div class="valid-feedback">looks good</div>
+            <label for="email" class="form-label fs-6"><%=t("email")%></label>
+            <div class="valid-feedback"><%=t("good")%></div>
           </div>
 
           <div class="form-floating mb-3 col-md-6">
@@ -116,8 +116,8 @@
               value="<%=user.phone%>"
               required
             />
-            <label for="phone" class="form-label fs-6">Phone</label>
-            <div class="valid-feedback">looks good</div>
+            <label for="phone" class="form-label fs-6"><%=t("phone")%></label>
+            <div class="valid-feedback"><%=t("good")%></div>
           </div>
 
           <div class="form-floating mb-3 col-md-6">
@@ -130,8 +130,8 @@
               value="<%=user.job%>"
               required
             />
-            <label for="job" class="form-label fs-6">Job</label>
-            <div class="valid-feedback">looks good</div>
+            <label for="job" class="form-label fs-6"><%=t("job")%></label>
+            <div class="valid-feedback"><%=t("good")%></div>
           </div>
 
           <div class="input-group mb-3 col-md-12">
@@ -175,19 +175,11 @@
             <% }} %>
           </div>
           <div class="modal-footer mt-3">
-            <button
-              type="button"
-              class="btn btn-outline-danger bg-gradient"
-              data-bs-dismiss="modal"
-            >
-              Annuler
+            <button type="button" class="btn btn-outline-danger bg-gradient" data-bs-dismiss="modal">
+              <%=t("cancel")%>
             </button>
-            <button
-              type="submit"
-              id="edit"
-              class="btn btn-outline-warning bg-gradient"
-            >
-              Modifier
+            <button type="submit" id="staff-edit" class="btn btn-outline-warning bg-gradient">
+              <%=t("edit")%>
             </button>
           </div>
         </form>

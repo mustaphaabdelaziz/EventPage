@@ -19,7 +19,7 @@
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Modifier Personnel</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Role de <%=p.participant.fullname  %></h5>
         <button
           type="button"
           class="btn-close"
@@ -45,26 +45,17 @@
               value="<%= p.role %>"
               required
             >
-              <option selected disabled value="">Role</option>
-              <% if (p.role === 'Organiser'){%>
-              <option class="option" value="Organiser" selected>
-                Organiser
+            <option selected disabled value="">Role</option>
+            <% for(r of eventRole){ %>
+              <% if (p.role === r.role){%>
+              <option class="option" value="<%=p.role%>" selected>
+                <%=r.label %>
               </option>
-              <option class="option" value="participant">Participant</option>
-              <option class="option" value="Invité">Invité</option>
-              <% }else if(p.role === 'Participant'){ %>
-              <option class="option" value="Organiser">Organiser</option>
-              <option class="option" value="Participant" selected>
-                Participant
-              </option>
-              <option class="option" value="Invité">Invité</option>
-              <% }else { %>
-              <option class="option" value="Organiser">Organiser</option>
-              <option class="option" value="Participant" selected>
-                Participant
-              </option>
-              <option class="option" value="Invité" selected>Invité</option>
-              <% } %>
+              <% }else {%>
+                <option class="option" value="<%=r.role%>">
+                  <%=r.label%>
+                </option>
+              <% }} %>
             </select>
             <label for="role" class="form-label">Role</label>
             <div class="valid-feedback">BIEN</div>

@@ -1,0 +1,55 @@
+<button id="item2" type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#newvideo">
+  <i class="bi bi-person-plus-fill me-2"></i><%= t('new picture') %>
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="newvideo" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel"><%= t('add') %> <%= t('video') %></h5>
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <form class="row g-3 needs-validation" action="/gallery" id="gallery" method="POST" autocomplete="off" novalidate enctype="multipart/form-data">
+          <div class="form-floating">
+            <select id="role" name="gallery[event]" class="form-select" required>
+              <option selected disabled value=""><%=t("event")%></option>
+              <% for(e of events){ %>
+
+              <option class="option" value="<%=e.id%>">
+                <%=e.title%>
+              </option>
+              <% }%>
+            </select>
+            <label for="role" class="form-label"><%=t("event")%></label>
+            <div class="valid-feedback">BIEN</div>
+          </div>
+          <div class="col-12 input-group mb-3">
+            <input type="file" class="form-control" id="picture" name="picture" required />
+            <label class="input-group-text" for="picture"><%= t('cover') %> <%= t('picture') %></label>
+          </div>
+
+          <div class="">
+            <textarea class="form-control" name="gallery[description]" id="description" rows="3" placeholder="Déscription" style="text-transform: capitalize"></textarea>
+          </div>
+
+
+          <div class="modal-footer mt-4">
+            <button type="button" class="btn btn-outline-danger bg-gradient" data-bs-dismiss="modal">
+              <%=t("cancel")%>
+            </button>
+            <button class="btn btn-outline-success"><%=t("add")%></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $("#newvideo").on("shown.bs.modal", function() {
+    $(this).find("[autofocus]").focus();
+  });
+</script>

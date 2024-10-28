@@ -1,4 +1,6 @@
 {
+    "article": "Article",
+    "articles": "Articles",
     "the_language": "language",
     "user_create_success": "User is created",
     "event_create_success": "Event is created Successfully",
@@ -8,7 +10,7 @@
     "user_not_found_exception": "User not found",
     "invalid_id_exception": "Invalid Identifier",
     "validation_exception": "Invalid Request Body",
-    "video_addition_message":"Video added Successfully",
+    "video_addition_message": "Video added Successfully",
     "username_null": "Username cannot be null",
     "username_size": "Username must have min 4 max 32 characters",
     "email_invalid": "Must be a valid e-mail address",
@@ -144,8 +146,23 @@
     "certificate": "Certificate",
     "state": "State",
     "good": "Good",
-    "include_in_home_page":"Include in Home Page"
-
-   
+    "include_in_home_page": "Include in Home Page",
+    "user": "User",
+    "users": "Users",
+    "new": "New",
+    "new picture": "New Picture",
+    "are you sure": "Are you sure",
+    "cancel": "Cancel",
+    "edit article": "Edit article",
+    "current password": "Current password",
+    "new password": "New password",
+    "confirm password": "Confirm password",
+    "edit profile": "Edit profile",
+    "edit user": "Edit user",
+    "edit event": "Edit event",
+    "role": "Role",
+    "last login": "Last login",
+    "action":"Action",
+    "users list":"Users list"
     
 }

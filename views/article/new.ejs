@@ -5,7 +5,7 @@
   data-bs-toggle="modal"
   data-bs-target="#newarticle"
 >
-  <i class="bi bi-person-plus-fill me-2"></i>Nouveau article
+  <i class="bi bi-person-plus-fill me-2"></i><%=t("new")%> <%=t("article")%>
 </button>
 
 <!-- Modal -->
@@ -22,7 +22,7 @@
   >
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Ajouter Article</h5>
+        <h5 class="modal-title" id="staticBackdropLabel"><%=t("add")%> <%=t("article")%></h5>
 
         <button
           type="button"
@@ -47,7 +47,7 @@
             name="article[date]" placeholder="<%= t('date') %>" required
             value="<%= moment().format("YYYY-MM-DD") %>" />
             <label for="date" class="form-label fs-6"> <%= t('date') %> </label>
-            <div class="valid-feedback">looks good</div>
+            <div class="valid-feedback"><%=t("good")%></div>
           </div>
           <div class="form-floating">
             <input
@@ -59,8 +59,8 @@
               autofocus
               required
             />
-            <label for="idtitle" class="form-label">Titre</label>
-            <div class="valid-feedback">BIEN</div>
+            <label for="idtitle" class="form-label"><%=t("title")%></label>
+            <div class="valid-feedback"><%=t("good")%></div>
           </div>
 
           <div class="">
@@ -102,9 +102,9 @@
               class="btn btn-outline-danger bg-gradient"
               data-bs-dismiss="modal"
             >
-              Annuler
+            <%=t("cancel")%>
             </button>
-            <button class="btn btn-outline-success">Ajouter</button>
+            <button class="btn btn-outline-success"><%=t("add")%></button>
           </div>
         </form>
       </div>

@@ -2,6 +2,7 @@ const Event = require("../../models/event");
 const Country = require("../../models/country");
 const moment = require("moment");
 const User = require("../../models/user/user");
+const {roles} = require("../../seeds/eventRole");
 module.exports.participantList = async (req, res) => {
   const { id } = req.params;
   const event = await Event.findById(id).populate({
@@ -10,19 +11,18 @@ module.exports.participantList = async (req, res) => {
   const algeria = await Country.find({});
   const states = algeria[0].states;
   // res.send(event.participants);
-  res.render("events/participants/index", { event, moment, states });
+  res.render("events/participants/index", { event, moment, states,eventRole:roles });
 };
 module.exports.ParticipantsManagement = async (req, res) => {
   const { id, idp } = req.params;
   const { role } = req.body.participant;
-  const event = await Event.findOneAndUpdate(
+ await Event.findOneAndUpdate(
     { id, "participants.participant": idp },
     {
       $set: { "participants.$.role": role },
     }
   );
   if (req.file) {
-   
     await User.findOneAndUpdate(
       { _id: idp, "attendedEvents.event": id },
       {
@@ -47,6 +47,5 @@ module.exports.ParticipantsManagement = async (req, res) => {
       { new: true }
     );
   }
-
   res.redirect(`/events/${id}/participants`);
 };

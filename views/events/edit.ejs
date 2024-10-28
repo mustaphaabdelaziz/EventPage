@@ -54,7 +54,7 @@
             <label for="title" class="form-label fw-bold fs-6"
               ><%= t('title') %>
             </label>
-            <div class="valid-feedback">looks good</div>
+            <div class="valid-feedback"><%=t("good")%></div>
           </div>
           <div class="form-floating col-md-6 mb-3">
             <input
@@ -66,15 +66,15 @@
               value="<%= MyEvent.location %>"
             />
             <datalist id="cities">
-              <option class="option" value="">Ville</option>
+              <option class="option" value=""><%=t("city")%></option>
               <% for (city of states) { %>
               <option class="option" value="<%= city.name %>">
                 <%= city.id + " - " + city.name %>
               </option>
               <%} %>
             </datalist>
-            <label for="wilaya" class="form-label">Wilaya</label>
-            <div class="valid-feedback">BIEN</div>
+            <label for="wilaya" class="form-label"><%=t("state")%></label>
+            <div class="valid-feedback"><%=t("good")%></div>
           </div>
 
           <div class="form-floating col-md-6 mb-3">
@@ -88,7 +88,7 @@
               value="<%=moment(MyEvent.period.start).format('YYYY-MM-DD')%>"
             />
             <label for="start" class="form-label fs-6"><%= t('begin') %></label>
-            <div class="valid-feedback">looks good</div>
+            <div class="valid-feedback"><%=t("good")%></div>
           </div>
           <div class="form-floating col-md-6 mb-3">
             <input
@@ -100,7 +100,7 @@
               value="<%=moment(MyEvent.period.end).format('YYYY-MM-DD')%>"
             />
             <label for="end" class="form-label fs-6"><%= t('finish') %></label>
-            <div class="valid-feedback">looks good</div>
+            <div class="valid-feedback"><%=t("good")%></div>
           </div>
 
           <div class="input-group mb-3 col-md-12">
@@ -128,7 +128,7 @@
               placeholder="<%= t('description') %>"
               required
             ><%=MyEvent.description%></textarea>
-            <div class="valid-feedback">looks good</div>
+            <div class="valid-feedback"><%=t("good")%></div>
           </div>
           <div class="mb-3">
             <img src="<%=MyEvent.thumbnail %>" class="img-thumbnail" alt="" />
@@ -149,14 +149,14 @@
               class="btn btn-outline-danger bg-gradient"
               data-bs-dismiss="modal"
             >
-              Annuler
+            <%=t("cancel")%>
             </button>
             <button
               type="submit"
               id="patient-register"
               class="btn btn-outline-warning bg-gradient"
             >
-              Modifier
+            <%=t("edit")%>
             </button>
           </div>
         </form>

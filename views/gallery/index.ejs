@@ -1,0 +1,36 @@
+<% layout('layouts/boilerplate')%>
+<div class="container-fluid mt-4">
+  <div class="col m-auto bg-light rounded-5 p-2">
+    <h3 class="text-center text-success">Gallery</h3>
+    <div class="d-flex mb-2">
+      <% if(currentUser){%>
+      <% if(currentUser.privileges.includes("admin")){%>
+      <%- include("./new")%>
+      <% }} %>
+    </div>
+  </div>
+  <form class="d-flex mt-2">
+    <input id="search" class="form-control mb-2" type="search" placeholder="Search" aria-label="Search" />
+  </form>
+  <div class="row">
+    <% for(g of gallery) {%>
+    <% if(currentUser){%>
+    <% if(currentUser.privileges.includes("admin")){%>
+    <%- include("./edit")%>
+    <% }else{%>
+    <div class="card col-lg-3 col-md-6 col-sm-12 col-12 m-2 shadow-sm rounded">
+      <div class="p-2 text-secondary">
+        <%= moment(g.addedAt).fromNow() %>
+      </div>
+      <img class="img-fluid w-100 h-100" src="<%= g.picture.url %>" alt="<%= g.picture.filename %>" />
+    </div>
+    <% }}else{%>
+    <div class="card col-lg-3 col-md-6 col-sm-12 col-12 m-2 shadow-sm rounded">
+      <div class="p-2 text-secondary">
+        <%= moment(g.addedAt).fromNow() %>
+      </div>
+      <img class="img-fluid w-100 h-100" src="<%= g.picture.url %>" alt="<%= g.picture.filename %>" />
+    </div>
+    <% }}%>
+  </div>
+</div>

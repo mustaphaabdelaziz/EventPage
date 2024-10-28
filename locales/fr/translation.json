@@ -1,4 +1,6 @@
 {
+  "article": "Article",
+  "articles": "Articles",
   "the_language": "La langue",
   "user_create_success": "L'utilisateur est créé",
   "user_not_found_exception": "Utilisateur non trouvé",
@@ -141,5 +143,21 @@
   "instructor": "Formateur",
   "state": "Wilaya",
   "good": "Bien",
-  "include_in_home_page": "Inclure dans la page d'accueil"
+  "include_in_home_page": "Inclure dans la page d'accueil",
+  "new":"Nouveau",
+  "new picture":"Nouvelle image",
+  "are you sure": "Êtes-vous sûr?",
+  "cancel": "Annuler",
+  "edit article": "Modifier l'article",
+  "change password": "Changer le mot de passe",
+  "current password": "le mot de passe Actuel",
+  "new password": "Nouveau mot de passe",
+  "confirm password": "Confirmer le mot de passe",
+  "reset password": "Réinitialiser le mot de passe",
+  "reset password message": "Veuillez cliquer sur le lien pour réinitialiser votre mot de passe :",
+  "reset password success": "Votre mot de passe a été réinitialisé avec succès",
+  "role":"Rôle",
+  "last login":"Dernière connexion",
+  "action":"Action",
+  "users list":"Liste des Utilisateurs"
 }
